@@ -1,0 +1,24 @@
+.error{
+    color: red;
+}
+
+.cart-items {
+    background-color: #445bd1;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 400;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 2px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5;
+    position: absolute;
+    top: -17px;
+    right: -12px;
+	color:white;
+}
