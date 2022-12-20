@@ -17,6 +17,7 @@ use App\Http\Controllers\franted\ContactController;
 use App\Http\Controllers\franted\DepartmentController;
 use App\Http\Controllers\franted\DoctorsController;
 use App\Http\Controllers\franted\ServicesController;
+use App\Http\Controllers\franted\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +40,16 @@ Route::get('about',[AboutController::class,'index'])->name('about');
 
 Route::controller(ServicesController::class)->prefix('services')->group(function () {
     Route::get('index', 'index')->name('services.index');
+    Route::get('index/{id}', 'index');
     Route::get('cart-item','showCart')->name('cart-item');
     Route::get('add-to-cart/{id}', 'addToCart')->name('add.to.cart');
     Route::patch('update-cart',  'update')->name('update.cart');
-    Route::delete('remove-from-cart',  'remove')->name('remove.from.cart');
+    Route::get('remove-from-cart/{id}',  'remove')->name('remove.from.cart');
+    Route::get('billing-address',  'billingAddress')->name('billing-address');
+});
+
+Route::controller(CheckoutController::class)->prefix('payment')->group(function () {
+    Route::get('index', 'index')->name('payment.index');
 });
 
 
@@ -114,5 +121,5 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
         Route::post('update',  'update')->name('product.update');
         Route::get('delete/{id}','destroy')->name('product.delete');
     });
-
+    
 });

@@ -46,9 +46,9 @@ border-bottom-right-radius: 16px;
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                    <h6 class="mb-0 text-muted">3 items</h6>
                   </div>
-                  @foreach($cart as $item)
+                  @if($cart)
+                  @foreach($cart as $key => $item)
                   <hr class="my-4">
                   <div class="row mb-4 d-flex justify-content-between align-items-center">
                     <div class="col-md-2 col-lg-2 col-xl-2">
@@ -60,33 +60,28 @@ border-bottom-right-radius: 16px;
                       <h6 class="text-muted">{{$item['product_name']}}</h6>
                       <h6 class="text-black mb-0">{{$item['product_description']}}</h6>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
 
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
-                        class="form-control form-control-sm" />
-
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <h6 class="text-muted">{{$item['quantity']}}</h6>
                     </div>
+
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0">€ {{$item['product_price']}}</h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="{{route('remove.from.cart')}}" class="text-muted"><i class="icofont-close"></i></a>
+                      <a href="{{url('services/remove-from-cart/'.$key)}}" class="text-muted"><i class="icofont-close"></i></a>
                     </div>
                   </div>
                  @endforeach 
-                  <hr class="my-4">
+                 <hr class="my-4">
+                 @else
+                    <div >
+                      <h6 class="mb-0 text-danger">Empty cart</h6>
+                    </div>
+                 @endif
 
                   <div class="pt-5">
-                    <h6 class="mb-0"><a href="#!" class="text-body"><i
-                          class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                    <h6 class="mb-0"><a href="{{route('services.index')}}" class="btn btn-info sm"><i class="icofont-long-arrow-left"></i>Back to Booking</a></h6>
                   </div>
                 </div>
               </div>
@@ -105,32 +100,37 @@ border-bottom-right-radius: 16px;
 
                   <hr class="my-4">
 
-                    @php $Subtotal = 0 @endphp
+                    @php
+                     $Subtotal = 0 ;
+                     $discount=20 ;
+                    @endphp
                     @foreach((array) session('cart') as $id => $details)
                         @php $Subtotal += $details['product_price'] * $details['quantity'] @endphp
                     @endforeach
                     <div class="d-flex justify-content-between">
                     <p class="mb-2">Subtotal</p>
-                    <p class="mb-2">${{$Subtotal}}</p>
+                    <p class="mb-2">${{$Subtotal>0 ? $Subtotal :'00.00'}}</p>
                     </div>
 
                     <div class="d-flex justify-content-between">
-                    <p class="mb-2">Shipping</p>
-                    <p class="mb-2">$20.00</p>
+                    <p class="mb-2">Discount</p>
+                    <p class="mb-2">- ${{$discount<$Subtotal ? $discount : '00.00'}}</p>
                     </div>
-
+                    @php 
+                    $Subtotal=$Subtotal-$discount;
+                    @endphp
                     <div class="d-flex justify-content-between mb-4">
                     <p class="mb-2">Total(Incl. taxes)</p>
-                    <p class="mb-2">$4818.00</p>
+                    <p class="mb-2">${{$Subtotal>0 ? $Subtotal :'00.00'}}</p>
                     </div>
-
+                    <a href="{{route('billing-address')}}">
                     <button type="button" class="btn btn-info btn-block btn-lg">
                     <div class="d-flex justify-content-between">
-                        <span>$4818.00</span>
+                        <span>${{$Subtotal>0 ? $Subtotal :'00.00'}}</span>
                         <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                     </div>
                     </button>
-
+</a>
                 </div>
               </div>
             </div>

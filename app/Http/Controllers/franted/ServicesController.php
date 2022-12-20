@@ -8,8 +8,11 @@ use App\Models\Product;
 
 class ServicesController extends Controller
 {
-    public function index(){
-       
+    public function index($id){
+       if($id){
+        $product= Product::where('package_name',$id)->latest()->paginate(10);
+        return view('franted.services.index',compact('product'));
+       }
         $product= Product::latest()->paginate(10);
         if($product){
             return view('franted.services.index',compact('product'));
@@ -76,15 +79,22 @@ class ServicesController extends Controller
      *
      * @return response()
      */
-    public function remove(Request $request)
+    public function remove($id)
     {
-        if($request->id) {
+        if($id) {
             $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
-                unset($cart[$request->id]);
+            if(isset($cart[$id])) {
+                unset($cart[$id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            return redirect()->back()->with('success', 'Product removed to cart successfully!');
+
         }
+    }
+
+    public function billingAddress(){
+        $cart = session()->get('cart', []);
+        return view('franted.services.billingAddress',compact('cart'));
+
     }
 }
