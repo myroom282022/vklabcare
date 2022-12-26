@@ -251,128 +251,154 @@ tr.text-muted td{
         <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
             <div class="mobile h5">Billing Address</div>
             <div id="details" class="bg-white rounded pb-5">
-                <form>
+                <form action="{{route('billing-address-create')}}" method="post">
+                    @csrf
                     <div class="form-group">
                         <label class="text-muted">Name</label>
-                        <input type="text" value="David Smith" class="form-control">
+                        <input type="text" value="{{old('billing_name')}}" name="billing_name" placeholder="Name" class="form-control">
+                        @if ($errors->has('billing_name'))
+                            <span class="text-danger">{{ $errors->first('billing_name') }}</span>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label class="text-muted">Email</label>
-                        <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                            <input type="email" value="david.343@gmail.com">
-                            <span class="fas fa-check text-success pr-sm-2 pr-0"></span>
+                        <input type="email" name="billing_email" placeholder="a@gmail.com" value="{{old('billing_email')}}" class="form-control">
+                        @if ($errors->has('billing_email'))
+                            <span class="text-danger">{{ $errors->first('billing_email') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group ">
+                        <label class="text-muted">Phone Number</label>
+                        <input type="text" value="{{old('billing_phone_number')}}" name="billing_phone_number" placeholder="1234567890" class="form-control ">
+                        @if ($errors->has('billing_phone_number'))
+                            <span class="text-danger">{{ $errors->first('billing_phone_number') }}</span>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <label class="text-muted">City</label>
+                                <input type="text" value="{{old('billing_city')}}" name="billing_city" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('billing_city'))
+                                    <span class="text-danger">{{ $errors->first('billing_city') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <label class="text-muted">Zip Code</label>
+                                <input type="text" value="{{old('billing_zip_code')}}" name="billing_zip_code" placeholder="212401" class="form-control ">
+                                @if ($errors->has('billing_zip_code'))
+                                    <span class="text-danger">{{ $errors->first('billing_zip_code') }}</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>City</label>
-                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                    <input type="text" value="Houston">
-                                    <span class="fas fa-check text-success pr-2"></span>
-                                </div>
+                            <div class="form-group ">
+                                <label class="text-muted">Address</label>
+                                <input type="text" value="{{old('billing_address')}}" name="billing_address" placeholder="address" class="form-control ">
+                                @if ($errors->has('billing_address'))
+                                    <span class="text-danger">{{ $errors->first('billing_address') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Zip code</label>
-                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                    <input type="text" value="77001">
-                                    <span class="fas fa-check text-success pr-2"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Address</label>
-                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                    <input type="text" value="542 W.14th Street">
-                                    <span class="fas fa-check text-success pr-2"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>State</label>
-                                <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                    <input type="text" value="NY">
-                                    <span class="fas fa-check text-success pr-2"></span>
-                                </div>
+                            <div class="form-group ">
+                                <label class="text-muted">State</label>
+                                <input type="text" value="{{old('billing_state')}}" name="billing_state" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('billing_state'))
+                                    <span class="text-danger">{{ $errors->first('billing_state') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <label>Country</label>
-                    <select name="country" id="country">
+                    <select name="billing_country" id="country">
                         <option value="usa">USA</option>
                         <option value="ind">INDIA</option>
                     </select>
-
-                    <input class="checkbox" type="checkbox" class="my-3" checked>
+                    @if ($errors->has('billing_country'))
+                        <span class="text-danger">{{ $errors->first('billing_country') }}</span>
+                    @endif
+                    <input class="checkbox" type="checkbox" class="my-3" checked name="is_same_shipping" value="yes">
                     <label class="my-3">Shipping address is same as billing</label>
 
                 <!-- shipping details start -->
 
                     <div class="shiiping">
                     <div class="h5 large">Shpping Address</div>
-                        <div class="form-group">
-                            <label class="text-muted">Name</label>
-                            <input type="text" value="David Smith" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="text-muted">Email</label>
-                            <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                <input type="email" value="david.343@gmail.com">
-                                <span class="fas fa-check text-success pr-sm-2 pr-0"></span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>City</label>
-                                    <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                        <input type="text" value="Houston">
-                                        <span class="fas fa-check text-success pr-2"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Zip code</label>
-                                    <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                        <input type="text" value="77001">
-                                        <span class="fas fa-check text-success pr-2"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                        <input type="text" value="542 W.14th Street">
-                                        <span class="fas fa-check text-success pr-2"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>State</label>
-                                    <div class="d-flex jusify-content-start align-items-center rounded p-2">
-                                        <input type="text" value="NY">
-                                        <span class="fas fa-check text-success pr-2"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <label>Country</label>
-                        <select name="country" id="country">
-                            <option value="usa">USA</option>
-                            <option value="ind">INDIA</option>
-                        </select>
+                    <div class="form-group">
+                        <label class="text-muted">Name</label>
+                        <input type="text" value="{{old('shipping_name')}}" name="shipping_name" placeholder="Name" class="form-control">
+                        @if ($errors->has('shipping_name'))
+                            <span class="text-danger">{{ $errors->first('shipping_name') }}</span>
+                        @endif
                     </div>
+                    <div class="form-group">
+                        <label class="text-muted">Email</label>
+                        <input type="email" name="shipping_email" placeholder="a@gmail.com" value="{{old('shipping_email')}}" class="form-control">
+                        @if ($errors->has('shipping_email'))
+                            <span class="text-danger">{{ $errors->first('shipping_email') }}</span>
+                        @endif
+                    </div>
+                    <div class="form-group ">
+                        <label class="text-muted">Phone Number</label>
+                        <input type="text" value="{{old('shipping_phone_number')}}" name="shipping_phone_number" placeholder="1234567890" class="form-control ">
+                        @if ($errors->has('shipping_phone_number'))
+                            <span class="text-danger">{{ $errors->first('shipping_phone_number') }}</span>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <label class="text-muted">City</label>
+                                <input type="text" value="{{old('shipping_city')}}" name="shipping_city" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('shipping_city'))
+                                    <span class="text-danger">{{ $errors->first('shipping_city') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <label class="text-muted">Zip Code</label>
+                                <input type="text" value="{{old('shipping_zip_code')}}" name="shipping_zip_code" placeholder="212401" class="form-control ">
+                                @if ($errors->has('shipping_zip_code'))
+                                    <span class="text-danger">{{ $errors->first('shipping_zip_code') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <label class="text-muted">Address</label>
+                                <input type="text" value="{{old('shipping_address')}}" name="shipping_address" placeholder="address" class="form-control ">
+                                @if ($errors->has('shipping_address'))
+                                    <span class="text-danger">{{ $errors->first('shipping_address') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group ">
+                                <label class="text-muted">State</label>
+                                <input type="text" value="{{old('shipping_state')}}" name="shipping_state" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('billing_state'))
+                                    <span class="text-danger">{{ $errors->first('shipping_state') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <label>Country</label>
+                    <select name="shipping_country" id="country">
+                        <option value="usa">USA</option>
+                        <option value="ind">INDIA</option>
+                    </select>
+                    @if ($errors->has('shipping_country'))
+                        <span class="text-danger">{{ $errors->first('shipping_country') }}</span>
+                    @endif
+                </div>
 
                 <!-- shipping details end -->
 
@@ -380,19 +406,16 @@ tr.text-muted td{
                     <div id="" class=" rounded mt-3">
                         <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
                                 <div class="col-md-6">
-                            <a href="{{route('cart-item')}}">
-
+                                <a href="{{route('cart-item')}}">
                                     <div class="btn text-uppercase">back to shopping</div>
-                                    </a>
-
-                                </div>
-                            <div class="col-md-6 pt-md-0 pt-3">
-                                <a href="{{route('payment.index')}}">
-                                    <div class="btn text-white ml-auto">
-                                        <span class="fas fa-lock"></span>
-                                        Continue to CHECKOUT
-                                    </div>
                                 </a>
+                                </div>
+                            <div class="col-md-6 pt-md-0 pt-3" >
+                                <button type="submit">
+                                    <div class="btn text-white ml-auto">
+                                        <span class="fas fa-lock">Continue to CHECKOUT</span>
+                                    </div>
+                                </button>
                             </div>
                         </div>
                     </div>

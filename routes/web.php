@@ -50,6 +50,9 @@ Route::controller(ServicesController::class)->prefix('services')->group(function
 
 Route::controller(CheckoutController::class)->prefix('payment')->group(function () {
     Route::get('index', 'index')->name('payment.index');
+    Route::post('billing-address-create',  'billingAddressCreate')->name('billing-address-create');
+    Route::post('store', 'store')->name('payment.store');
+
 });
 
 

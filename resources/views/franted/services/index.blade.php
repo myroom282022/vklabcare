@@ -20,7 +20,9 @@
 				@foreach($product as $productValue)
 				<div class="col-lg-4 col-md-6">
 				<div class="department-block mb-5">
-					<img src="{{url('storage/product/img/'.$productValue->product_image)}}" alt="" class="img-fluid w-100">
+					<a href="{{ route('add.to.cart', $productValue->id) }}">
+						<img src="{{url('storage/product/img/'.$productValue->product_image)}}" alt="" class="img-fluid w-100">
+					</a>
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">{{$productValue->product_name}}</h4>
 						<div class="truhealth-packege-info-price">
