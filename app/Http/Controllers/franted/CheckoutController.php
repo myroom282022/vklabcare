@@ -9,18 +9,17 @@ use App\Models\Shipping;
 use Razorpay\Api\Api;
 use Session;
 use Exception;
+use App\Models\Payment;
+use App\Models\Order;
 
 class CheckoutController extends Controller
 {
     public function index(){
         $cart = session()->get('cart', []);
         return view('franted.services.checkout',compact('cart'));
-
     }
     public function Billing(){
-        
         return view('franted.services.checkout',compact('cart'));
-
     }
     public function billingAddressCreate(Request $request){
         $validatedData = $request->validate([
@@ -112,16 +111,40 @@ class CheckoutController extends Controller
     //payment getway 
     public function store(Request $request)
     {
-        $input = $request->all();
+          $input = $request->all();
   
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
   
-        $payment = $api->payment->fetch($input['razorpay_payment_id']);
-  
+         $payment = $api->payment->fetch($input['razorpay_payment_id']);
+
         if(count($input)  && !empty($input['razorpay_payment_id'])) {
             try {
-                $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount'=>$payment['amount'])); 
-  
+                // $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount'=>$payment['amount']));
+                // $paymentData['user_id']         =   $auth()->user()->id;
+                $paymentData['transaction_id']  =   $payment->id;
+                $paymentData['order_id']        =   $payment->order_id;
+                $paymentData['total_price']     =   $request->total_price;
+                $paymentData['payment_type']    =   $payment->method;
+                $paymentData['product_price']   =   $request->product_price;
+                $paymentData['discount_price']  =   $request->discount_price;
+                $paymentData['delivery_charge'] =   $request->delivery_charge;
+                $paymentData['quantity']        =   $request->quantity;
+                $paymentData['status']          =   'Success';
+                $len=5;
+                $paymentData['order_number']    =   $this->incrementalHash($len);
+                $paymentDetails= Payment::create($paymentData);
+
+                // $order['user_id']             =   $auth()->user()->id;
+                $order['payment_id']          =   $paymentDetails->id;
+                $order['product_name']        =   $request->product_name;
+                $order['product_description'] =   $request->product_description;
+                $order['product_price']       =   $request->product_price;
+                $order['order_number']        =   $paymentDetails->order_number;
+                $order['quantity']            =   $request->quantity;
+                $order['product_image']       =   $request->product_image;
+               
+                Order::create($order);
+               
             } catch (Exception $e) {
                 return  $e->getMessage();
                 Session::put('error',$e->getMessage());
@@ -130,6 +153,42 @@ class CheckoutController extends Controller
         }
           
         Session::put('success', 'Payment successful');
-        return redirect()->back();
+        Session::forget('cart', []);
+        return redirect()->route('payment.success')->withSuccess('Payment successfully');
+    }
+    function incrementalHash($len){
+        $charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        $base = strlen($charset);
+        $result = '';
+      
+        $now = explode(' ', microtime())[1];
+        while ($now >= $base){
+          $i = $now % $base;
+          $result = $charset[$i] . $result;
+          $now /= $base;
+        }
+        return substr($result, -5);
+      }
+    public function payments(){
+        $name=$request->name;
+        $amount=$request->amount;
+        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+        $order = $api->oprder->create(array(
+            'receipt' => 123,
+            'amount'  => $amount*100,
+            'currency' => 'INR'
+        )); 
+        $orderId=$order['id'];
+
+        Session::put('orderId',$orderId);
+        Session::put('amount',$amount);
+        return redirect('/');
+
+
+    }
+
+    public function successPage(){
+        
+        return view('franted.services.success');
     }
 }

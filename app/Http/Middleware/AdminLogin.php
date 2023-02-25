@@ -16,9 +16,9 @@ class AdminLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->is_admin == '1'){
+        if(auth()->user()->role == 'admin'){
             return $next($request);
         }
-        return redirect('login')->with(‘error’,"You don't have admin access.");
+        return redirect('admin/login')->with('error',"You don't have admin access.");
     }
 }

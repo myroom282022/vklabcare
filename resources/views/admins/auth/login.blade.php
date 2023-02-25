@@ -13,7 +13,7 @@
                     <p class="mb-0">Enter your email and password to sign in</p>
                   </div>
                   <div class="card-body">
-                    <form role="form" action="{{ route('login.post') }}" method="POST">
+                    <form role="form" action="{{ route('admin-login-post') }}" method="POST">
                     @csrf
                       <label>Email</label>
                       <div class="mb-3">

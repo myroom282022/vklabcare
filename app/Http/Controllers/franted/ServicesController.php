@@ -5,22 +5,29 @@ namespace App\Http\Controllers\franted;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Package;
 
 class ServicesController extends Controller
 {
-    public function index($id){
-       if($id){
-        $product= Product::where('package_name',$id)->latest()->paginate(10);
-        return view('franted.services.index',compact('product'));
-       }
-        $product= Product::latest()->paginate(10);
-        if($product){
-            return view('franted.services.index',compact('product'));
-        }
-        $product='';
+    public function index(Request $request){
+      
+        $product=  Package::with('getProduct')->get();
         return view('franted.services.index',compact('product'));
 
     }
+    public function product($id){
+        if($id){
+         $product= Product::where('package_name',$id)->latest()->paginate(10);
+         return view('franted.services.product',compact('product'));
+        }
+         $product= Product::latest()->paginate(10);
+         if($product){
+             return view('franted.services.product',compact('product'));
+         }
+         $product='';
+         return view('franted.services.product',compact('product'));
+ 
+     }
     /**
      * Write code on Method
      *

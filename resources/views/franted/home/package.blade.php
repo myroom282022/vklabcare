@@ -14,7 +14,7 @@
 			<div class="col-lg-4 col-md-6">
 				
 					<div class="department-block mb-5">
-							<a href="{{url('services/index/'.$packageValue->package_name)}}">
+							<a href="{{url('services/product/'.$packageValue->package_name)}}">
 								<img src="{{url('storage/package/img/'.$packageValue->package_image)}}" alt="" class="img-fluid w-100">
 							</a>
 						<div class="content">
@@ -24,7 +24,7 @@
 								<span class="text-muted"><del>₹{{$packageValue->package_discount_price}}</del></span>
 							</div>
 							<p class="mb-4">{{$packageValue->package_description}}</p>
-							<a href="{{url('services/index/'.$packageValue->package_name)}}" class="btn btn-primary btn-sm mr-3">Book Now</a>
+							<a href="{{url('services/product/'.$packageValue->package_name)}}" class="btn btn-primary btn-sm mr-3">Book Now</a>
 							<a href="department-single.html" class="read-more">Learn More  <i class="icofont-simple-right ml-2"></i></a>
 						</div>
 					</div>

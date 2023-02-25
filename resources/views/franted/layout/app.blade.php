@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="{{url('front_assets/plugins/icofont/icofont.min.css')}}">
   <link rel="stylesheet" href="{{url('front_assets/plugins/slick-carousel/slick/slick.css')}}">
   <link rel="stylesheet" href="{{url('front_assets/plugins/slick-carousel/slick/slick-theme.css')}}">
+  <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
   <script src="{{url('front_assets/js/jquery.min.js')}}"></script>
 
@@ -53,6 +54,26 @@
     <script src="plugins/google-map/gmap.js"></script>
     
     <script src="{{url('front_assets/js/script.js')}}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+		<script>
+			@if(Session::has('success'))
+			toastr.options =
+			{
+				"closeButton" : true,
+				"progressBar" : true
+			}
+					toastr.success("{{ session('success') }}");
+			@endif
+		  
+			@if(Session::has('error'))
+			toastr.options =
+			{
+				"closeButton" : true,
+				"progressBar" : true
+			}
+					toastr.error("{{ session('error') }}");
+			@endif
+		  </script>
+		@stack('scripts')
   </body>
   </html>

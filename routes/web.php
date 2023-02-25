@@ -3,13 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AdminLoginContrroller;
-use  App\Http\Controllers\Admin\DashboardController;
-use  App\Http\Controllers\Admin\UsersController;
-use  App\Http\Controllers\Admin\SliderController;
-use  App\Http\Controllers\Admin\PackageController;
-use  App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\TransitionController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
+// ***************User Panel******************
 
+use App\Http\Controllers\Auth\AuthOtpController;
 use App\Http\Controllers\franted\HomeController;
 use App\Http\Controllers\franted\AboutController;
 use App\Http\Controllers\franted\BlogController;
@@ -18,6 +22,8 @@ use App\Http\Controllers\franted\DepartmentController;
 use App\Http\Controllers\franted\DoctorsController;
 use App\Http\Controllers\franted\ServicesController;
 use App\Http\Controllers\franted\CheckoutController;
+
+use App\Http\Controllers\User\UserDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,12 +41,35 @@ use App\Http\Controllers\franted\CheckoutController;
 // });
 // franted routes -----------------------------------------
 
-Route::get('/',[HomeController::class,'index']);
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('login', 'login')->name('user-login');
+    Route::post('login', 'postLogin')->name('user-login-post'); 
+    Route::get('register', 'userRegister')->name('user-register');
+    Route::post('register', 'postRegister')->name('user-register-post'); 
+});
+
+Route::controller(AuthOtpController::class)->group(function(){
+    Route::get('otp/login', 'login')->name('otp.login');
+    Route::post('otp/resend', 'generate')->name('otp.resend');
+    Route::get('otp/verification', 'verification')->name('otp.verification');
+    Route::post('otp/login', 'loginWithOtp')->name('otp.getlogin');
+    
+});
+Route::group(['prefix' => 'user','middleware'=> ['auth', 'is_user']],function () {
+    Route::controller(UserDashboardController::class)->group(function(){
+        Route::get('/dashboard', 'index')->name('user-dashboard');
+        Route::get('logout','logout')->name('user-logout');
+
+    });
+});
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('about',[AboutController::class,'index'])->name('about');
+
 
 Route::controller(ServicesController::class)->prefix('services')->group(function () {
     Route::get('index', 'index')->name('services.index');
-    Route::get('index/{id}', 'index');
+    Route::get('product/{id}', 'product');
     Route::get('cart-item','showCart')->name('cart-item');
     Route::get('add-to-cart/{id}', 'addToCart')->name('add.to.cart');
     Route::patch('update-cart',  'update')->name('update.cart');
@@ -52,7 +81,7 @@ Route::controller(CheckoutController::class)->prefix('payment')->group(function 
     Route::get('index', 'index')->name('payment.index');
     Route::post('billing-address-create',  'billingAddressCreate')->name('billing-address-create');
     Route::post('store', 'store')->name('payment.store');
-
+    Route::get('success', 'successPage')->name('payment.success');
 });
 
 
@@ -75,16 +104,19 @@ Route::controller(BlogController::class)->group(function(){
 });
 
 
-// backend routes -----------------------------------------
+
+
+//                     ###################
+// ************************Admin Panel *********************************
+//                     @@@@@@@@@@@@@@@@@@@@@@
+
 
 Route::controller(AdminLoginContrroller::class)->group(function(){
-    Route::get('login', 'login')->name('login');
-    Route::post('post-login', 'postLogin')->name('login.post'); 
-    Route::get('registration', 'registration')->name('register');
-    Route::post('post-registration', 'postRegistration')->name('register.post'); 
+    Route::get('admin/login', 'login')->name('admin-login');
+    Route::post('admin/login', 'postLogin')->name('admin-login-post'); 
+    Route::get('admin/registration', 'registration')->name('register');
+    Route::post('admin/post-registration', 'postRegistration')->name('register-post'); 
 });
-
-
 
 Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
@@ -124,5 +156,17 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
         Route::post('update',  'update')->name('product.update');
         Route::get('delete/{id}','destroy')->name('product.delete');
     });
-    
+
+    Route::controller(TransitionController::class)->prefix('transition')->group(function () {
+        Route::get('index', 'index')->name('transition.index');
+        Route::get('order/{id}', 'order')->name('transition.order');
+        Route::get('delete/{id}','destroy')->name('transition.delete');
+    });
+
+    Route::controller(AdminProfileController::class)->prefix('profile')->group(function () {
+        Route::get('index', 'index')->name('profile.index');
+        Route::get('delete/{id}','destroy')->name('profile.delete');
+        Route::get('update','destroy')->name('profile.update');
+        Route::get('change-password','destroy')->name('profile.change.password');
+    });
 });

@@ -316,7 +316,7 @@ tr.text-muted td{
                     </div>
                     <label>Country</label>
                     <select name="billing_country" id="country">
-                        <option value="usa">USA</option>
+                        <!-- <option value="usa">USA</option> -->
                         <option value="ind">INDIA</option>
                     </select>
                     @if ($errors->has('billing_country'))

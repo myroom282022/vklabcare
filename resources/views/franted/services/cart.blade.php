@@ -124,13 +124,13 @@ border-bottom-right-radius: 16px;
                     <p class="mb-2">${{$Subtotal>0 ? $Subtotal :'00.00'}}</p>
                     </div>
                     <a href="{{route('billing-address')}}">
-                    <button type="button" class="btn btn-info btn-block btn-lg">
-                    <div class="d-flex justify-content-between">
-                        <span>${{$Subtotal>0 ? $Subtotal :'00.00'}}</span>
-                        <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
-                    </div>
-                    </button>
-</a>
+                      <button type="button" class="btn btn-info btn-block btn-lg">
+                      <div class="d-flex justify-content-between">
+                          <span>${{$Subtotal>0 ? $Subtotal :'00.00'}}</span>
+                          <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                      </div>
+                      </button>
+                    </a>
                 </div>
               </div>
             </div>

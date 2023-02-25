@@ -14,7 +14,7 @@ class UsersController extends Controller
     // show all data -------------------
     public function index()
     {
-       $data= User::where('is_admin',null)->latest()->paginate(10);
+       $data= User::where('role','user')->latest()->paginate(10);
         return view('admins.users.index',compact('data'));
     } 
     // show all data -------------------

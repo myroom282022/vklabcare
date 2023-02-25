@@ -64,7 +64,7 @@
               </div>
             </div>
             <div class="card-body">
-                <form role="form text-left" action="{{ route('register.post') }}" method="POST">
+                <form role="form text-left" action="{{ route('admin-register-post') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <input type="text" class="form-control" name="name" placeholder="Name" aria-label="Name" aria-describedby="email-addon">
