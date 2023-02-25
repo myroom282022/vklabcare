@@ -32,6 +32,7 @@
                       <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                         <label class="form-check-label" for="rememberMe">Remember me</label>
+                        <a class="ms-4" href="">Forget Password</a>
                       </div>
                       <div class="text-center">
                         <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>

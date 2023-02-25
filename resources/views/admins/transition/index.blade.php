@@ -5,14 +5,6 @@
         <div class="card mb-4">
         <div class="card-header pb-0">
             <h4>Transition Details</h4>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end userbuttton">
-                <a href="{{route('users.create')}}">
-                    <button class="btn btn-primary me-md-2 btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#adduser">
-                    <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;
-                    Add User
-                    </button>
-                </a>
-            </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">

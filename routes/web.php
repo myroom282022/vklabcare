@@ -165,8 +165,9 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
 
     Route::controller(AdminProfileController::class)->prefix('profile')->group(function () {
         Route::get('index', 'index')->name('profile.index');
-        Route::get('delete/{id}','destroy')->name('profile.delete');
-        Route::get('update','destroy')->name('profile.update');
-        Route::get('change-password','destroy')->name('profile.change.password');
+        Route::post('update','update')->name('profile.update');
+        Route::get('change-password','changePassword')->name('profile.change.password');
+        Route::post('change-password','ChangePasswordPost')->name('profile.update.password');
+
     });
 });

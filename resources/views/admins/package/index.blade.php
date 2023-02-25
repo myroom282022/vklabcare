@@ -35,9 +35,13 @@
                         <tr>
                             <td>{{$useId}}</td>
                             <td>
-                            <img src="{{url('storage/package/img/'.$data->package_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
-
+                                <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="{{url('storage/package/img/'.$data->package_image)}}" class="avatar avatar-sm me-3" alt="user1">
+                                    </div>
+                                </div>
                             </td>
+
                             <td>{{$data->package_name}}</td>
                             <td><textarea cols="num" rows="num">{{$data->package_description}}</textarea></td>
                             <td>{{$data->package_price}}</td>
