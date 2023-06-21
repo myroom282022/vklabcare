@@ -10,8 +10,9 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TransitionController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AllAppontmentController;
 
-// ***************User Panel******************
+// ***************All uses Panel******************
 
 use App\Http\Controllers\Auth\AuthOtpController;
 use App\Http\Controllers\franted\HomeController;
@@ -22,6 +23,8 @@ use App\Http\Controllers\franted\DepartmentController;
 use App\Http\Controllers\franted\DoctorsController;
 use App\Http\Controllers\franted\ServicesController;
 use App\Http\Controllers\franted\CheckoutController;
+use App\Http\Controllers\franted\BookAppoinmentController;
+// ***************User Panel******************
 
 use App\Http\Controllers\User\UserDashboardController;
 
@@ -36,36 +39,12 @@ use App\Http\Controllers\User\UserDashboardController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// franted routes -----------------------------------------
+//                     ###################
+// ************************All use this  Panel *********************************
+//                     @@@@@@@@@@@@@@@@@@@@@@                   
 
-
-Route::controller(AuthController::class)->group(function(){
-    Route::get('login', 'login')->name('user-login');
-    Route::post('login', 'postLogin')->name('user-login-post'); 
-    Route::get('register', 'userRegister')->name('user-register');
-    Route::post('register', 'postRegister')->name('user-register-post'); 
-});
-
-Route::controller(AuthOtpController::class)->group(function(){
-    Route::get('otp/login', 'login')->name('otp.login');
-    Route::post('otp/resend', 'generate')->name('otp.resend');
-    Route::get('otp/verification', 'verification')->name('otp.verification');
-    Route::post('otp/login', 'loginWithOtp')->name('otp.getlogin');
-    
-});
-Route::group(['prefix' => 'user','middleware'=> ['auth', 'is_user']],function () {
-    Route::controller(UserDashboardController::class)->group(function(){
-        Route::get('/dashboard', 'index')->name('user-dashboard');
-        Route::get('logout','logout')->name('user-logout');
-
-    });
-});
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('about',[AboutController::class,'index'])->name('about');
-
 
 Route::controller(ServicesController::class)->prefix('services')->group(function () {
     Route::get('index', 'index')->name('services.index');
@@ -84,8 +63,6 @@ Route::controller(CheckoutController::class)->prefix('payment')->group(function 
     Route::get('success', 'successPage')->name('payment.success');
 });
 
-
-
 Route::get('contact',[ContactController::class,'index'])->name('contact');
 Route::controller(DepartmentController::class)->group(function(){
     Route::get('departments','index')->name('departments');
@@ -103,8 +80,37 @@ Route::controller(BlogController::class)->group(function(){
     Route::get('blog-single','singlePage')->name('blog-single');
 });
 
+Route::controller(BookAppoinmentController::class)->group(function(){
 
+    Route::get('book-appoinment','create')->name('book-appoinment-create');
+    Route::post('book-appoinment','store')->name('book-appoinment-store');
+});
 
+//                     ###################
+// ************************User Panel *********************************
+//                     @@@@@@@@@@@@@@@@@@@@@@
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('login', 'login')->name('user-login');
+    Route::post('login', 'postLogin')->name('user-login-post'); 
+    Route::get('register', 'userRegister')->name('user-register');
+    Route::post('register', 'postRegister')->name('user-register-post'); 
+});
+
+Route::controller(AuthOtpController::class)->group(function(){
+    Route::get('otp/login', 'login')->name('otp.login');
+    Route::post('otp/resend', 'generate')->name('otp.resend');
+    Route::get('otp/verification', 'verification')->name('otp.verification');
+    Route::post('otp/login', 'loginWithOtp')->name('otp.getlogin');
+    
+});
+
+Route::group(['prefix' => 'user','middleware'=> ['auth', 'is_user']],function () {
+    Route::controller(UserDashboardController::class)->group(function(){
+        Route::get('/dashboard', 'index')->name('user-dashboard');
+        Route::get('logout','logout')->name('user-logout');
+    });
+});
 
 //                     ###################
 // ************************Admin Panel *********************************
@@ -169,5 +175,9 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
         Route::get('change-password','changePassword')->name('profile.change.password');
         Route::post('change-password','ChangePasswordPost')->name('profile.update.password');
 
+    });
+
+    Route::controller(AllAppontmentController::class)->group(function(){
+        Route::get('list-appoinment','index')->name('list-appoinment');
     });
 });
