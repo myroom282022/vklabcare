@@ -24,6 +24,9 @@ class User extends Authenticatable
         'role',
         'phone_number',
         'user_image',
+        'referral_code',
+        'bounce',
+        'rezorpay_customer_id',
     ];
 
     /**

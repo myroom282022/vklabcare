@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('user_image')->nullable();
+            $table->string('referral_code')->nullable();
+            $table->decimal('bounce', 8, 2)->default(0);
+            $table->string('rezorpay_customer_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

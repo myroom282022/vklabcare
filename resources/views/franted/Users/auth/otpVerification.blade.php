@@ -14,7 +14,11 @@
 				@php 
 				$phoneNumberDeegits=substr($user->phone_number, -4);
 				@endphp
-				<div> <span>A code has been sent to</span> <small>*******{{$phoneNumberDeegits}}</small> </div> 
+				<div>
+					 <span>A code has been sent to phone</span> <small>*******{{$phoneNumberDeegits}}</small>
+					 <br/> 
+					 <span>A code has been sent to email </span> <small>{{$user->email}}</small> 
+				</div> 
 				<form method="post" action="{{ route('otp.getlogin') }}" >
                 @csrf
                         <input type="hidden" name="user_id" value="{{$user->id}}" />
@@ -27,19 +31,13 @@
 					</div> 
 					<div class="mt-4"> <button type="submit" class="btn btn-danger px-4 veryfy-form validate">Verify OTP</button> </div>
 				</form>
-					
-					
+				<form  method="post" action="{{route('otp.resend')}}">
+					@csrf
+					<input type="hidden" name="user_id" value="{{$user->id}}" />
+					<button class="btn btn-success">Resend OTP</button> 
+				</form>
 				 </div>
-				<div class="card-2">
-					<div class="content d-flex justify-content-center align-items-center">
-						<form  method="post" action="{{route('otp.resend')}}">
-							@csrf
-							<input type="hidden" name="user_id" value="{{$user->id}}" />
-							<button class="btn btn-success">Resend OTP</button> 
-						</form>
-						
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>
@@ -48,27 +46,43 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        function OTPInput() {
+            const inputs = document.querySelectorAll('#otp > *[id]');
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('input', function(event) {
+                    if (event.target.value.length === 1) {
+                        if (i < inputs.length - 1) {
+                            inputs[i + 1].focus();
+                        } else {
+                            inputs[i].blur(); // Move focus away from the last input
+                        }
+                    } else if (event.target.value.length === 0) {
+                        if (i > 0) {
+                            inputs[i - 1].focus();
+                        }
+                    }
+                });
 
-document.addEventListener("DOMContentLoaded", function(event) {
-  function OTPInput() {
-const inputs = document.querySelectorAll('#otp > *[id]');
-for (let i = 0; i < inputs.length; i++) { inputs[i].addEventListener('keydown', function(event) { if (event.key==="Backspace" ) { inputs[i].value='' ; if (i !==0) inputs[i - 1].focus(); } else { if (i===inputs.length - 1 && inputs[i].value !=='' ) { return true; } else if (event.keyCode> 47 && event.keyCode < 58) { inputs[i].value=event.key; if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode> 64 && event.keyCode < 91) { inputs[i].value=String.fromCharCode(event.keyCode); if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } } }); } } OTPInput();
-    
-});
+                inputs[i].addEventListener('keydown', function(event) {
+                    if (event.key === "Backspace") {
+                        if (i > 0) {
+                            inputs[i - 1].focus();
+                        }
+                    }
+                });
+            }
+        }
+        OTPInput();
 
-
-$(".veryfy-form").click(function(){
-let first=$('#first').val();
-let second=$('#second').val();
-let third=$('#third').val();
-let fourth=$('#fourth').val();
-let fifth=$('#fifth').val();
-let sixth=$('#sixth').val();
-let twilio_otp=first +second+third +fourth+ fifth+sixth;
-    // let keyword= $(this).find("input").val();
-	$('#twilio_otp').val(twilio_otp);
-   
-});
+        $(".veryfy-form").click(function() {
+            let twilio_otp = '';
+            const inputs = document.querySelectorAll('#otp > *[id]');
+            inputs.forEach(function(input) {
+                twilio_otp += input.value;
+            });
+            document.getElementById('twilio_otp').value = twilio_otp;
+        });
+    });
 </script>
-
 @endpush

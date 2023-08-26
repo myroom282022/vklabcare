@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('package_books', function (Blueprint $table) {
             $table->id();
-            $table->string('departments_name')->nullable();
-            $table->string('departments_name')->nullable();
-            $table->string('departments_name')->nullable();
-            $table->string('departments_name')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('package_books');
     }
 };

@@ -1,3 +1,17 @@
+:root {
+    --blue: #DA6AA9;
+    /* --black: #1d1d21; */
+    --black: #515151;
+    --lightdark: #160647;
+    --green: #4BC8F1;
+    --bg:#f3f9f9;
+    --pink:#DA6AA9;
+    --purple:#7959A6;
+    --skyblue:#0bb2f0;
+    --darkblack:#000000;
+    --yellow:#eaee10;
+}
+
 .userbuttton {
     margin-top: -4% !important;
 }

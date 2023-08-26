@@ -11,13 +11,13 @@
 
 					<ul class="list-inline footer-socials mt-4">
 						<li class="list-inline-item">
-							<a href="https://www.facebook.com/themefisher"><i class="icofont-facebook"></i></a>
+							<a href="#"><i class="icofont-facebook"></i></a>
 						</li>
 						<li class="list-inline-item">
-							<a href="https://twitter.com/themefisher"><i class="icofont-twitter"></i></a>
+							<a href="#"><i class="icofont-twitter"></i></a>
 						</li>
 						<li class="list-inline-item">
-							<a href="https://www.pinterest.com/themefisher/"><i class="icofont-linkedin"></i></a>
+							<a href="#"><i class="icofont-linkedin"></i></a>
 						</li>
 					</ul>
 				</div>
@@ -69,9 +69,9 @@
 					<div class="footer-contact-block">
 						<div class="icon d-flex align-items-center">
 							<i class="icofont-support mr-3"></i>
-							<span class="h6 mb-0">Mon to Fri : 08:30 - 18:00</span>
+							<span class="h6 mb-0">Open 24 hours</span>
 						</div>
-						<h4 class="mt-2"><a href="tel:+23-345-67890">+91 919-826-5264</a></h4>
+						<h4 class="mt-2"><a href="tel:+23-345-67890">+91 958 230 6210</a></h4>
 					</div>
 				</div>
 			</div>
@@ -81,7 +81,7 @@
 			<div class="row align-items-center justify-content-between">
 				<div class="col-lg-6">
 					<div class="copyright">
-						Copyright &copy; 2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a>
+						Copyright &copy; 2023, Designed &amp; Developed by vka3healthcare
 					</div>
 				</div>
 				<div class="col-lg-6">

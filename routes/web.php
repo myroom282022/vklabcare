@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TransitionController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AllAppontmentController;
-
+use App\Http\Controllers\SendMails\MailController;
 // ***************All uses Panel******************
 
 use App\Http\Controllers\Auth\AuthOtpController;
@@ -86,6 +86,7 @@ Route::controller(BookAppoinmentController::class)->group(function(){
     Route::post('book-appoinment','store')->name('book-appoinment-store');
 });
 
+Route::get('send',[MailController::class,'index']);
 //                     ###################
 // ************************User Panel *********************************
 //                     @@@@@@@@@@@@@@@@@@@@@@
@@ -102,7 +103,7 @@ Route::controller(AuthOtpController::class)->group(function(){
     Route::post('otp/resend', 'generate')->name('otp.resend');
     Route::get('otp/verification', 'verification')->name('otp.verification');
     Route::post('otp/login', 'loginWithOtp')->name('otp.getlogin');
-    
+    Route::get('otp/login/{user_id}/{otp}', 'linkVerify')->name('otp.linkVerify');
 });
 
 Route::group(['prefix' => 'user','middleware'=> ['auth', 'is_user']],function () {

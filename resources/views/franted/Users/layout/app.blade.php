@@ -19,6 +19,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{url('../assets/css/soft-ui-dashboard.css?v=1.0.3')}}" rel="stylesheet" />
   <link  href="{{url('../assets/css/style.css')}}" rel="stylesheet" />
+
   @include('toster')
 </head>
 <body class="g-sidenav-show  bg-gray-100">
@@ -47,6 +48,7 @@
     }
   </script>
   <script src="{{url('../assets/js/soft-ui-dashboard.min.js?v=1.0.3')}}"></script>
+
 </body>
 
 </html>

@@ -277,22 +277,23 @@ tr.text-muted td{
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group ">
-                                <label class="text-muted">City</label>
-                                <input type="text" value="{{old('billing_city')}}" name="billing_city" placeholder="Delhi" class="form-control ">
-                                @if ($errors->has('billing_city'))
-                                    <span class="text-danger">{{ $errors->first('billing_city') }}</span>
+                                <label class="text-muted">State</label>
+                                <input type="text" value="{{$currentUserInfo->regionName ?? old('billing_state')}}" name="billing_state" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('billing_state'))
+                                    <span class="text-danger">{{ $errors->first('billing_state') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group ">
-                                <label class="text-muted">Zip Code</label>
-                                <input type="text" value="{{old('billing_zip_code')}}" name="billing_zip_code" placeholder="212401" class="form-control ">
-                                @if ($errors->has('billing_zip_code'))
-                                    <span class="text-danger">{{ $errors->first('billing_zip_code') }}</span>
+                                <label class="text-muted">City</label>
+                                <input type="text" value="{{$currentUserInfo->cityName ?? old('billing_city')}}" name="billing_city" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('billing_city'))
+                                    <span class="text-danger">{{ $errors->first('billing_city') }}</span>
                                 @endif
                             </div>
                         </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -304,12 +305,13 @@ tr.text-muted td{
                                 @endif
                             </div>
                         </div>
+                        
                         <div class="col-lg-6">
                             <div class="form-group ">
-                                <label class="text-muted">State</label>
-                                <input type="text" value="{{old('billing_state')}}" name="billing_state" placeholder="Delhi" class="form-control ">
-                                @if ($errors->has('billing_state'))
-                                    <span class="text-danger">{{ $errors->first('billing_state') }}</span>
+                                <label class="text-muted">Zip Code</label>
+                                <input type="text" value="{{$currentUserInfo->zipCode ??  old('billing_zip_code')}}" name="billing_zip_code" placeholder="212401" class="form-control ">
+                                @if ($errors->has('billing_zip_code'))
+                                    <span class="text-danger">{{ $errors->first('billing_zip_code') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -317,7 +319,7 @@ tr.text-muted td{
                     <label>Country</label>
                     <select name="billing_country" id="country">
                         <!-- <option value="usa">USA</option> -->
-                        <option value="ind">INDIA</option>
+                        <option value="{{$currentUserInfo->countryName ??  old('billing_country')}}">{{$currentUserInfo->countryName ??  old('billing_country')}}</option>
                     </select>
                     @if ($errors->has('billing_country'))
                         <span class="text-danger">{{ $errors->first('billing_country') }}</span>
@@ -353,22 +355,23 @@ tr.text-muted td{
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group ">
-                                <label class="text-muted">City</label>
-                                <input type="text" value="{{old('shipping_city')}}" name="shipping_city" placeholder="Delhi" class="form-control ">
-                                @if ($errors->has('shipping_city'))
-                                    <span class="text-danger">{{ $errors->first('shipping_city') }}</span>
+                                <label class="text-muted">State</label>
+                                <input type="text" value="{{$currentUserInfo->regionName ?? old('billing_state')}}" name="billing_state" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('billing_state'))
+                                    <span class="text-danger">{{ $errors->first('billing_state') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group ">
-                                <label class="text-muted">Zip Code</label>
-                                <input type="text" value="{{old('shipping_zip_code')}}" name="shipping_zip_code" placeholder="212401" class="form-control ">
-                                @if ($errors->has('shipping_zip_code'))
-                                    <span class="text-danger">{{ $errors->first('shipping_zip_code') }}</span>
+                                <label class="text-muted">City</label>
+                                <input type="text" value="{{$currentUserInfo->cityName ?? old('billing_city')}}" name="billing_city" placeholder="Delhi" class="form-control ">
+                                @if ($errors->has('billing_city'))
+                                    <span class="text-danger">{{ $errors->first('billing_city') }}</span>
                                 @endif
                             </div>
                         </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -382,18 +385,17 @@ tr.text-muted td{
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group ">
-                                <label class="text-muted">State</label>
-                                <input type="text" value="{{old('shipping_state')}}" name="shipping_state" placeholder="Delhi" class="form-control ">
-                                @if ($errors->has('billing_state'))
-                                    <span class="text-danger">{{ $errors->first('shipping_state') }}</span>
+                                <label class="text-muted">Zip Code</label>
+                                <input type="text" value="{{$currentUserInfo->zipCode ??  old('billing_zip_code')}}" name="billing_zip_code" placeholder="212401" class="form-control ">
+                                @if ($errors->has('billing_zip_code'))
+                                    <span class="text-danger">{{ $errors->first('billing_zip_code') }}</span>
                                 @endif
                             </div>
                         </div>
                     </div>
                     <label>Country</label>
                     <select name="shipping_country" id="country">
-                        <option value="usa">USA</option>
-                        <option value="ind">INDIA</option>
+                    <option value="{{$currentUserInfo->countryName ??  old('shipping_country')}}">{{$currentUserInfo->countryName ??  old('shipping_country')}}</option>
                     </select>
                     @if ($errors->has('shipping_country'))
                         <span class="text-danger">{{ $errors->first('shipping_country') }}</span>

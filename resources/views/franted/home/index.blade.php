@@ -34,7 +34,7 @@
 							<i class="icofont-support"></i>
 						</div>
 						<span>Emegency Cases</span>
-						<h4 class="mb-3">1-800-700-6200</h4>
+						<h4 class="mb-3">+91 958 230 6210</h4>
 						<p>Get ALl time support for emergency.We have introduced the principle of family medicine.Get Conneted with us for any urgency .</p>
 					</div>
 				</div>
@@ -60,7 +60,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="counter-stat">
 						<i class="icofont-flag"></i>
-						<span class="h3 counter" data-count="700">0</span>+
+						<span class="h3 counter" data-count="70">0</span>+
 						<p>Surgery Comepleted</p>
 					</div>
 				</div>

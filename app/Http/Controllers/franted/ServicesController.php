@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\franted;
 
+use Stevebauman\Location\Facades\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Distinct;
 use App\Models\Product;
 use App\Models\Package;
+use App\Models\State;
+
 
 class ServicesController extends Controller
 {
@@ -99,9 +103,18 @@ class ServicesController extends Controller
         }
     }
 
-    public function billingAddress(){
+    public function billingAddress(Request $request){
+        $state=State::all();
+        $distinct=Distinct::all();
+        $ip = $request->ip();
+        if($ip =='127.0.0.1'){
+            $ip = '110.224.79.223'; 
+        }else{
+            $ip = $request->ip();
+        }
+        $currentUserInfo = Location::get($ip);
         $cart = session()->get('cart', []);
-        return view('franted.services.billingAddress',compact('cart'));
+        return view('franted.services.billingAddress',compact('cart','state','distinct','currentUserInfo'));
 
     }
 }

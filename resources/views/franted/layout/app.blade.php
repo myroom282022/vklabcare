@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="{{url('front_assets/plugins/slick-carousel/slick/slick.css')}}">
   <link rel="stylesheet" href="{{url('front_assets/plugins/slick-carousel/slick/slick-theme.css')}}">
   <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <script src="{{url('front_assets/js/jquery.min.js')}}"></script>
 
@@ -34,7 +35,7 @@
   <link rel="stylesheet" href="{{url('front_assets/css/custom.css')}}">
 </head>
 <body id="top">
-<header>
+<header class="">
     @include('franted.layout.header')
     @include('franted.layout.navbar')
 </header>

@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "razorpay/razorpay": "^2.8",
+        "stevebauman/location": "^7.0",
         "twilio/sdk": "^6.44"
     },
     "require-dev": {
