@@ -234,7 +234,203 @@
     z-index: 2;
 	color: var(--skyblue);
 }
+.btn-color{
+	background-color: var(--skyblue);
+	color:white !important;
+    border-radius: 30px;
+}
+.payment-button{
+    background-color: var(--skyblue);
+	color:white !important;
+    width:80%;
+}
+.heading-color{
+	color: var(--skyblue);
+}
+.footer-socials li a {
+    width: 45px;
+    height: 45px;
+    background: var(--skyblue) !important;
+    color: #fff;
+    display: inline-block;
+    text-align: center;
+    border-radius: 100%;
+    padding-top: 12px;
+}
+
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+	font-size: 1rem;
+	line-height: 2.15;
+	padding-left: .75em;
+	padding-right: .75em;
+	}
+	
+	.card-registration .select-arrow {
+	top: 13px;
+	}
+	
+	.bg-grey {
+	background-color: #0bb2f01a;
+	}
+
+/* start billing--------------------------- */
+
+.fa-check:before {
+    content: "" !important;
+}
+
+header .active{
+    font-weight: 700;
+    position: relative;
+}
+header .active .fa-check {
+    position: absolute;
+    left: 37%;
+    bottom: -32px;
+    background-color: #fff;
+    font-size:30px;
+    color: var(--skyblue);
+}
+.progress{
+    height: 3px;
+    background-color: #ccc;
+}
+.progress div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.progress .progress-bar-billing{
+    width: 35%;
+}
+.progress .progress-bar-payment{
+    width: 52%;
+}
+.progress .progress-bar-success{
+    width: 100%;
+}
+#details{
+    padding: 30px 50px;
+    min-height: 300px;
+}
+input{
+    border: none;
+    outline: none;
+}
+.form-group .d-flex{
+    border: 1px solid #ddd;
+}
+.form-group .d-flex input{
+    width: 95%;
+}
+
+select{
+    width: 100%;
+    padding: 8px 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+input[type="checkbox"] + label{
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+#address,#cart,#summary{
+    padding: 20px 50px;
+
+}
+#address .d-md-flex p.text-justify,#register p.text-muted{
+    margin: 0;
+}
+#register{
+    background-color: #d9ecf2;
+}
+#register a{
+    text-decoration: none;
+    color: #333;
+}
+#cart,#summary{
+    max-width: 500px;
+}
+.h6{
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.h6 a{
+    text-decoration: none;
+    font-size: 1rem;
+}
+.item img{
+    object-fit: cover;
+    border-radius: 5px;
+}
+.item{
+    position: relative;
+}
+.number{
+    position: absolute;
+    font-weight: 800;
+    color: #fff;
+    background-color: #0033ff;
+    padding-left: 7px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    width: 25px;
+    height: 25px;
+    top: -5px;
+    right: -5px;
+}
+.display-5{
+    font-size: 1.2rem;
+}
+#cart ~ p.text-muted{
+    margin: 0;
+    font-size: 0.9rem;
+}
+tr.text-muted td{
+    border: none;
+}
+.fa-minus,.fa-plus{
+    font-size: 0.7rem;
+}
+.table td{
+    padding: 0.3rem;
+}
+
+.btn.text-white{
+    background-color: #66cdaa;
+    border-radius: 0px;
+}
+.btn.text-white:hover{
+    background-color: #3cb371;
+}
+.wrapper .row + div.text-muted{
+    font-size: 0.9rem;
+}
+.mobile,#mobile{
+    display: none;
+}
+.buttons{
+    vertical-align: text-bottom;
+}
+#register{
+    width: 50%;
+}
+
+/* end billing ------------------------------- */
 
 @media (min-width: 768px) {
 }
-  
+@media (min-width: 992px) {
+	.card-registration-2 .bg-grey {
+	border-top-right-radius: 16px;
+	border-bottom-right-radius: 16px;
+	}
+	}
+	
+	@media (max-width: 991px) {
+	.card-registration-2 .bg-grey {
+	border-bottom-left-radius: 16px;
+	border-bottom-right-radius: 16px;
+	}
+	}

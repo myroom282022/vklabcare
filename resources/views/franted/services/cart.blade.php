@@ -1,41 +1,6 @@
 @extends('franted.layout.app')
 @section('content')
-<style>
-
-
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
-font-size: 1rem;
-line-height: 2.15;
-padding-left: .75em;
-padding-right: .75em;
-}
-
-.card-registration .select-arrow {
-top: 13px;
-}
-
-.bg-grey {
-background-color: #eae8e8;
-}
-
-@media (min-width: 992px) {
-.card-registration-2 .bg-grey {
-border-top-right-radius: 16px;
-border-bottom-right-radius: 16px;
-}
-}
-
-@media (max-width: 991px) {
-.card-registration-2 .bg-grey {
-border-bottom-left-radius: 16px;
-border-bottom-right-radius: 16px;
-}
-}
-    </style>
-
-
-
-<section class="h-100 h-custom" style="background-color: #d2c9ff;">
+<section class="h-100 h-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -45,7 +10,7 @@ border-bottom-right-radius: 16px;
               <div class="col-lg-8">
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
-                    <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
+                    <h1 class="fw-bold mb-0 heading-color">Booking Details</h1>
                   </div>
                   @if($cart)
                   @foreach($cart as $key => $item)
@@ -66,10 +31,10 @@ border-bottom-right-radius: 16px;
                     </div>
 
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0">€ {{$item['product_price']}}</h6>
+                      <h6 class="mb-0">₹ {{$item['product_price']}}</h6>
                     </div>
                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="{{url('services/remove-from-cart/'.$key)}}" class="text-muted"><i class="icofont-close"></i></a>
+                      <a href="{{url('services/remove-from-cart/'.$key)}}" class="text-muted"><i class="icofont-close text-danger"></i></a>
                     </div>
                   </div>
                  @endforeach 
@@ -81,15 +46,15 @@ border-bottom-right-radius: 16px;
                  @endif
 
                   <div class="pt-5">
-                    <h6 class="mb-0"><a href="{{route('services.index')}}" class="btn btn-info sm"><i class="icofont-long-arrow-left"></i>Back to Booking</a></h6>
+                    <h6 class="mb-0"><a href="{{route('services.index')}}" class="btn btn-color sm"><i class="icofont-long-arrow-left"></i>Back to Booking</a></h6>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-4 bg-grey">
+              <div class="col-lg-4 bg-grey heading-color">
                 <div class="p-4">
                   
                 
-                  <h5 class="text-uppercase mb-3">Give code</h5>
+                  <h5 class="text-uppercase mb-3 heading-color">Give code</h5>
 
                   <div class="mb-3">
                     <div class="form-outline">
@@ -109,24 +74,24 @@ border-bottom-right-radius: 16px;
                     @endforeach
                     <div class="d-flex justify-content-between">
                     <p class="mb-2">Subtotal</p>
-                    <p class="mb-2">${{$Subtotal>0 ? $Subtotal :'00.00'}}</p>
+                    <p class="mb-2">₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</p>
                     </div>
 
                     <div class="d-flex justify-content-between">
                     <p class="mb-2">Discount</p>
-                    <p class="mb-2">- ${{$discount<$Subtotal ? $discount : '00.00'}}</p>
+                    <p class="mb-2">- ₹{{$discount<$Subtotal ? $discount : '00.00'}}</p>
                     </div>
                     @php 
                     $Subtotal=$Subtotal-$discount;
                     @endphp
                     <div class="d-flex justify-content-between mb-4">
                     <p class="mb-2">Total(Incl. taxes)</p>
-                    <p class="mb-2">${{$Subtotal>0 ? $Subtotal :'00.00'}}</p>
+                    <p class="mb-2">₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</p>
                     </div>
                     <a href="{{route('billing-address')}}">
-                      <button type="button" class="btn btn-info btn-block btn-lg">
+                      <button type="button" class="btn btn-color btn-block btn-lg">
                       <div class="d-flex justify-content-between">
-                          <span>${{$Subtotal>0 ? $Subtotal :'00.00'}}</span>
+                          <span>₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</span>
                           <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                       </div>
                       </button>

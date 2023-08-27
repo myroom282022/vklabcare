@@ -7,7 +7,7 @@
         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image"> 
       </div>
       <div class="col-sm-md-7 col-lg-5 col-xl-5 offset-xl-1">
-       <h5>Sign Up</h5>
+       <h5 class="heading-color">Sign Up</h5>
        <p>Sign up or Sign in to access your orders, special offers, health tips and more!</p>
        
         <form method="POST" action="{{ route('user-register-post') }}">
@@ -47,14 +47,14 @@
           </div>
 
           <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-lg btn-block mt-3">Submit</button>
+          <button type="submit" class="btn btn-color btn-lg btn-block mt-3">Submit</button>
             @if (Route::has('login'))
-                <a class="btn btn-link" href="{{ route('user-login') }}">
+                <a class="btn btn-link heading-color" href="{{ route('user-login') }}">
                     {{ __('Login With Email') }}
                 </a>
             @endif
             @if (Route::has('otp.login'))
-                <a class="btn btn-link" href="{{route('otp.login')}}">
+                <a class="btn btn-link heading-color" href="{{route('otp.login')}}">
                     {{ __('Login With Phone') }}
                 </a>
             @endif

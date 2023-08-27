@@ -43,6 +43,17 @@ use App\Http\Controllers\User\UserDashboardController;
 // ************************All use this  Panel *********************************
 //                     @@@@@@@@@@@@@@@@@@@@@@                   
 
+Route::get('/clear', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    Artisan::call('route:cache');
+    Artisan::call('optimize');
+    return "Cleared!";
+ });
+ 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('about',[AboutController::class,'index'])->name('about');
 

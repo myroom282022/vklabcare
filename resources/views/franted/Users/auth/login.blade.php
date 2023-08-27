@@ -9,7 +9,7 @@
             </div>
           <div class="col-lg-6 ">
             <div class=" pb-0 text-left d-flex flex-column mx-auto">
-              <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
+              <h3 class="font-weight-bolder heading-color text-gradient">Welcome back</h3>
               <p class="mb-0">Enter your email and password to sign in</p>
             </div>
             <form role="form" action="{{ route('user-login-post') }}" method="POST">
@@ -33,11 +33,9 @@
                 <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                 <label class="form-check-label" for="rememberMe">Remember me</label>
               </div>
-              <div class="text-center">
-                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
-              </div>
+              
                <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+              <button type="submit" class="btn btn-color btn-lg btn-block my-3">Sign In</button>
               @if (Route::has('user-login'))
                   <a class="btn btn-link" href="{{ route('user-login') }}">
                       {{ __('Login With Email') }}

@@ -67,7 +67,7 @@ class ServicesController extends Controller
         }
           
          session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect('services/cart-item')->with('success', 'Product added to cart successfully!');
     }
   
     /**
