@@ -131,11 +131,11 @@
                             @endforeach
                         <div class="d-flex align-items-center">
                             <div class="display-5">Subtotal</div>
-                            <div class="ml-auto font-weight-bold">${{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
+                            <div class="ml-auto font-weight-bold">₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
                         </div>
                         <div class="d-flex align-items-center py-2 border-bottom">
                             <div class="display-5">Shipping</div>
-                            <div class="ml-auto font-weight-bold">+ ${{$shipping<$Subtotal ? $shipping : '00.00'}}</div>
+                            <div class="ml-auto font-weight-bold">+ ₹{{$shipping<$Subtotal ? $shipping : '00.00'}}</div>
                         </div>
                         @php 
                             $Subtotal=$Subtotal+$shipping;
@@ -144,7 +144,7 @@
                             <div class="display-5">Total</div>
                             <div class="ml-auto d-flex">
                                 <div class="text-primary text-uppercase px-3">usd</div>
-                                <div class="font-weight-bold">${{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
+                                <div class="font-weight-bold">₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
                             </div>
                         </div>
 

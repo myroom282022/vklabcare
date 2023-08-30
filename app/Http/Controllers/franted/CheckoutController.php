@@ -12,6 +12,7 @@ use Exception;
 use App\Models\Payment;
 use App\Models\Order;
 use App\Models\State;
+use App\Models\User;
 
 class CheckoutController extends Controller
 {
@@ -26,7 +27,7 @@ class CheckoutController extends Controller
         $validatedData = $request->validate([
             'billing_name'          =>  'required',
             'billing_phone_number'  =>  'required|numeric|digits:10',
-            'billing_email'         =>  'required|email|unique:billings',
+            'billing_email'         =>  'required',
             'billing_city'          =>  'required',
             'billing_zip_code'      =>  'required',
             'billing_address'       =>  'required',
@@ -36,7 +37,6 @@ class CheckoutController extends Controller
             'billing_name.required' => 'Please enter your Name',
             'billing_phone_number.required' => 'Please enter phone number ',
             'billing_email.required' => 'Please enter valid email',
-            'unique.email' => 'Email is already exit.',
             'billing_city.required' => 'Please enter your city',
             'billing_zip_code.required' => 'Please enter zip code',
             'billing_address.required' => 'Please enter address ',
@@ -45,11 +45,21 @@ class CheckoutController extends Controller
 
         ]);
 
+        if(empty(auth()->user())){
+            $user = User::where('email', $request->billing_email)->Orwhere('phone_number', $request->billing_phone_number)->first();
+            if($user){
+                return redirect('otp/login')->withErros('you are not login !');
+            }else{
+                $url="register?email=$request->billing_email";
+                return redirect($url)->withErros('you are not register !');
+            }
+        }
+
         if(empty($request->is_same_shipping)){
             $validatedData = $request->validate([
                 'shipping_name'          =>  'required',
                 'shipping_phone_number'  =>  'required|numeric|digits:10',
-                'shipping_email'         =>  'required|email|unique:shippings',
+                'shipping_email'         =>  'required',
                 'shipping_city'          =>  'required',
                 'shipping_zip_code'      =>  'required',
                 'shipping_address'       =>  'required',
@@ -59,7 +69,6 @@ class CheckoutController extends Controller
                 'shipping_name.required' => 'Please enter your Name',
                 'shipping_phone_number.required' => 'Please enter phone number ',
                 'shipping_email.required' => 'Please enter valid email',
-                'unique.email' => 'Email is already exit.',
                 'shipping_city.required' => 'Please enter your city',
                 'shipping_zip_code.required' => 'Please enter zip code',
                 'shipping_address.required' => 'Please enter address ',
@@ -68,7 +77,7 @@ class CheckoutController extends Controller
     
             ]);
                 $shipping = Shipping::updateOrCreate([
-                    'id' => '$request->id'
+                    'user_id' => auth()->user()->id
                 ], [
                     'shipping_name'          =>  $request->shipping_name,
                     'shipping_phone_number'  =>  $request->shipping_phone_number,
@@ -82,7 +91,7 @@ class CheckoutController extends Controller
         }
         
         $billing = Billing::updateOrCreate([
-            'id' => '$request->id'
+            'user_id' => auth()->user()->id
         ], [
             'billing_name'          =>  $request->billing_name,
             'billing_phone_number'  =>  $request->billing_phone_number,
@@ -95,7 +104,7 @@ class CheckoutController extends Controller
         ]);
         if($request->is_same_shipping){
             $shipping = Shipping::updateOrCreate([
-                'id' => '$request->id'
+                'user_id' => auth()->user()->id
             ], [
                 'shipping_name'          =>  $request->billing_name,
                 'shipping_phone_number'  =>  $request->billing_phone_number,
@@ -107,56 +116,73 @@ class CheckoutController extends Controller
                 'shipping_country'       =>  $request->billing_country,
             ]);
         }    
+        
         return redirect('payment/index')->withSuccess("Billing address add successfully");
     }
     //payment getway 
     public function store(Request $request)
     {
-          $input = $request->all();
-  
+        $input = $request->all();
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
-  
          $payment = $api->payment->fetch($input['razorpay_payment_id']);
-
-        if(count($input)  && !empty($input['razorpay_payment_id'])) {
-            try {
-                // $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount'=>$payment['amount']));
-                // $paymentData['user_id']         =   $auth()->user()->id;
-                $paymentData['transaction_id']  =   $payment->id;
-                $paymentData['order_id']        =   $payment->order_id;
-                $paymentData['total_price']     =   $request->total_price;
-                $paymentData['payment_type']    =   $payment->method;
-                $paymentData['product_price']   =   $request->product_price;
-                $paymentData['discount_price']  =   $request->discount_price;
-                $paymentData['delivery_charge'] =   $request->delivery_charge;
-                $paymentData['quantity']        =   $request->quantity;
-                $paymentData['status']          =   'Success';
-                $len=5;
-                $paymentData['order_number']    =   $this->incrementalHash($len);
-                $paymentDetails= Payment::create($paymentData);
-
-                // $order['user_id']             =   $auth()->user()->id;
-                $order['payment_id']          =   $paymentDetails->id;
-                $order['product_name']        =   $request->product_name;
-                $order['product_description'] =   $request->product_description;
-                $order['product_price']       =   $request->product_price;
-                $order['order_number']        =   $paymentDetails->order_number;
-                $order['quantity']            =   $request->quantity;
-                $order['product_image']       =   $request->product_image;
+        // if($payment) {
+        //     try {
+        //         if($payment->method == 'card'){
+        //             $cardData=[
+        //                 'card_name'        =>   $payment->card['network'] ?? '',
+        //                 'card_number'      =>   $payment->card['last4'] ?? '',
+        //                 'bank_name'        =>   $payment->card['issuer'] ?? '',
+        //                 'card_id'          =>   $payment->card['id'] ?? '',
+        //           ];
                
-                Order::create($order);
+
+        //         }
+        //         $paymentData['user_id']         =   auth()->user()->id;
+        //         $paymentData['transaction_id']  =   $payment->id ?? '';
+        //         $paymentData['order_id']        =   $payment->order_id ?? '';
+        //         $paymentData['total_price']     =   $payment->amount/100 ?? '';
+        //         $paymentData['payment_type']    =   $payment->method ?? '';
+        //         $paymentData['currency']    =   $payment->currency ?? '';
+        //         $paymentData['order_id']    =   $payment->order_id ?? '';
+        //         $paymentData['description']    =   $payment->description ?? '';
+        //         $paymentData['vpa']    =   $payment->vpa ?? '';
+        //         $paymentData['upi_transaction_id']    =   $payment->acquirer_data['upi_transaction_id'] ?? '';
+        //         $paymentData['card_details']    =   $cardData ?? '';
+        //         $paymentData['status']          =   'Success';
+
+
+        //         return $paymentData;
+        //         // $paymentDetails= Payment::create($paymentData);
+        //         // $paymentData['product_price']   =   $request->product_price;
+        //         // $paymentData['discount_price']  =   $request->discount_price;
+        //         // $paymentData['delivery_charge'] =   $request->delivery_charge;
+        //         // $paymentData['quantity']        =   $request->quantity;
+        //         // $paymentData['status']          =   'Success';
+        //         // $paymentDetails= Payment::create($paymentData);
+
+        //         // $order['user_id']             =   auth()->user()->id;
+        //         // $order['payment_id']          =   $paymentDetails->id;
+        //         // $order['product_name']        =   $request->product_name;
+        //         // $order['product_description'] =   $request->product_description;
+        //         // $order['product_price']       =   $payment->amount/100;
+        //         // $order['order_number']        =   $paymentDetails->order_number;
+        //         // $order['quantity']            =   $request->quantity;
+        //         // $order['product_image']       =   $request->product_image;
                
-            } catch (Exception $e) {
-                return  $e->getMessage();
-                Session::put('error',$e->getMessage());
-                return redirect()->back();
-            }
-        }
+        //         // Order::create($order);
+               
+        //     } catch (Exception $e) {
+        //         return  $e->getMessage();
+        //         Session::put('error',$e->getMessage());
+        //         return redirect()->back();
+        //     }
+        // }
           
         Session::put('success', 'Payment successful');
         Session::forget('cart', []);
         return redirect()->route('payment.success')->withSuccess('Payment successfully');
     }
+
     function incrementalHash($len){
         $charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         $base = strlen($charset);
@@ -169,7 +195,7 @@ class CheckoutController extends Controller
           $now /= $base;
         }
         return substr($result, -5);
-      }
+    }
     public function payments(){
         $name=$request->name;
         $amount=$request->amount;
@@ -189,7 +215,6 @@ class CheckoutController extends Controller
     }
 
     public function successPage(){
-        
         return view('franted.services.success');
     }
 }

@@ -61,7 +61,19 @@
 					</ul>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
+				@if(auth()->user())
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">Dashboard <i class="icofont-thin-down"></i></a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown02">
+						<li><a class="dropdown-item" href="{{route('user-dashboard')}}">Dashboard</a></li>
+						<li><a class="dropdown-item" href="{{route('user-logout')}}">Logout</a></li>
+					</ul>
+				</li>
+				@else
 				<li class="nav-item"><a class="nav-link" href="{{route('otp.login')}}">Login</a></li>
+				@endif
+
 				<li class="nav-item"><a class="nav-link" href="{{route('cart-item')}}">
 					<i class="icofont-shopping-cart" style="font-size:20px"><sup><b  class="cart-items">{{ count((array) session('cart')) }}</b></sup></i>
 					</a>

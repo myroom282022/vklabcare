@@ -25,8 +25,9 @@ class AuthController extends Controller
    | provide this functionality without requiring any additional code.
    |
    */
-    public function userRegister(){
-        return view('franted.Users.auth.register');
+    public function userRegister(Request $request){
+        $email = $request->query('email');
+        return view('franted.Users.auth.register',compact('email'));
     }
    
     public function postRegister(Request $request){  
@@ -57,6 +58,22 @@ class AuthController extends Controller
             ]);
             $userData['user_id']=$user->id;
             UserDetails::create($userData);
+            if($request->send_url){
+                Auth::login($user);
+                return redirect($request->send_url)->withSuccess("$user->name Registered Successfully");
+            }else{
+                $userOtp = $this->generateOtp($request->phone_number);
+                $otp=  $userOtp->otp;
+               // $userOtp->sendSMS($request->phone_number);
+               $mailData = [
+                   'title' => 'Mail for OTP verify ',
+                   'otp' =>  $otp,
+                   'verify_type' =>'phone',
+                   'user_id'=>$user->id,
+               ];
+               Mail::to($user->email)->send(new otpVerify($mailData));
+               return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
+            }
         return redirect("otp/login")->withSuccess(' You have Registered Successfully');
     }
 
@@ -131,7 +148,7 @@ class AuthController extends Controller
                         'user_id'=>$user->id,
                     ];
                     Mail::to($user->email)->send(new otpVerify($mailData));
-                    return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your Mobile Number."); 
+                    return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
             }
         }      
     }

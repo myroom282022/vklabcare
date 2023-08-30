@@ -13,6 +13,9 @@
         <form method="POST" action="{{ route('user-register-post') }}">
             @csrf
           <!-- Password input -->
+          @if($email)
+            <input type="text"  name="send_url" class="form-control form-control-lg"value="services/billing-address">
+          @endif
           <div class="form-outline mb-1">
             <label class="form-label" for="phone_number">Name</label>
             <input type="text" id="name" name="name" class="form-control form-control-lg  @error('name') is-invalid @enderror" value="{{ old('name') }}" autofocus placeholder="Enter Name"/>
@@ -23,7 +26,7 @@
 
           <div class="form-outline mb-1">
             <label class="form-label" for="phone_number">Email</label>
-            <input type="email" id="email" name="email" class="form-control form-control-lg  @error('email') is-invalid @enderror" value="{{ old('email') }}" autofocus placeholder="Enter Email"/>
+            <input type="email" id="email" name="email" class="form-control form-control-lg  @error('email') is-invalid @enderror" value="{{$email ?? old('email') }}" autofocus placeholder="Enter Email"/>
             @if ($errors->has('email'))
                 <span class="text-danger text-left">{{ $errors->first('email') }}</span>
             @endif

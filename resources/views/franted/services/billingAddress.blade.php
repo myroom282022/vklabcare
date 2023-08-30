@@ -26,21 +26,21 @@
                             @csrf
                             <div class="form-group">
                                 <label class="text-muted">Name</label>
-                                <input type="text" value="{{old('billing_name')}}" name="billing_name" placeholder="Name" class="form-control">
+                                <input type="text" value="{{$billing->billing_name ?? $userData->name ?? ''}}" name="billing_name" class="form-control">
                                 @if ($errors->has('billing_name'))
                                     <span class="text-danger">{{ $errors->first('billing_name') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
                                 <label class="text-muted">Email</label>
-                                <input type="email" name="billing_email" placeholder="a@gmail.com" value="{{old('billing_email')}}" class="form-control">
+                                <input type="email" name="billing_email"  value="{{$billing->billing_email ?? $userData->email ?? ''}}" class="form-control">
                                 @if ($errors->has('billing_email'))
                                     <span class="text-danger">{{ $errors->first('billing_email') }}</span>
                                 @endif
                             </div>
                             <div class="form-group ">
                                 <label class="text-muted">Phone Number</label>
-                                <input type="text" value="{{old('billing_phone_number')}}" name="billing_phone_number" placeholder="1234567890" class="form-control ">
+                                <input type="text" value="{{$billing->billing_phone_number ?? $userData->phone_number ?? ''}}" maxlength="10" name="billing_phone_number"  class="form-control phone_number">
                                 @if ($errors->has('billing_phone_number'))
                                     <span class="text-danger">{{ $errors->first('billing_phone_number') }}</span>
                                 @endif
@@ -49,7 +49,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">State</label>
-                                        <input type="text" value="{{$currentUserInfo->regionName ?? old('billing_state')}}" name="billing_state" placeholder="Delhi" class="form-control ">
+                                        <input type="text" value="{{$billing->billing_state ?? $currentUserInfo->regionName}}" name="billing_state"  class="form-control ">
                                         @if ($errors->has('billing_state'))
                                             <span class="text-danger">{{ $errors->first('billing_state') }}</span>
                                         @endif
@@ -58,7 +58,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">City</label>
-                                        <input type="text" value="{{$currentUserInfo->cityName ?? old('billing_city')}}" name="billing_city" placeholder="Delhi" class="form-control ">
+                                        <input type="text" value="{{$billing->billing_city ?? $currentUserInfo->cityName }}" name="billing_city"  class="form-control ">
                                         @if ($errors->has('billing_city'))
                                             <span class="text-danger">{{ $errors->first('billing_city') }}</span>
                                         @endif
@@ -70,7 +70,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">Address</label>
-                                        <input type="text" value="{{old('billing_address')}}" name="billing_address" placeholder="address" class="form-control ">
+                                        <input type="text" value="{{$billing->billing_address ?? ''}}" name="billing_address"  class="form-control ">
                                         @if ($errors->has('billing_address'))
                                             <span class="text-danger">{{ $errors->first('billing_address') }}</span>
                                         @endif
@@ -80,7 +80,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">Zip Code</label>
-                                        <input type="text" value="{{$currentUserInfo->zipCode ??  old('billing_zip_code')}}" name="billing_zip_code" placeholder="212401" class="form-control ">
+                                        <input type="text" value="{{$billing->billing_zip_code ?? $currentUserInfo->zipCode}}" name="billing_zip_code" maxlength="6" class="form-control phone_number">
                                         @if ($errors->has('billing_zip_code'))
                                             <span class="text-danger">{{ $errors->first('billing_zip_code') }}</span>
                                         @endif
@@ -90,7 +90,7 @@
                             <label>Country</label>
                             <select name="billing_country" id="country">
                                 <!-- <option value="usa">USA</option> -->
-                                <option value="{{$currentUserInfo->countryName ??  old('billing_country')}}">{{$currentUserInfo->countryName ??  old('billing_country')}}</option>
+                                <option value="{{$billing->billing_country ?? $currentUserInfo->countryName}}">{{$billing->billing_country ?? $currentUserInfo->countryName }}</option>
                             </select>
                             @if ($errors->has('billing_country'))
                                 <span class="text-danger">{{ $errors->first('billing_country') }}</span>
@@ -104,51 +104,50 @@
                             <div class="h5 large">Shpping Address</div>
                             <div class="form-group">
                                 <label class="text-muted">Name</label>
-                                <input type="text" value="{{old('shipping_name')}}" name="shipping_name" placeholder="Name" class="form-control">
+                                <input type="text" value="{{$shipping->shipping_name ?? $userData->name ?? ''}}" name="shipping_name"  class="form-control">
                                 @if ($errors->has('shipping_name'))
                                     <span class="text-danger">{{ $errors->first('shipping_name') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
                                 <label class="text-muted">Email</label>
-                                <input type="email" name="shipping_email" placeholder="a@gmail.com" value="{{old('shipping_email')}}" class="form-control">
+                                <input type="email" name="shipping_email"  value="{{$shipping->shipping_email ?? $userData->email ?? ''}}" class="form-control">
                                 @if ($errors->has('shipping_email'))
                                     <span class="text-danger">{{ $errors->first('shipping_email') }}</span>
                                 @endif
                             </div>
                             <div class="form-group ">
                                 <label class="text-muted">Phone Number</label>
-                                <input type="text" value="{{old('shipping_phone_number')}}" name="shipping_phone_number" placeholder="1234567890" class="form-control ">
-                                @if ($errors->has('shipping_phone_number'))
-                                    <span class="text-danger">{{ $errors->first('shipping_phone_number') }}</span>
+                                <input type="text"  value="{{$shipping->shipping_phone_number ?? $userData->phone_number ?? ''}}" maxlength="10" name="shipping_email"  class="form-control phone_number">
+                                @if ($errors->has('shipping_email'))
+                                    <span class="text-danger">{{ $errors->first('shipping_email') }}</span>
                                 @endif
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">State</label>
-                                        <input type="text" value="{{$currentUserInfo->regionName ?? old('billing_state')}}" name="billing_state" placeholder="Delhi" class="form-control ">
-                                        @if ($errors->has('billing_state'))
-                                            <span class="text-danger">{{ $errors->first('billing_state') }}</span>
+                                        <input type="text" value="{{$shipping->shipping_state ?? $currentUserInfo->regionName}}" name="shipping_state"  class="form-control ">
+                                        @if ($errors->has('shipping_state'))
+                                            <span class="text-danger">{{ $errors->first('shipping_state') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">City</label>
-                                        <input type="text" value="{{$currentUserInfo->cityName ?? old('billing_city')}}" name="billing_city" placeholder="Delhi" class="form-control ">
-                                        @if ($errors->has('billing_city'))
-                                            <span class="text-danger">{{ $errors->first('billing_city') }}</span>
+                                        <input type="text" value="{{$shipping->shipping_city ?? $currentUserInfo->cityName}}" name="shipping_city"  class="form-control ">
+                                        @if ($errors->has('shipping_city'))
+                                            <span class="text-danger">{{ $errors->first('shipping_city') }}</span>
                                         @endif
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">Address</label>
-                                        <input type="text" value="{{old('shipping_address')}}" name="shipping_address" placeholder="address" class="form-control ">
+                                        <input type="text" value="{{$shipping->shipping_address ?? ''}}" name="shipping_address"  class="form-control ">
                                         @if ($errors->has('shipping_address'))
                                             <span class="text-danger">{{ $errors->first('shipping_address') }}</span>
                                         @endif
@@ -157,16 +156,16 @@
                                 <div class="col-lg-6">
                                     <div class="form-group ">
                                         <label class="text-muted">Zip Code</label>
-                                        <input type="text" value="{{$currentUserInfo->zipCode ??  old('billing_zip_code')}}" name="billing_zip_code" placeholder="212401" class="form-control ">
-                                        @if ($errors->has('billing_zip_code'))
-                                            <span class="text-danger">{{ $errors->first('billing_zip_code') }}</span>
+                                        <input type="text" value="{{$shipping->shipping_zip_code ?? $currentUserInfo->zipCode}}" name="shipping_zip_code" maxlength="6" class="form-control phone_number">
+                                        @if ($errors->has('shipping_zip_code'))
+                                            <span class="text-danger">{{ $errors->first('shipping_zip_code') }}</span>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                             <label>Country</label>
                             <select name="shipping_country" id="country">
-                            <option value="{{$currentUserInfo->countryName ??  old('shipping_country')}}">{{$currentUserInfo->countryName ??  old('shipping_country')}}</option>
+                            <option value="{{$shipping->shipping_country ?? $currentUserInfo->countryName}}">{{$shipping->shipping_country ?? $currentUserInfo->countryName}}</option>
                             </select>
                             @if ($errors->has('shipping_country'))
                                 <span class="text-danger">{{ $errors->first('shipping_country') }}</span>
@@ -192,10 +191,6 @@
                             </div>
                         </form>
                     </div>
-                
-
-
-                    
                 </div>
                 <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1 pt-lg-0 pt-3">
                     <div id="cart" class="bg-white rounded">
@@ -215,7 +210,7 @@
                                     <a href="#" class="h5 text-primary">{{$item['product_description']}}</a>
                                 </div>
                                 <div class="ml-auto">
-                                    <b class="h5">${{$item['product_price']}}</b>
+                                    <b class="h5">₹{{$item['product_price']}}</b>
                                 </div>
                             </div>
                         @endforeach 
@@ -232,11 +227,11 @@
                             @endforeach
                         <div class="d-flex align-items-center">
                             <div class="display-5">Subtotal</div>
-                            <div class="ml-auto font-weight-bold">${{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
+                            <div class="ml-auto font-weight-bold">₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
                         </div>
                         <div class="d-flex align-items-center py-2 border-bottom">
                             <div class="display-5">Shipping</div>
-                            <div class="ml-auto font-weight-bold">+ ${{$shipping<$Subtotal ? $shipping : '00.00'}}</div>
+                            <div class="ml-auto font-weight-bold">+ ₹{{$shipping<$Subtotal ? $shipping : '00.00'}}</div>
                         </div>
                         @php 
                             $Subtotal=$Subtotal+$shipping;
@@ -244,8 +239,8 @@
                         <div class="d-flex align-items-center py-2">
                             <div class="display-5">Total</div>
                             <div class="ml-auto d-flex">
-                                <div class="text-primary text-uppercase px-3">usd</div>
-                                <div class="font-weight-bold">${{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
+                                <div class="text-primary text-uppercase px-3">inr</div>
+                                <div class="font-weight-bold">₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
                             </div>
                         </div>
 
@@ -273,5 +268,13 @@
                 $(".shiiping").show(300);
             }
         });
+
+        // validate phone number --------------------
+      $('.phone_number').on('input', function() {
+        var inputValue = $(this).val();
+        var numericValue = inputValue.replace(/[^0-9]/g, '');
+        $(this).val(numericValue);
+      });
+
     });
 </script>

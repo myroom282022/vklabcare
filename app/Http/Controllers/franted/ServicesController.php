@@ -9,15 +9,14 @@ use App\Models\Distinct;
 use App\Models\Product;
 use App\Models\Package;
 use App\Models\State;
-
+use App\Models\Billing;
+use App\Models\Shipping;
 
 class ServicesController extends Controller
 {
     public function index(Request $request){
-      
         $product=  Package::with('getProduct')->get();
         return view('franted.services.index',compact('product'));
-
     }
     public function product($id){
         if($id){
@@ -32,28 +31,14 @@ class ServicesController extends Controller
          return view('franted.services.product',compact('product'));
  
      }
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function showCart()
-    {
+   
+    public function showCart(){
          $cart = session()->get('cart', []);
         return view('franted.services.cart',compact('cart'));
     }
-  
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function addToCart($id)
-    {
+    public function addToCart($id){
         $product = Product::findOrFail($id);
-          
-          $cart = session()->get('cart', []);
-  
+        $cart = session()->get('cart', []);
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -66,17 +51,11 @@ class ServicesController extends Controller
             ];
         }
           
-         session()->put('cart', $cart);
+        session()->put('cart', $cart);
         return redirect('services/cart-item')->with('success', 'Product added to cart successfully!');
     }
   
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function update(Request $request)
-    {
+    public function update(Request $request){
         if($request->id && $request->quantity){
             $cart = session()->get('cart');
             $cart[$request->id]["quantity"] = $request->quantity;
@@ -84,14 +63,7 @@ class ServicesController extends Controller
             session()->flash('success', 'Cart updated successfully');
         }
     }
-  
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function remove($id)
-    {
+    public function remove($id){
         if($id) {
             $cart = session()->get('cart');
             if(isset($cart[$id])) {
@@ -104,8 +76,14 @@ class ServicesController extends Controller
     }
 
     public function billingAddress(Request $request){
-        $state=State::all();
-        $distinct=Distinct::all();
+        $billing='';
+        $shipping='';
+        $userData='';
+        if(!empty(auth()->user())){
+            $userData=auth()->user();
+            $billing=Billing::where('user_id',$userData->id)->latest()->first();
+            $shipping=Shipping::where('user_id',$userData->id)->latest()->first();
+        }
         $ip = $request->ip();
         if($ip =='127.0.0.1'){
             $ip = '110.224.79.223'; 
@@ -114,7 +92,7 @@ class ServicesController extends Controller
         }
         $currentUserInfo = Location::get($ip);
         $cart = session()->get('cart', []);
-        return view('franted.services.billingAddress',compact('cart','state','distinct','currentUserInfo'));
+        return view('franted.services.billingAddress',compact('cart','currentUserInfo','userData','shipping','billing'));
 
     }
 }
