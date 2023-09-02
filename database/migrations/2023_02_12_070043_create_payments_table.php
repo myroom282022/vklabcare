@@ -20,11 +20,12 @@ return new class extends Migration
             $table->string('order_id')->nullable();
             $table->string('order_number')->nullable();
             $table->decimal('total_price')->nullable();
-            $table->decimal('product_price')->nullable();
-            $table->decimal('discount_price')->nullable();
-            $table->decimal('delivery_charge')->nullable();
-            $table->integer('quantity')->nullable();
             $table->string('payment_type')->nullable();
+            $table->string('vpa')->nullable();
+            $table->string('upi_transaction_id')->nullable();
+            $table->text('card_details')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('description')->nullable();
             $table->enum('status',['Success','Failed','Pending'])->default('Pending');
             $table->timestamps();
         });

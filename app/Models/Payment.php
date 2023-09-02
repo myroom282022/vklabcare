@@ -11,16 +11,16 @@ class Payment extends Model
     protected $fillable = [
         'user_id',
         'transaction_id',
-        'total_price',
-        'product_price',
-        'discount_price',
-        'delivery_charge',
-        'quantity',
-        'status',
-        'order_number',
         'order_id',
+        'total_price',
         'payment_type',
-        
+        'order_number',
+        'status',
+        'currency',
+        'description',
+        'vpa',
+        'upi_transaction_id',
+        'card_details',
     ];
     public function paymentDetails(){
         return $this->hasMany(Order::class);

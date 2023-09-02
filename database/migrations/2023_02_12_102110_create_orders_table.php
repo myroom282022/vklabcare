@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('product_description')->nullable();
             $table->decimal('product_price')->nullable();
             $table->string('product_image')->nullable();
+            $table->string('delivery_charge')->nullable();
+            $table->string('total_price')->nullable();
             $table->timestamps();
         });
     }

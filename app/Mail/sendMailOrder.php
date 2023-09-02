@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class otpVerify extends Mailable
+class sendMailOrder extends Mailable
 {
     use Queueable, SerializesModels;
   
@@ -28,7 +28,9 @@ class otpVerify extends Mailable
      *
      * @return $this
      */
-    public function build(){
-        return $this->subject('Send OTP verify mail from vka3healthcare')->view('emails.sendOtp');
+    public function build()
+    {
+        return $this->subject('Booking Package Confirmation mail from vka3healthcare')
+                    ->view('emails.sendMailOrder');
     }
 }
