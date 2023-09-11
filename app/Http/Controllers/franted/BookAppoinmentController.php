@@ -13,16 +13,13 @@ class BookAppoinmentController extends Controller
         return view('franted.Appoinment.bookApp');
     }
     public function store(Request $request){
-        // $request->available_date;
          $available_date= $request->available_date;
-    //  return  $available_dat->format('Y-m-d');
           $yesterday = Carbon::yesterday()->format('Y-m-d');
        
         $validatedData= request()->validate([
             'speciality'            =>  'required|not_in:0',
             'doctor_name'           =>  'required|not_in:0',
             'start_date'            =>  $yesterday,
-            // 'available_date'        =>  'required|date_format:Y-m-d|after:start_date',
             'available_date'        =>  'required|date_format:Y-m-d|after:start_date',
             'available_time'        =>  'required',
             'patient_name'          =>  'required',
@@ -52,6 +49,4 @@ class BookAppoinmentController extends Controller
         Appoinment::create($data);
         return view('franted.Appoinment.confirmation')->withSuccess('Your appontment is booked Succesfully !');
     }
-    
-   
 }

@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Session;
-use App\Models\User;
-use App\Models\UserOtp;
-use App\Models\UserDetails;
+use Illuminate\Http\Request;
+use App\Models\PackageBook;
+use App\Models\Product;
+use App\Models\ClientDevice;
+use App\Models\Affiliate;
 use App\Mail\otpVerify;
+use App\Mail\BookInfo;
+use App\Models\UserOtp;
+use App\Models\User;
+use Session;
 use Hash;
 use Mail;
 
@@ -26,10 +30,10 @@ class AuthController extends Controller
    |
    */
     public function userRegister(Request $request){
-        $email = $request->query('email');
-        return view('franted.Users.auth.register',compact('email'));
+        $phone_number ='';
+         $referral_code = $request->query('referral_code') ?? '';
+        return view('franted.Users.auth.register',compact('phone_number','referral_code'));
     }
-   
     public function postRegister(Request $request){  
         $validatedData = $request->validate([
             'name' => 'required',
@@ -48,33 +52,41 @@ class AuthController extends Controller
             'phone_number.required' => 'Please enter your Phone Number.',
         ]);
         $data = $request->all();
-        $user=  User::create([
-            'name' => $data['name'],
-            'role' => 'user',
-            'email' => $data['email'],
-            'phone_number' => $data['phone_number'],
-            'password' => Hash::make($data['password']),
-            'referral_code'=> $this->generateReferralCode(),
-            ]);
-            $userData['user_id']=$user->id;
-            UserDetails::create($userData);
-            if($request->send_url){
-                Auth::login($user);
-                return redirect($request->send_url)->withSuccess("$user->name Registered Successfully");
-            }else{
-                $userOtp = $this->generateOtp($request->phone_number);
-                $otp=  $userOtp->otp;
-               // $userOtp->sendSMS($request->phone_number);
-               $mailData = [
-                   'title' => 'Mail for OTP verify ',
-                   'otp' =>  $otp,
-                   'verify_type' =>'phone',
-                   'user_id'=>$user->id,
-               ];
-               Mail::to($user->email)->send(new otpVerify($mailData));
-               return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
-            }
-        return redirect("otp/login")->withSuccess(' You have Registered Successfully');
+        $user   =   User::where('phone_number',$request->phone_number)->latest()->first();
+        if($user){
+            $user=  User::where('id',$user->id)->update([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                ]);
+        }else{
+            $user=  User::create([
+                'name' => $data['name'],
+                'role' => 'user',
+                'email' => $data['email'],
+                'phone_number' => $data['phone_number'],
+                'password' => Hash::make($data['password']),
+                'referral_code'=> $this->generateReferralCode(),
+                ]);
+        }
+       
+            $referralData   =   User::where('referral_code',$request->referral_code)->latest()->first();
+             if($referralData){
+                $clientData =   Affiliate::create(['user_id'=>$user->id,'referral_user_id'=>$referralData->id,]);
+             }
+            $device_id = md5($_SERVER['HTTP_USER_AGENT']);
+            $clientData =   ClientDevice::where('device_id',$device_id)->update(['user_id'=>$user->id]);
+            $userOtp = $this->generateOtp($request->phone_number);
+            $otp=  $userOtp->otp;
+            // $userOtp->sendSMS($request->phone_number);
+            $mailData = [
+                'title' => 'Mail for OTP verify ',
+                'otp' =>  $otp,
+                'verify_type' =>'phone',
+                'user_id'=>$user->id,
+            ];
+            Mail::to($request->email)->send(new otpVerify($mailData));
+            return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
     }
 
     // referral code generate 
@@ -94,61 +106,93 @@ class AuthController extends Controller
 
     public function postLogin(Request $request){   
         if($request->email){
-        $input = $request->all();
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))){
-            $user=User::where('email',$request->email)->first();
-            $userDetails=UserDetails::where('user_id',$user->id)->first();
-            if($userDetails->is_phone_verified === 1 || $userDetails->is_email_verified === 1){
-                Auth::login($user);
-                if (auth()->user()->role == 'user') {
-                    return redirect('/user/dashboard')->with('success', 'you are login successfully');
+            $input = $request->all();
+            $this->validate($request, [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))){
+                $user=User::where('email',$request->email)->first();
+                $device_id = md5($_SERVER['HTTP_USER_AGENT']);
+                $clientData =   ClientDevice::where('device_id',$device_id)->update(['user_id'=>$user->id]);
+                if($user->is_phone_verified === 1){
+                    Auth::login($user);
+                    if (auth()->user()->role == 'user') {
+                        return redirect('/user/dashboard')->with('success', 'you are login successfully');
+                    }
+                    return redirect()->route('user-login')->with('error','Credencial not match');
+                }else{
+                        $phone_number=$user->phone_number;
+                        $userOtp = $this->generateOtp($phone_number);
+                        $otp=$userOtp->otp;
+                        $mailData = [
+                            'title' => 'Mail for OTP verify ',
+                            'otp' =>  $otp,
+                            'verify_type' =>'email',
+                            'user_id'=>$user->id,
+                        ];
+                        Mail::to($user->email)->send(new otpVerify($mailData));
+                        return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
                 }
-                return redirect()->route('user-login')->with('error','Credencial not match');
-            }else{
-                    $phone_number=$user->phone_number;
-                    $userOtp = $this->generateOtp($phone_number);
-                    $otp=$userOtp->otp;
-                    $mailData = [
-                        'title' => 'Mail for OTP verify ',
-                        'otp' =>  $otp,
-                        'verify_type' =>'email',
-                        'user_id'=>$user->id,
-                    ];
-                    Mail::to($user->email)->send(new otpVerify($mailData));
-                    return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
             }
-        }
             return redirect()->route('user-login')->with('error','Email-Address And Password Are Wrong.');
 
         }else{
             $input = $request->all();
             $this->validate($request, [
-                'phone_number' => 'required|exists:users,phone_number'
+                // 'phone_number' => 'required|exists:users,phone_number'
+                'phone_number' => 'required|digits:10',
             ]);
-            $user=User::where('phone_number',$request->phone_number)->first();
-            $userDetails=UserDetails::where('user_id',$user->id)->first();
-            if($userDetails->is_phone_verified === 1 || $userDetails->is_email_verified === 1){
-                    Auth::login($user);
-                if (auth()->user()->role == 'user') {
-                    return redirect('/user/dashboard')->with('success', 'you are login successfully');
-                }
-                return redirect()->route('otp.login')->with('error','Phone Number Wrong');
+              $user   =   User::where('phone_number',$request->phone_number)->latest()->first();
+              if($request->product == '' &&  $user == ''){
+                $phone_number = $request->phone_number;
+                $referral_code ='';
+                return view('franted.Users.auth.register',compact('phone_number','referral_code'));
+            }
+          if(!$user){
+            $user = User::Create(
+                ['phone_number'   => $request->phone_number,
+                'role'   => 'user',
+                'referral_code'=> $this->generateReferralCode(),
+                'password'=> Hash::make($request->phone_number),
+                ]);
+            }
+             
+            $device_id = md5($_SERVER['HTTP_USER_AGENT']);
+            $clientData =   ClientDevice::where('device_id',$device_id)->update(['user_id'=>$user->id]);
+            if($request->product){
+                $product = Product::findOrFail($request->product);
+                $deviceData= ClientDevice::where('device_id',$device_id)->latest()->first();
+                  $bookData = [
+                    'userData' => $user,
+                    'product' =>  $product,
+                    'deviceData'=>$deviceData,
+                ];
+                PackageBook::create(['user_id' => $user->id, 'product_id' => $product->id]);
+                Mail::to('vka3healthcare@gmail.com')->send(new BookInfo($bookData));
+                Auth::login($user);
+                return redirect('/services/cart-item')->with('success', 'you are login successfully');
+            }
+            if($user->is_phone_verified === 1 && $user->role == 'user'){
+                Auth::login($user);
+                return redirect('/user/dashboard')->with('success', 'you are login successfully');
             }else{
-                     $userOtp = $this->generateOtp($request->phone_number);
-                     $otp=  $userOtp->otp;
-                    // $userOtp->sendSMS($request->phone_number);
-                    $mailData = [
-                        'title' => 'Mail for OTP verify ',
-                        'otp' =>  $otp,
-                        'verify_type' =>'phone',
-                        'user_id'=>$user->id,
-                    ];
-                    Mail::to($user->email)->send(new otpVerify($mailData));
-                    return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
+                if(!$user->email){
+                    $phone_number = $user->phone_number;
+                    $referral_code ='';
+                    return view('franted.Users.auth.register',compact('phone_number','referral_code'));
+                }
+                 $userOtp = $this->generateOtp($request->phone_number);
+                $otp=  $userOtp->otp;
+                // $userOtp->sendSMS($request->phone_number);
+                 $mailData = [
+                    'title' => 'Mail for OTP verify ',
+                    'otp' =>  $otp,
+                    'verify_type' =>'phone',
+                    'user_id'=>$user->id,
+                ];
+                Mail::to($user->email)->send(new otpVerify($mailData));
+                return view('franted.Users.auth.otpVerification',compact('user'))->with('success',  "OTP has been sent on Your phone and email."); 
             }
         }      
     }

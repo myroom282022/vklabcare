@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('is_phone_verified')->default('0');
             $table->string('password')->nullable();
             $table->string('role')->nullable();
-            $table->string('phone_number')->nullable();
+            $table->string('phone_number')->unique();
             $table->string('user_image')->nullable();
-            $table->string('referral_code')->nullable();
+            $table->string('referral_code')->unique();
             $table->decimal('bounce', 8, 2)->default(0);
             $table->string('rezorpay_customer_id')->nullable();
             $table->rememberToken();

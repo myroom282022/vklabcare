@@ -47,17 +47,14 @@ class CheckoutController extends Controller
             'billing_country.required' => 'Please enter country',
 
         ]);
-
-        if(empty(auth()->user())){
-            $user = User::where('email', $request->billing_email)->Orwhere('phone_number', $request->billing_phone_number)->first();
-            if($user){
-                return redirect('otp/login')->withErros('you are not login !');
-            }else{
-                $url="register?email=$request->billing_email";
-                return redirect($url)->withErros('you are not register !');
+        $user = User::where('phone_number', $request->billing_phone_number)->first();
+        if(auth()->user()){
+            if(empty(auth()->user()->email)){
+                $user = User::where('id', auth()->user()->id)->update(['email' =>$request->billing_email,'name' =>$request->billing_name]);
             }
+        }else{
+            return redirect('otp/login')->withErros('you are not login !');
         }
-
         if(empty($request->is_same_shipping)){
             $validatedData = $request->validate([
                 'shipping_name'          =>  'required',

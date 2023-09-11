@@ -11,6 +11,12 @@ use App\Models\Package;
 use App\Models\State;
 use App\Models\Billing;
 use App\Models\Shipping;
+use App\Models\ClientDevice;
+use App\Models\User;
+use App\Mail\BookInfo;
+use App\Models\PackageBook;
+use Mail;
+use Session;
 
 class ServicesController extends Controller
 {
@@ -50,9 +56,24 @@ class ServicesController extends Controller
                 "product_image" => $product->product_image
             ];
         }
-          
+       
         session()->put('cart', $cart);
-        return redirect('services/cart-item')->with('success', 'Product added to cart successfully!');
+        session()->put('product_id', $product->id);
+        if(empty(auth()->user())){
+            $referral_code='';  
+            $product=$product->id;
+            return view('franted.Users.auth.otpLogin',compact('product','referral_code'));
+        }
+        $user=auth()->user();
+        $deviceData= ClientDevice::where('user_id',$user->id)->latest()->first();
+        $bookData = [
+          'userData' => $user,
+          'product' =>  $product,
+          'deviceData'=>$deviceData,
+      ];
+        PackageBook::create(['user_id'=>$user->id,'product_id'=>$product->id]);
+        Mail::to('vka3healthcare@gmail.com')->send(new BookInfo($bookData));
+        return redirect('services/cart-item')->with('success', 'Package Book in cart successfully!');
     }
   
     public function update(Request $request){
@@ -76,14 +97,17 @@ class ServicesController extends Controller
     }
 
     public function billingAddress(Request $request){
+         $product= Session::get('product_id');
         $billing='';
         $shipping='';
         $userData='';
-        if(!empty(auth()->user())){
-            $userData=auth()->user();
-            $billing=Billing::where('user_id',$userData->id)->latest()->first();
-            $shipping=Shipping::where('user_id',$userData->id)->latest()->first();
+        if(empty(auth()->user())){
+            $referral_code='';  
+            return view('franted.Users.auth.otpLogin',compact('product','referral_code'));
         }
+        $userData=auth()->user();
+        $billing=Billing::where('user_id',$userData->id)->latest()->first();
+        $shipping=Shipping::where('user_id',$userData->id)->latest()->first();
         $ip = $request->ip();
         if($ip =='127.0.0.1'){
             $ip = '110.224.79.223'; 

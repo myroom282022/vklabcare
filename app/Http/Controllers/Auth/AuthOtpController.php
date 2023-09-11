@@ -18,8 +18,9 @@ class AuthOtpController extends Controller
      *
      * @return response()
      */
-    public function login(){
-        return view('franted.Users.auth.otpLogin');
+    public function login(Request $request){
+         $product='';
+        return view('franted.Users.auth.otpLogin',compact('product'));
     }
   
     public function generate(Request $request)
@@ -80,7 +81,7 @@ class AuthOtpController extends Controller
                     'expire_at' => now(),
                     'verify_type' => 'email',
                 ]);
-                UserDetails::where('user_id',$user_id)->update(['is_email_verified' => 1]);
+                User::where('id',$user_id)->update(['is_phone_verified' => 1]);
                 Auth::login($user);
                 return redirect('/user/dashboard')->with('success', 'your are login successfully');
             }
@@ -111,7 +112,7 @@ class AuthOtpController extends Controller
                 'expire_at' => now(),
                 'verify_type' => 'phone Number',
             ]);
-            UserDetails::where('user_id',$request->user_id)->update(['is_phone_verified' => 1]);
+            User::where('id',$request->user_id)->update(['is_phone_verified' => 1]);
             Auth::login($user);
             return redirect('/user/dashboard')->with('success', 'your are login successfully');
         }

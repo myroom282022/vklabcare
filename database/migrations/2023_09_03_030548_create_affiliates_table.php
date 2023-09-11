@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('package_books', function (Blueprint $table) {
+        Schema::create('affiliates', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
-            $table->integer('product_id')->nullable();
+            $table->integer('referral_user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('package_books');
+        Schema::dropIfExists('affiliates');
     }
 };

@@ -61,7 +61,7 @@
 					</ul>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
-				@if(auth()->user())
+				@if(auth()->user() && auth()->user()->is_phone_verified == 1)
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">Dashboard <i class="icofont-thin-down"></i></a>

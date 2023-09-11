@@ -13,9 +13,6 @@
         <form method="POST" action="{{ route('user-register-post') }}">
             @csrf
           <!-- Password input -->
-          @if($email)
-            <input type="text"  name="send_url" class="form-control form-control-lg"value="services/billing-address">
-          @endif
           <div class="form-outline mb-1">
             <label class="form-label" for="phone_number">Name</label>
             <input type="text" id="name" name="name" class="form-control form-control-lg  @error('name') is-invalid @enderror" value="{{ old('name') }}" autofocus placeholder="Enter Name"/>
@@ -43,12 +40,17 @@
 
           <div class="form-outline mb-1">
             <label class="form-label" for="phone_number">Phone Number</label>
-            <input type="text" id="phone_number" name="phone_number" maxlength="10" class="form-control form-control-lg @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}"autofocus placeholder="Enter Your Registered Mobile Number"/>
+            <input type="text" id="phone_number" name="phone_number" maxlength="10" class="form-control form-control-lg @error('phone_number') is-invalid @enderror" value="{{$phone_number ?? old('phone_number') }}"autofocus placeholder="Enter Your Registered Mobile Number"/>
             @if ($errors->has('name'))
                 <span class="text-danger text-left">{{ $errors->first('phone_number') }}</span>
             @endif
           </div>
-
+          @if($referral_code)
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example23">Referral code (optional)</label>
+            <input type="text"  name="referral_code"  class="form-control form-control-lg " readonly value="{{$referral_code }}"/>
+          </div>
+          @endif
           <!-- Submit button -->
           <button type="submit" class="btn btn-color btn-lg btn-block mt-3">Submit</button>
             @if (Route::has('login'))
