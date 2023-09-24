@@ -1,33 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
+
+// ***************All Admin Panel******************
+use App\Http\Controllers\Admin\AllAppontmentController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Auth\AdminLoginContrroller;
+use App\Http\Controllers\Admin\TransitionController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\SendMails\MailController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\TransitionController;
-use App\Http\Controllers\Admin\AdminProfileController;
-use App\Http\Controllers\Admin\AllAppontmentController;
-use App\Http\Controllers\SendMails\MailController;
-// ***************All uses Panel******************
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Auth\AuthController;
 
+// ***************All Fronted Panel******************
+
+use App\Http\Controllers\franted\BlogController;
 use App\Http\Controllers\Auth\AuthOtpController;
 use App\Http\Controllers\franted\HomeController;
 use App\Http\Controllers\franted\AboutController;
-use App\Http\Controllers\franted\BlogController;
 use App\Http\Controllers\franted\ContactController;
-use App\Http\Controllers\franted\DepartmentController;
 use App\Http\Controllers\franted\DoctorsController;
-use App\Http\Controllers\franted\ServicesController;
 use App\Http\Controllers\franted\CheckoutController;
+use App\Http\Controllers\franted\ServicesController;
+use App\Http\Controllers\franted\DepartmentController;
 use App\Http\Controllers\franted\BookAppoinmentController;
+
 // ***************User Panel******************
-
 use App\Http\Controllers\User\UserDashboardController;
-
+use App\Http\Controllers\User\UserPaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,7 +43,7 @@ use App\Http\Controllers\User\UserDashboardController;
 */
 
 //                     ###################
-// ************************All use this  Panel *********************************
+// ************************All fronted  Panel *********************************
 //                     @@@@@@@@@@@@@@@@@@@@@@                   
 
 Route::get('/clear', function() {
@@ -121,6 +124,9 @@ Route::group(['prefix' => 'user','middleware'=> ['auth', 'is_user']],function ()
     Route::controller(UserDashboardController::class)->group(function(){
         Route::get('/dashboard', 'index')->name('user-dashboard');
         Route::get('logout','logout')->name('user-logout');
+    });
+    Route::controller(UserPaymentController::class)->group(function(){
+        Route::get('/payment', 'index')->name('user-payment');
     });
 });
 

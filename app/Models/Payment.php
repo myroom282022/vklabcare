@@ -22,6 +22,10 @@ class Payment extends Model
         'upi_transaction_id',
         'card_details',
     ];
+
+    public function singleUserPayment(){
+        return $this->hasOne(Order::class ,'payment_id','id');
+    }
     public function paymentDetails(){
         return $this->hasMany(Order::class);
     }

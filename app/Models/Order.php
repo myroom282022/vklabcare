@@ -20,7 +20,15 @@ class Order extends Model
         'delivery_charge',
         'total_price',
     ];
-
+protected $appends =[
+    'image'
+];
+    public function getImageAttribute(){
+        return url('storage/product/img/').'/'.$this->product_image;
+    }
+    public function singleUserPayment(){
+        return $this->belongsTo(Payment::class ,'id','payment_id');
+    }
     public function orderDetails()
     {
         return $this->belongsTo(Payment::class);
