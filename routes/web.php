@@ -123,10 +123,12 @@ Route::controller(AuthOtpController::class)->group(function(){
 Route::group(['prefix' => 'user','middleware'=> ['auth', 'is_user']],function () {
     Route::controller(UserDashboardController::class)->group(function(){
         Route::get('/dashboard', 'index')->name('user-dashboard');
+        Route::get('/update-profile', 'updateProfile')->name('user-update-profile');
         Route::get('logout','logout')->name('user-logout');
     });
     Route::controller(UserPaymentController::class)->group(function(){
         Route::get('/payment', 'index')->name('user-payment');
+        Route::get('/orders', 'usersOrders')->name('user-orders');
     });
 });
 

@@ -21,85 +21,83 @@
             <div class="container py-5">
             
             <div class="row ">
-                <div class="col-lg-6 card m-auto">
-                        <h3 class="text-center mt-3 heading-color">Payment Method</h3>
-                        <div class="card-body text-center">
-                            <form action="{{ route('payment.store') }}" method="POST" >
-                                <div class="pb-3 mx-5 mt-3">
-                                    <div class="d-flex flex-row pb-3">
-                                        <div class="d-flex align-items-center pe-2">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1"
-                                            value="" aria-label="..." checked />
-                                        </div>
-                                        <div class="rounded border d-flex w-100 p-3 align-items-center">
-                                            <p class="mb-0">
-                                            Cash on delivery
-                                            </p>
-                                            <div class="mx-3"><i class="fa fa-money" aria-hidden="true"></i></div>
-                                        </div>
-                                    </div>
+                <div class="card-body text-center col-sm-6">
+                    <h3 class="text-center mt-3 heading-color m-auto">Payment Method</h3>
+                    <form action="{{ route('payment.store') }}" method="POST" >
+                        <div class="pb-3 mx-5 mt-3">
+                            <div class="d-flex flex-row  my-3 cash-on-booking">
+                                <div class="rounded border d-flex w-100 p-3 align-items-center">
+                                    <p class="mb-0"> Cash on booking</p>
+                                    <div class="mx-3"><i class="fa fa-money" aria-hidden="true"></i></div>
+                                </div>
+                            </div>
 
-                                    <div class="d-flex flex-row">
-                                        <div class="d-flex align-items-center pe-2">
-                                            <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2"
-                                            value="" aria-label="..." />
-                                        </div>
-                                        <div class="rounded border d-flex w-100 p-3 align-items-center">
-                                            <p class="mb-0">
-                                            Online Payment
-                                            </p>
-                                            <div class="mx-3">
-                                            <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
-                                            <i class="fa fa-paypal" aria-hidden="true"></i>
-                                            <i class="fa fa-cc-mastercard" aria-hidden="true"></i>
-                                            <i class="fa fa-cc-visa" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
+                            <div class="d-flex flex-row online-booking">
+                                <div class="rounded border d-flex w-100 p-3 align-items-center">
+                                    <p class="mb-0">Online Booking</p>
+                                    <div class="mx-3">
+                                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                                    <i class="fa fa-paypal" aria-hidden="true"></i>
+                                    <i class="fa fa-cc-mastercard" aria-hidden="true"></i>
+                                    <i class="fa fa-cc-visa" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                                @csrf
-                                @foreach($cart as $key => $item)
-                                    <input type="hidden" name="product_image"value="{{$item['product_image']}}">
-                                    <input type="hidden" name="product_name"value="{{$item['product_name']}}">
-                                    <input type="hidden" name="product_description"value="{{$item['product_description']}}">
-                                    <input type="hidden" name="product_price"value="{{$item['product_price']}}">
-                                @endforeach 
-                                @php
-                                    $Subtotal = 0 ;
-                                    $shipping=20 ;
-                                @endphp
-                                @foreach((array) session('cart') as $id => $details)
-                                    @php $Subtotal += $details['product_price'] * $details['quantity'] @endphp
-                                    <input type="hidden" name="quantity"value="{{$details['quantity']}}">
-                                @endforeach
-                                @php
-                                    $totalPrice= ($Subtotal+$shipping)*100;
-                                    $api = new Razorpay\Api\Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
-                                    $order = $api->order->create(array(
-                                        'amount'  =>  $totalPrice,
-                                        'currency' =>"INR"
-                                    )); 
-                                @endphp
-                                <input type="hidden" name="total_price"value="{{$totalPrice}}">
-                                <input type="hidden" name="delivery_charge"value="{{$shipping}}">
-                                <input type="hidden" name="discount_price"value="0">
-                                <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                        data-key="{{ env('RAZORPAY_KEY') }}"
-                                        data-amount=" {{$totalPrice}}"
-                                        data-currency="INR"
-                                        data-buttontext="Add New Card"
-                                        data-name="vk a3healthcare"
-                                        data-description="Test Transation"
-                                        data-order_id="{{$order->id}}"
-                                        data-image="https://www.itsolutionstuff.com/frontTheme/images/logo.png"
-                                        data-prefill.name="{{auth()->user()->name ?? ''}}"
-                                        data-prefill.email="{{auth()->user()->email ?? ''}}"
-                                        data-theme.color="#ff7529">
-                                </script>
-                            <button type="submit" class="btn  payment-button">Proceed to payment</button>
-                            </form>
-                            <button type="submit" class="btn  payment-button">Proceed to payment</button>
+                            </div>
                         </div>
+                        @csrf
+                        @foreach($cart as $key => $item)
+                            <input type="hidden" name="product_image"value="{{$item['product_image']}}">
+                            <input type="hidden" name="product_name"value="{{$item['product_name']}}">
+                            <input type="hidden" name="product_description"value="{{$item['product_description']}}">
+                            <input type="hidden" name="product_price"value="{{$item['product_price']}}">
+                        @endforeach 
+                        @php
+                            $Subtotal = 0 ;
+                            $shipping=20 ;
+                        @endphp
+                        @foreach((array) session('cart') as $id => $details)
+                            @php $Subtotal += $details['product_price'] * $details['quantity'] @endphp
+                            <input type="hidden" name="quantity"value="{{$details['quantity']}}">
+                        @endforeach
+                        @php
+                            $totalPrice= ($Subtotal+$shipping)*100;
+                            $api = new Razorpay\Api\Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+                            $order = $api->order->create(array(
+                                'amount'  =>  $totalPrice,
+                                'currency' =>"INR"
+                            )); 
+                        @endphp
+                        <input type="hidden" name="total_price"value="{{$totalPrice}}">
+                        <input type="hidden" name="delivery_charge"value="{{$shipping}}">
+                        <input type="hidden" name="discount_price"value="0">
+                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="{{ env('RAZORPAY_KEY') }}"
+                                data-amount=" {{$totalPrice}}"
+                                data-currency="INR"
+                                {{-- data-buttontext="Add New Card" --}}
+                                data-name="vka3 healthcare"
+                                data-description="Test Transation"
+                                data-order_id="{{$order->id}}"
+                                data-image="https://vka3healthcare.com/public/front_assets/images/vka3logo.png"
+                                data-prefill.name="{{auth()->user()->name ?? ''}}"
+                                data-prefill.email="{{auth()->user()->email ?? ''}}"
+                                data-theme.color="#4ecef4">
+                        </script>
+                    <button type="submit" class="btn  payment-button online-btn">Proceed to payment</button>
+                    </form>
+                    <form class="cash-btn" action="{{ route('payment.store') }}" method="POST" >
+                        @csrf
+                        @foreach($cart as $key => $item)
+                        <input type="hidden" name="product_image"value="{{$item['product_image']}}">
+                        <input type="hidden" name="product_name"value="{{$item['product_name']}}">
+                        <input type="hidden" name="product_description"value="{{$item['product_description']}}">
+                        <input type="hidden" name="product_price"value="{{$item['product_price']}}">
+                    @endforeach 
+                    <input type="hidden" name="total_price"value="{{$totalPrice}}">
+                    <input type="hidden" name="delivery_charge"value="{{$shipping}}">
+                    <input type="hidden" name="discount_price"value="0">
+                    <button type="submit" class="btn  payment-button cash-btn " style="display:none">Proceed to payment</button>
+                    </form>
                 </div>
 
                 <div class=" col-lg-5">
@@ -157,14 +155,24 @@
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.2.js" integrity="sha256-pkn2CUZmheSeyssYw3vMp1+xyub4m+e+QK4sQskvuo4=" crossorigin="anonymous"></script>
 <script>
-    // $(document).ready(function(){
-    //     $(".shiiping").hide();
-    //     $(".checkbox").click(function() {
-    //         if($(this).is(":checked")) {
-    //             $(".shiiping").hide(200);
-    //         } else {
-    //             $(".shiiping").show(300);
-    //         }
-    //     });
-    // });
+    $(document).ready(function(){
+        $(".cash-btn").hide();
+        $(".online-btn").show();
+        $('.online-booking').addClass('checkout-box');
+
+        $(".cash-on-booking").click(function() {
+            $('.online-booking').removeClass('checkout-box');
+            $(this).addClass('checkout-box');
+            $(".online-btn").hide();
+            $(".cash-btn").show();
+        });
+
+        $(".online-booking").click(function() {
+            $('.cash-on-booking').removeClass('checkout-box');
+            $(this).addClass('checkout-box');
+            $(".cash-btn").hide();
+            $(".online-btn").show();
+        });
+       
+    });
 </script>

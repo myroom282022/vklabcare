@@ -20,14 +20,11 @@ class AdminProfileController extends Controller
 
     public function update(Request $request)
     {  
-       // return $request;
-
-        $id=$request->id;
-         $user = User::find($id);
+         $id = $request->id;
         $validatedData= request()->validate([
             'name'          =>  'required',
-            'email'         => 'required|unique:users,email,'.$user->id,
-            'phone_number'  =>  'required|numeric|digits:10',
+            'email'         => 'required|unique:users,email,'.$id,
+            'phone_number'         => 'required|numeric|digits:10|unique:users,phone_number,'.$id,
        ],[
             'name.required'         =>  'Please enter your name',
             'email.required'        =>  'Please enter your email',
@@ -36,7 +33,7 @@ class AdminProfileController extends Controller
             'phone_number.required' =>  'Please enter your phone number',
             'phone_number.min'      =>  'Please enter 10 digites  phone number',
         ]);
-        $details = [
+         $details = [
              'name' => $request->name,
              'email' => $request->email, 
              'phone_number' => $request->phone_number,
@@ -79,7 +76,7 @@ class AdminProfileController extends Controller
             'confirm_password.required'     =>  'Please enter Confirm Passsword',
             'confirm_password.same'         =>  'Please enter confirm and new  Passsword same',
         ]);
-        $user=$request->user();
+         $user=$request->user();
       if (Hash::check($request->current_password,$user->password)) {
             User::where('id',auth()->user()->id)->update(['password'=>Hash::make($request->new_password) 
         ]);
@@ -87,7 +84,7 @@ class AdminProfileController extends Controller
         }else{
             return redirect()->back()->withError('Current Password is Worng');
         }
-        return redirect('/')->withSuccess('Users Updated successfully !'); 
+        return redirect('/')->withSuccess('Password updated successfully !'); 
 
     }
 }

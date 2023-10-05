@@ -18,9 +18,12 @@
               <div class="list-group list-group-flush mx-3">
                 <div class="user-details m-auto">
                   @if (auth()->user()->user_image ?? '')
-                  <img src="{{url('storage/users/img/'.auth()->user()->user_image)}}" alt="" class="user-image">
+                  <img src="{{url('storage/users/img/'.auth()->user()->user_image)}}" alt="" class="user-image object-fit-sm-contain">
                   @else
-                    <img src="{{url('front_assets/images/team/test-thumb1.jpg')}}" alt="" class="user-image">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                  class="rounded-circle img-fluid user-image object-fit-sm-contain" >
+
+                    {{-- <img src="{{url('front_assets/images/team/test-thumb1.jpg')}}" alt="" class="user-image"> --}}
                   @endif
                   
                   <h6>{{auth()->user()->email ?? auth()->user()->phone_number}}</h6>
@@ -28,15 +31,22 @@
                 <a href="{{route('user-dashboard')}}"class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('user-dashboard') ? 'active':'' }}"aria-current="true">
                   <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
                 </a>
+                <a href="{{route('user-update-profile')}}" class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('user-update-profile') ? 'active':'' }}"
+                  ><i class="fas fa-users fa-fw me-3"></i><span>Profile</span></a
+                >
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+                  ><i class="fas fa-lock fa-fw me-3"></i><span>Affilate Users</span></a
+                >
                 <a href="{{route('user-payment')}}" class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('user-payment') ? 'active':'' }}"
                   ><i class="fas fa-money-bill fa-fw me-3"></i><span>Transation</span></a
+                >
+                <a href="{{route('user-orders')}}" class="list-group-item list-group-item-action py-2 ripple {{ request()->routeIs('user-orders') ? 'active':'' }}"
+                  ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Orders</span></a
                 >
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple ">
                   <i class="fas fa-chart-area fa-fw me-3"></i><span>Webiste traffic</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-                  ><i class="fas fa-lock fa-fw me-3"></i><span>Password</span></a
-                >
+                
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple"
                   ><i class="fas fa-chart-line fa-fw me-3"></i><span>Analytics</span></a
                 >
@@ -44,21 +54,8 @@
                   <i class="fas fa-chart-pie fa-fw me-3"></i><span>SEO</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-                  ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Orders</span></a
-                >
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-                  ><i class="fas fa-globe fa-fw me-3"></i><span>International</span></a
-                >
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple"
                   ><i class="fas fa-building fa-fw me-3"></i><span>Partners</span></a
                 >
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-                  ><i class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a
-                >
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-                  ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
-                >
-                
               </div>
             </div>
           </nav>

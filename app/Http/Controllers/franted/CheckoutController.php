@@ -122,7 +122,7 @@ class CheckoutController extends Controller
     //payment getway 
     public function store(Request $request)
     {
-        $input = $request->all();
+      return   $input = $request->all();
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
          $payment = $api->payment->fetch($input['razorpay_payment_id']);
         if($payment) {

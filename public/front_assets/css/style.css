@@ -1431,3 +1431,13 @@ a:focus {
   opacity: 1;
 }
 /*# sourceMappingURL=style.css.map */
+.checkout-box {
+  background-color: #0bb2f024;
+  font-weight: 500;
+}
+input.razorpay-payment-button {
+  display: none !important;
+}
+#header-wrapper.svelte-mrdos2.svelte-mrdos2.svelte-mrdos2 {
+  background-color: #4ecef4 !important;
+}

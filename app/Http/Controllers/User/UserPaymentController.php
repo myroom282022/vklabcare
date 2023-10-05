@@ -13,4 +13,8 @@ class UserPaymentController extends Controller
         $payData = Payment::with('singleUserPayment')->where('user_id',auth()->user()->id)->latest()->get();
         return view('franted.Users.payment.index',compact('payData'));
     }
+    public function usersOrders(){
+        $payData = Order::with('singleUserOrderPayment')->where('user_id',auth()->user()->id)->latest()->get();
+        return view('franted.Users.payment.orders',compact('payData'));
+    }
 }

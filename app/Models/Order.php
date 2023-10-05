@@ -26,8 +26,8 @@ protected $appends =[
     public function getImageAttribute(){
         return url('storage/product/img/').'/'.$this->product_image;
     }
-    public function singleUserPayment(){
-        return $this->belongsTo(Payment::class ,'id','payment_id');
+    public function singleUserOrderPayment(){
+        return $this->belongsTo(Payment::class ,'payment_id' ,'id');
     }
     public function orderDetails()
     {

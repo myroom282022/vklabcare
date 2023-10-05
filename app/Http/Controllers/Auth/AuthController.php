@@ -117,7 +117,7 @@ class AuthController extends Controller
                 $clientData =   ClientDevice::where('device_id',$device_id)->update(['user_id'=>$user->id]);
                 if($user->is_phone_verified === 1){
                     Auth::login($user);
-                    if (auth()->user()->role == 'user') {
+                    if (auth()->user()->role == 'user' || auth()->user()->role == 'admin') {
                         return redirect('/user/dashboard')->with('success', 'you are login successfully');
                     }
                     return redirect()->route('user-login')->with('error','Credencial not match');
@@ -173,7 +173,7 @@ class AuthController extends Controller
                 Auth::login($user);
                 return redirect('/services/cart-item')->with('success', 'you are login successfully');
             }
-            if($user->is_phone_verified === 1 && $user->role == 'user'){
+            if($user->is_phone_verified === 1 && $user->role == 'user' || $user->role == 'admin'){
                 Auth::login($user);
                 return redirect('/user/dashboard')->with('success', 'you are login successfully');
             }else{
