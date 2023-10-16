@@ -224,7 +224,7 @@
           </div>
         </div>
       </div>
-      <script src="{{url('../assets/js/plugins/chartjs.min.js')}}"></script>
+      <script src="{{url('../public/assets/js/plugins/chartjs.min.js')}}"></script>
     <script>
       var ctx = document.getElementById("chart-bars").getContext("2d");
 

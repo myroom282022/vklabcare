@@ -20,7 +20,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-6">
 				<div class="doctor-img-block">
-					<img src="{{url('front_assets/images/team/1.jpg')}}" alt="" class="img-fluid w-100">
+					<img src="{{url('public/front_assets/images/team/1.jpg')}}" alt="" class="img-fluid w-100">
 
 					<div class="info-block mt-4">
 						<h4 class="mb-0">Alexandar james</h4>

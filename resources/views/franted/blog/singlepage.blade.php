@@ -27,7 +27,7 @@
         <div class="row">
 	<div class="col-lg-12 mb-5">
 		<div class="single-blog-item">
-			<img src="{{url('front_assets/images/blog/blog-1.jpg')}}" alt="" class="img-fluid">
+			<img src="{{url('public/front_assets/images/blog/blog-1.jpg')}}" alt="" class="img-fluid">
 
 			<div class="blog-item-content mt-5">
 				<div class="blog-item-meta mb-3">
@@ -86,7 +86,7 @@
 				<li class="mb-5">
 					<div class="comment-area-box d-block d-sm-flex">
 						<div class="comment-thumb">
-							<img alt="" src="{{url('front_assets/images/blog/testimonial1.jpg')}}" style="width: 70px">
+							<img alt="" src="{{url('public/front_assets/images/blog/testimonial1.jpg')}}" style="width: 70px">
 						</div>
 
 						<div class="block">
@@ -110,7 +110,7 @@
 				<li>
 					<div class="comment-area-box d-block d-sm-flex">
 						<div class="comment-thumb">
-							<img alt="" src="{{url('front_assets/images/blog/testimonial2.jpg')}}" style="width: 70px">
+							<img alt="" src="{{url('public/front_assets/images/blog/testimonial2.jpg')}}" style="width: 70px">
 						</div>
 
 						<div class="block">

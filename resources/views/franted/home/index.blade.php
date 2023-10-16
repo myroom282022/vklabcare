@@ -208,7 +208,7 @@
 					<i class="icofont-quote-right"></i>
 
 					<div class="testimonial-thumb">
-						<img src="{{url('front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
+						<img src="{{url('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info ">
@@ -222,7 +222,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('front_assets/images/team/test-thumb2.jpg')}}" alt="" class="img-fluid">
+						<img src="{{url('public/front_assets/images/team/test-thumb2.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -238,7 +238,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('front_assets/images/team/test-thumb3.jpg')}}" alt="" class="img-fluid">
+						<img src="{{url('public/front_assets/images/team/test-thumb3.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -254,7 +254,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('front_assets/images/team/test-thumb4.jpg')}}" alt="" class="img-fluid">
+						<img src="{{url('public/front_assets/images/team/test-thumb4.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -269,7 +269,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
+						<img src="{{url('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -302,52 +302,52 @@
 		<div class="row clients-logo">
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/1.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/1.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/2.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/2.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/3.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/3.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/4.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/4.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/5.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/5.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/6.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/6.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/3.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/3.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/4.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/4.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/5.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/5.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="col-lg-2">
 				<div class="client-thumb">
-					<img src="{{url('front_assets/images/about/6.png')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/about/6.png')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 		</div>

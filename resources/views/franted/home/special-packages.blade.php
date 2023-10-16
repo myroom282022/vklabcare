@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{url('front_assets/css/packages.css')}}">
+<link rel="stylesheet" href="{{url('public/front_assets/css/packages.css')}}">
 <section class="pricing-section">
     <div class="container">
         <div class="sec-title text-center">

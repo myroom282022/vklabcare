@@ -5,7 +5,7 @@
 <!-- MDB -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css" rel="stylesheet"/>
 
-<link rel="stylesheet" href="{{url('front_assets/css/sidebar.css')}}">
+<link rel="stylesheet" href="{{url('public/front_assets/css/sidebar.css')}}">
    <div class="container my-4">
     <div class="row">
       <div class="col-sm-3 sidebar">
@@ -23,7 +23,7 @@
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                   class="rounded-circle img-fluid user-image object-fit-sm-contain" >
 
-                    {{-- <img src="{{url('front_assets/images/team/test-thumb1.jpg')}}" alt="" class="user-image"> --}}
+                    {{-- <img src="{{url('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="user-image"> --}}
                   @endif
                   
                   <h6>{{auth()->user()->email ?? auth()->user()->phone_number}}</h6>

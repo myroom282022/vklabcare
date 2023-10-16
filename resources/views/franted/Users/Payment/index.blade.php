@@ -119,5 +119,5 @@
 @include('franted.Users.common.footer')
 @endsection
 @push('scripts')
-<script src="{{asset('front_assets/js/user_payment.js')}}"></script>
+<script src="{{asset('public/front_assets/js/user_payment.js')}}"></script>
 @endpush

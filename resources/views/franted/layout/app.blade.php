@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
-  <title>Novena- Health Care &amp; Medical template</title>
+  <title>VKA3 - Health Care &amp; Medical D 13/187, Sector 7, Rohini Near Sai Baba mandir New Delhi 110085</title>
 
   <!-- Mobile Specific Metas
   ================================================== -->
@@ -16,23 +16,23 @@
   <meta name="generator" content="Themefisher Novena HTML Template v1.0">
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="{{url('front_assets/images/favicon.png')}}" />
+  <link rel="shortcut icon" type="image/x-icon" href="{{url('public/front_assets/images/favicon.png')}}" />
 
   <!-- 
   Essential stylesheets
   =====================================-->
-  <link rel="stylesheet" href="{{url('front_assets/plugins/bootstrap/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{url('front_assets/plugins/icofont/icofont.min.css')}}">
-  <link rel="stylesheet" href="{{url('front_assets/plugins/slick-carousel/slick/slick.css')}}">
-  <link rel="stylesheet" href="{{url('front_assets/plugins/slick-carousel/slick/slick-theme.css')}}">
+  <link rel="stylesheet" href="{{url('public/front_assets/plugins/bootstrap/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{url('public/front_assets/plugins/icofont/icofont.min.css')}}">
+  <link rel="stylesheet" href="{{url('public/front_assets/plugins/slick-carousel/slick/slick.css')}}">
+  <link rel="stylesheet" href="{{url('public/front_assets/plugins/slick-carousel/slick/slick-theme.css')}}">
   <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
-  <script src="{{url('front_assets/js/jquery.min.js')}}"></script>
+  <script src="{{url('public/front_assets/js/jquery.min.js')}}"></script>
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="{{url('front_assets/css/style.css')}}">
-  <link rel="stylesheet" href="{{url('front_assets/css/custom.css')}}">
+  <link rel="stylesheet" href="{{url('public/front_assets/css/style.css')}}">
+  <link rel="stylesheet" href="{{url('public/front_assets/css/custom.css')}}">
 </head>
 <body id="top">
 <header class="">
@@ -45,16 +45,16 @@
     Essential Scripts
     =====================================-->
 
-    <script src="{{url('front_assets/plugins/jquery/jquery.js')}}"></script>
-    <script src="{{url('front_assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
-    <script src="{{url('front_assets/plugins/slick-carousel/slick/slick.min.js')}}"></script>
-    <script src="{{url('front_assets/plugins/shuffle/shuffle.min.js')}}"></script>
+    <script src="{{url('public/front_assets/plugins/jquery/jquery.js')}}"></script>
+    <script src="{{url('public/front_assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{url('public/front_assets/plugins/slick-carousel/slick/slick.min.js')}}"></script>
+    <script src="{{url('public/front_assets/plugins/shuffle/shuffle.min.js')}}"></script>
 
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA"></script>
     <script src="plugins/google-map/gmap.js"></script>
     
-    <script src="{{url('front_assets/js/script.js')}}"></script>
+    <script src="{{url('public/front_assets/js/script.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 		<script>
 			@if(Session::has('success'))

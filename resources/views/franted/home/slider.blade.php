@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{asset('front_assets/css/slider.css')}}" >
+<link rel="stylesheet" href="{{asset('public/front_assets/css/slider.css')}}" >
 <section class="">
 	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">

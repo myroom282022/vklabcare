@@ -38,7 +38,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 d-none d-lg-block">
-        <img src="{{asset('/front_assets/images/logRegImage/login.png')}}" class="img-fluid" alt="Phone image">
+        <img src="{{asset('/public/front_assets/images/logRegImage/login.png')}}" class="img-fluid" alt="Phone image">
 			</div>
 		  <div class="col-lg-6 ">
         <h5>Sign In / Sign Up</h5>

@@ -5,7 +5,7 @@
         @if(auth()->user()->user_image)
         <img src="{{asset('storage/users/img/'.auth()->user()->user_image)}}" class="navbar-brand-img h-100" alt="main_logo">
         @else
-        <img src="{{url('front_assets\images\logoes\userimage.jpg')}}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{url('public/front_assets\images\logoes\userimage.jpg')}}" class="navbar-brand-img h-100" alt="main_logo">
         @endif
         <span class="ms-1 font-weight-bold">{{auth()->user()->email}}</span>
       </a>

@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="department-img">
-					<img src="{{url('front_assets/images/service/bg-1.jpg')}}" alt="" class="img-fluid">
+					<img src="{{url('public/front_assets/images/service/bg-1.jpg')}}" alt="" class="img-fluid">
 				</div>
 			</div>
 		</div>
