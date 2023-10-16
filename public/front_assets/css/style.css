@@ -59,6 +59,7 @@ h6, .h6 {
 
 p {
   line-height: 30px;
+  word-break: break-word;
 }
 
 .navbar-toggle .icon-bar {
@@ -1440,4 +1441,16 @@ input.razorpay-payment-button {
 }
 #header-wrapper.svelte-mrdos2.svelte-mrdos2.svelte-mrdos2 {
   background-color: #4ecef4 !important;
+}
+
+ul.dropdown-menu.cart-list {
+  margin-left: -500% !important;
+  width: 300px !important;
+}
+.btn-color {
+  background-color: var(--skyblue) !important;
+  color: white !important;
+  border-radius: 30px !important;
+  font-size: 14px !important;
+  font-weight: 700px;
 }

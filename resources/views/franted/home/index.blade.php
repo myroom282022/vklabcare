@@ -42,9 +42,23 @@
 		</div>
 	</div>
 </section>
-
+<section class="">
+	@include('franted.home.special-packages')
+</section>
+{{-- <section class="">
+	@include('franted.home.secondp')
+</section> --}}
 <section class="">
 	@include('franted.home.package')
+</section>
+<section class="my-5">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 m-auto ">
+				<a href="{{route('packages.index')}}"><button class="btn btn-info"> MORE PACKAGES</button></a>
+			</div>
+		</div>
+	</div>
 </section>
 <section class="cta-section ">
 	<div class="container">

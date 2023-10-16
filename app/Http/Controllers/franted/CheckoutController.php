@@ -5,6 +5,7 @@ namespace App\Http\Controllers\franted;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\sendMailOrder;
+use App\Models\PackageBook;
 use App\Models\Shipping;
 use App\Models\Billing;
 use App\Models\Payment;
@@ -20,7 +21,8 @@ use Mail;
 class CheckoutController extends Controller
 {
     public function index(){
-        $cart = session()->get('cart', []);
+        // $cart = session()->get('cart', []);
+        $cart = PackageBook::where('user_id', auth()->user()->id)->with('getPackage')->get();
         return view('franted.services.checkout',compact('cart'));
     }
     public function Billing(){

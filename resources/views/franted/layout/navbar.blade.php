@@ -1,3 +1,11 @@
+@php
+	$user = auth()->user();
+	if ($user){
+		$cart = App\Models\PackageBook::where('user_id', $user->id)->with('getPackage')->get();
+	}else {
+		$cart = '';
+	}
+@endphp
 <div class="1fixed-top ">
 <nav class="navbar navbar-expand-lg navigation " id="navbar">
 	<div class="container ">
@@ -14,6 +22,7 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link" href="{{url('/')}}">Home</a></li>
 				<li class="nav-item"><a class="nav-link" href="{{route('about')}}">About</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{route('packages.index')}}">Packages</a></li>
 				<li class="nav-item"><a class="nav-link" href="{{route('services.index')}}">Services</a></li>
 
 				<li class="nav-item dropdown">
@@ -73,13 +82,64 @@
 				@else
 				<li class="nav-item"><a class="nav-link" href="{{route('otp.login')}}">Login</a></li>
 				@endif
+					
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="{{route('packages.list')}}" id="dropdown05" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i class="icofont-shopping-cart" style="font-size:20px"><sup><b class="cart-items">{{ count((array) session('cart')) }}</b></sup></i></a>
+						
+					<ul class="dropdown-menu  cart-list" aria-labelledby="dropdown05">
+						@if ($cart)
+						<li>
+							<div class="container-fluit my-3">
+								@foreach($cart as $key => $packageData)
+							@foreach($packageData->getPackage as $key => $item)
+								<div class="row mx-2">
+									<div class="col-sm-6"><h6>{{$item['package_name']}}</h6></div>
+									<div class="col-sm-1">{{$item['quantity'] ?? 1}}</div>
+									<div class="col-sm-3">{{$item['package_discount_price']}}</div>
+									<div class="col-sm-1">
+										<a href="{{route('packages.remove.cart',$item->id)}}" class="text-muted"><i class="icofont-close text-danger"></i></a>
+									</div>
+								</div>
+							<hr/>
+								@endforeach
+							@endforeach
+								<div class="row">
+									<div class="col-sm-7">
+										<a href="{{route('packages.list')}}">
+											<button type="button" class="btn btn-color btn-block btn-lg">
+											<div class="d-flex justify-content-between">
+												<span>view Cart</span>
+											</div>
+											</button>
+										  </a>
+									</div>
+									<div class="col-sm-5">
+										<a href="{{route('billing-address')}}">
+											<button type="button" class="btn btn-color btn-block btn-lg">
+											<div class="d-flex justify-content-between">
+												<span>Checkout </span>
+											</div>
+											</button>
+										  </a>
+								</div>
+							</div>
+							
+						</li>
+						@else
+						<li class="nav-item">
+							<h6 class="text-danger">Empty cart</h6>
+						</li>
+							
+						@endif
 
-				<li class="nav-item"><a class="nav-link" href="{{route('cart-item')}}">
-					<i class="icofont-shopping-cart" style="font-size:20px"><sup><b  class="cart-items">{{ count((array) session('cart')) }}</b></sup></i>
-					</a>
+					</ul>
 				</li>
 			</ul>
 		</div>
 	</div>
 </nav>
 </div>
+
+
+

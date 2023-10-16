@@ -1,23 +1,9 @@
 @extends('franted.layout.app')
 @section('content')
-<section class="page-title bg-1">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="block text-center">
-          <span class="text-white">Our services</span>
-          <h1 class="text-capitalize mb-5 text-lg">What We Do</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- portfolio -->
-<section class="section doctors">
-  <div class="container-fluit">
+<section class="my-3 doctors">
+  <div class="container-fluit mx-3">
 	<div class="row">
 		<div class="col-sm-2">
 			<div class="col-12 text-center  mb-5">

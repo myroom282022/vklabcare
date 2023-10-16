@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // ***************All Admin Panel******************
+use App\Http\Controllers\Admin\PackageCategoryController;
 use App\Http\Controllers\Admin\AllAppontmentController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Auth\AdminLoginContrroller;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\AuthController;
+
 
 // ***************All Fronted Panel******************
 
@@ -27,6 +29,8 @@ use App\Http\Controllers\franted\CheckoutController;
 use App\Http\Controllers\franted\ServicesController;
 use App\Http\Controllers\franted\DepartmentController;
 use App\Http\Controllers\franted\BookAppoinmentController;
+use App\Http\Controllers\franted\UserPackageController;
+
 
 // ***************User Panel******************
 use App\Http\Controllers\User\UserDashboardController;
@@ -59,6 +63,14 @@ Route::get('/clear', function() {
  
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('about',[AboutController::class,'index'])->name('about');
+
+Route::controller(UserPackageController::class)->prefix('packages')->group(function () {
+    Route::get('index', 'index')->name('packages.index');
+    Route::get('book/{slug}', 'packageBook')->name('packages.book');
+    Route::get('book-list', 'getBookList')->name('packages.list');
+    Route::patch('update-cart',  'update')->name('update.cart');
+    Route::get('remove-cart/{id}',  'remove')->name('packages.remove.cart');
+});
 
 Route::controller(ServicesController::class)->prefix('services')->group(function () {
     Route::get('index', 'index')->name('services.index');
@@ -173,7 +185,15 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
         Route::post('update',  'update')->name('package.update');
         Route::get('delete/{id}','destroy')->name('package.delete');
     });
-
+    Route::controller(PackageCategoryController::class)->prefix('package-category')->group(function () {
+        Route::get('/', 'index')->name('package-category.index');
+        Route::get('create', 'create')->name('package-category.create');
+        Route::post('store', 'store')->name('package-category.store');
+        Route::get('edit/{id}',  'edit')->name('package-category.edit');
+        Route::post('update',  'update')->name('package-category.update');
+        Route::get('delete/{id}','destroy')->name('package-category.delete');
+    });
+    
     Route::controller(ProductController::class)->prefix('product')->group(function () {
         Route::get('index', 'index')->name('product.index');
         Route::get('create', 'create')->name('product.create');

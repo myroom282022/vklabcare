@@ -4,12 +4,12 @@
     <div class="col-12">
         <div class="card mb-4">
         <div class="card-header pb-0">
-            <h4>Package Details</h4>
+            <h4>Package Category Details</h4>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end userbuttton">
-                <a href="{{route('package.create')}}">
+                <a href="{{route('package-category.create')}}">
                     <button class="btn btn-primary me-md-2 btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#adduser">
                     <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;
-                    Add Package
+                    Add Package Category
                     </button>
                 </a>
             </div>
@@ -20,15 +20,7 @@
                 <thead>
                 <tr>
                     <th>Sr.No</th>
-                    <th> Image</th>
-                    <th> Package Category</th>
                     <th> Name</th>
-                    <th> Price </th>
-                    <th> Discount Price </th>
-                    <th>Percentage</th>
-                    <th>Package Type</th>
-                    <th> Description </th>
-                    <th> Description Not Add</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -38,24 +30,9 @@
                     @foreach($package as $data)
                         <tr>
                             <td>{{$useId}}</td>
+                            <td>{{$data->package_category_name}}</td>
                             <td>
-                                <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="{{url('storage/package/img/'.$data->package_image)}}" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-capitilize">{{$data->package_category_name}}</td>
-                            <td>{{$data->package_name}}</td>
-                            <td>{{$data->package_price}}</td>
-                            <td>{{$data->package_discount_price}}</td>
-                            <td>{{$data->package_discount_percentage ?? '0'}}%</td>
-                            <td>{{$data->package_type}}</td>
-                            <td>{{$data->package_description}}</td>
-                            <td>{{$data->description_not_add ?? ''}}</td>
-                           
-                            <td>
-                                <a href="{{url('admin/package/edit/'.$data->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>
+                                <a href="{{url('admin/package-category/edit/'.$data->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>
                                 <a href="#" delete_id="{{$data->id}}" class="button delete_confirm" id="deletebutton"><i class="fas fa-trash text-danger" aria-hidden="true" style="font-size:18px"></i></a>
                             </td>
                         </tr>
@@ -101,7 +78,7 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((willDelete) => {
             if (willDelete) {
-                var url = "{{url('admin/package/delete')}}/"+ delete_id;
+                var url = "{{url('admin/package-category/delete')}}/"+ delete_id;
               return window.location.href=url;
             }
         });

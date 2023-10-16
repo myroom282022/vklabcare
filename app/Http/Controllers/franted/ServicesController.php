@@ -115,7 +115,8 @@ class ServicesController extends Controller
             $ip = $request->ip();
         }
         $currentUserInfo = Location::get($ip);
-        $cart = session()->get('cart', []);
+        // $cart = session()->get('cart', []);
+        $cart = PackageBook::where('user_id', $userData->id)->with('getPackage')->get();
         return view('franted.services.billingAddress',compact('cart','currentUserInfo','userData','shipping','billing'));
 
     }

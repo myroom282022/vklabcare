@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PackageBook extends Model
+class PackageCategory extends Model
 {
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'package_id',
+        'package_category_name',
     ];
-    public function getPackage(){
-        return $this->hasMany(Package::class , 'id'  ,'package_id');
-    }
 }

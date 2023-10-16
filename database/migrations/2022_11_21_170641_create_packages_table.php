@@ -18,9 +18,14 @@ return new class extends Migration
             $table->integer('user_id')->nullable();
             $table->string('package_name')->nullable();
             $table->text('package_description')->nullable();
-            $table->decimal('package_price')->nullable();
-            $table->decimal('package_discount_price')->nullable();
+            $table->text('description_not_add')->nullable();
+            $table->decimal('package_price')->default('0');
+            $table->decimal('package_discount_price')->default('0');
             $table->string('package_image')->nullable();
+            $table->string('package_type')->nullable();
+            $table->decimal('package_discount_percentage')->default('0');
+            $table->string('package_category_name')->nullable();
+            $table->string('package_slug_name')->nullable();
             $table->timestamps();
         });
     }

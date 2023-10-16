@@ -16,7 +16,6 @@
                     aria-valuemax="100"></div>
             </div>
         </header>
-        
         <div class="wrappermy-3">
             <div class="h5 large mt-3">Billing Address</div>
             <div class="row">
@@ -198,25 +197,24 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="h6">Cart Summary</div>
                         </div>
-                            @foreach($cart as $key => $packageData)
-                            @foreach($packageData->getPackage as $key => $item)
                         <div class="d-flex jusitfy-content-between align-items-center pt-3 pb-2 border-bottom">
-
-                                <div class="item">
-                                    <img src="{{url('storage/Package/img/'.$item['package_image'])}}"
+                        @foreach($cart as $key => $item)
+                        
+                            <div class="item pr-2">
+                                    <img src="{{url('storage/product/img/'.$item['product_image'])}}"
                                         alt="" width="80" height="80">
+                                    <!-- <div class="number">1</div> -->
                                 </div>
-                                <div class="d-flex flex-column">
-                                    <b class="h5">{{$item['package_name']}}</b>
-                                    <a href="#" class=" text-info">{{$item['package_description']}}</a>
+                                <div class="d-flex flex-column px-3">
+                                    <b class="h5">{{$item['product_name']}}</b>
+                                    <a href="#" class="h5 text-primary">{{$item['product_description']}}</a>
                                 </div>
                                 <div class="ml-auto">
-                                    <b class="h5">₹{{$item['package_discount_price'] ?? ''}}</b>
+                                    <b class="h5">₹{{$item['product_price']}}</b>
                                 </div>
                             </div>
                         @endforeach 
-                        @endforeach 
-                    </div>
+
                         <div class="my-3">
                             <input type="text" class="w-100 form-control text-center" placeholder="Gift Card or Promo Card">
                         </div>
@@ -224,10 +222,8 @@
                             $Subtotal = 0 ;
                             $shipping=20 ;
                             @endphp
-                                @foreach($cart as $key => $packageData)
-                                @foreach($packageData->getPackage as $key => $details)
-                                @php $Subtotal += $details['package_discount_price'] *  1 @endphp
-                            @endforeach
+                            @foreach((array) session('cart') as $id => $details)
+                                @php $Subtotal += $details['product_price'] * $details['quantity'] @endphp
                             @endforeach
                         <div class="d-flex align-items-center">
                             <div class="display-5">Subtotal</div>
@@ -247,7 +243,9 @@
                                 <div class="font-weight-bold">₹{{$Subtotal>0 ? $Subtotal :'00.00'}}</div>
                             </div>
                         </div>
+
                     </div>
+                    
                     
                     <div class="text-muted pt-3" id="mobile">
                         <span class="fas fa-lock"></span>

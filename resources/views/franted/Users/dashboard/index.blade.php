@@ -73,5 +73,8 @@
       </div>
     </div>
 </section>
+<section class="">
+	@include('franted.home.secondp')
+</section>
 @include('franted.Users.common.footer')
 @endsection

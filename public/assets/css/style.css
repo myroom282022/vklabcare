@@ -18,3 +18,6 @@
 .error{
     color: red;
 }
+.table th {
+    white-space: inherit !important;
+  }
