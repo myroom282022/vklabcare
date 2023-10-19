@@ -26,6 +26,9 @@ class Package extends Model
     public function getProduct(){
         return $this->hasMany(Product::class, 'package_name','package_name');
     }
+    public function belongsPackageCategory(){
+        return $this->hasMany(PackageCategory::class, 'package_category_name','package_category_name');
+    }
     
     public function belongsPackage(){
         return $this->belongsTo(PackageBook::class , 'package_id' ,'id');

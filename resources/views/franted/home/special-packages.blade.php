@@ -60,52 +60,6 @@
                 </div>
                 @endif
                 @endforeach
-
-                <!-- Pricing Block -->
-                {{-- <div class="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
-                    <div class="inner-box">
-                        <div class="icon-box">
-                            <div class="icon-outer"><i class="fas fa-gem"></i></div>
-                        </div>
-                        <div class="price-box">
-                            <div class="title">Full Pass</div>
-                            <h4 class="price">$99.99</h4>
-                        </div>
-                        <ul class="features">
-                            <li class="true">Conference plans</li>
-                            <li class="true">Free Lunch And Coffee</li>
-                            <li class="true">Certificate</li>
-                            <li class="true">Easy Access</li>
-                            <li class="false">Free Contacts</li>
-                        </ul>
-                        <div class="btn-box">
-                            <a href="https://codepen.io/anupkumar92" class="theme-btn">BUY plan</a>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <!-- Pricing Block -->
-                {{-- <div class="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
-                    <div class="inner-box">
-                        <div class="icon-box">
-                            <div class="icon-outer"><i class="fas fa-rocket"></i></div>
-                        </div>
-                        <div class="price-box">
-                            <div class="title">Group Pass</div>
-                            <h4 class="price">$199.99</h4>
-                        </div>
-                        <ul class="features">
-                            <li class="true">Conference plans</li>
-                            <li class="true">Free Lunch And Coffee</li>
-                            <li class="true">Certificate</li>
-                            <li class="true">Easy Access</li>
-                            <li class="true">Free Contacts</li>
-                        </ul>
-                        <div class="btn-box">
-                            <a href="https://codepen.io/anupkumar92" class="theme-btn">BUY plan</a>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>

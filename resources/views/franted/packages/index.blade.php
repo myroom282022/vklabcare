@@ -11,9 +11,9 @@
 				  <label class="btn active ">
 					<input type="radio" name="shuffle-filter" value="all" checked="checked" />All Department
 				  </label>
-				  @foreach($product as $iteam)
+				  @foreach($package as $iteam)
 				  <label class="btn ">
-					<input type="radio" name="shuffle-filter" value="{{$iteam->package_name}}" />{{$iteam->package_name}}
+					<input type="radio" name="shuffle-filter" value="{{$iteam->package_category_name ?? ''}}" />{{$iteam->package_category_name ?? ''}}
 				  </label>
 				  @endforeach
 				</div>
@@ -21,33 +21,32 @@
 		</div>
 		<div class="col-sm-10">
 			<div class="row shuffle-wrapper portfolio-gallery">
-				@if($product)
-					@foreach($product as $productIteam)
-					@foreach($productIteam->getProduct as $productValue)
-		
-						<div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item my-5" data-groups="[&quot;{{$productValue->package_name}}&quot;]">
-							<div class="card ">
+				@if($package)
+					@foreach($package as $productIteam)
+					@foreach($productIteam->getPackageCategory as $packageValue)
+						<div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item my-5" data-groups="[&quot;{{$packageValue->package_category_name}}&quot;]">
+							<div class="card">
 								<div class="image-container">
 									<div class="first">
 										<div class="d-flex justify-content-between align-items-center">
-										<span class="discount">-25%</span>
+										<span class="discount"> {{$packageValue->package_discount_percentage ?? 0}}%</span>
 										<span class="wishlist"><i class="fa fa-heart text-danger"></i></span>
 										</div>
 									</div>
-									<a href="{{ route('add.to.cart', $productValue->id) }}">
-										<img src="{{url('storage/Product/img/'.$productValue->product_image)}}" class="img-fluid rounded thumbnail-image">
+									<a href="{{url('services/product/'.$packageValue->package_name)}}">
+										<img src="{{url('storage/package/img/'.$packageValue->package_image)}}" class="img-fluid rounded thumbnail-image">
 									</a>
 								</div>
 								<div class="product-detail-container p-2">
 										<div class="d-flex justify-content-between align-items-center">
-											<h5 class="dress-name">{{$productValue->product_name ?? ''}}</h5>
+											<h5 class="dress-name">{{$packageValue->package_name ?? ''}}</h5>
 											<div class="d-flex flex-column mb-2">
-												<span class="new-price">₹{{$productValue->product_price ?? ''}}</span>
-												<small class="old-price text-right text-muted">₹{{$productValue->product_discount_price ?? ''}}</small>
+												<span class="new-price">₹{{$packageValue->package_discount_price ?? ''}}</span>
+												<small class="old-price text-right"><del>₹{{$packageValue->package_price ?? ''}}</del></small>
 											</div>
 										</div>
 										<div class="d-flex justify-content-between align-items-center pt-1">
-											<p>{{$productValue->product_description ?? ''}} </p>
+											<p>{{$packageValue->package_description ?? ''}} </p>
 										</div>
 										<div class="d-flex justify-content-between align-items-center pt-1 my-3">
 											<div>
@@ -59,7 +58,7 @@
 												<br/>
 												<span class="rating-number">4.8</span>
 											</div>
-											<a href="{{ route('add.to.cart', $productValue->id) }}">
+											<a href="{{route('packages.book',$packageValue->package_slug_name ?? $item->id)}}" class="theme-btn">
 												<button class="btn btn-outline-info btn-sm">Book Now </button>
 											</a>
 									</div>
@@ -69,11 +68,11 @@
 								<div class="card voutchers">
 									<div class="voutcher-divider">
 										<div class="voutcher-left text-center">
-											<span class="voutcher-name">Monday Happy</span>
-											<h5 class="voutcher-code">#MONHPY</h5>
+											<span class="voutcher-name">Happy Day</span>
+											<h5 class="voutcher-code">Home Collection Free</h5>
 										</div>
 										<div class="voutcher-right text-center border-left">
-											<h5 class="discount-percent">20%</h5>
+											<h5 class="discount-percent">{{$packageValue->package_discount_percentage ?? 0}}%</h5>
 											<span class="off">Off</span>
 										</div>
 									</div>

@@ -122,8 +122,7 @@ class CheckoutController extends Controller
         return redirect('payment/index')->withSuccess("Billing address add successfully");
     }
     //payment getway 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
       return   $input = $request->all();
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
          $payment = $api->payment->fetch($input['razorpay_payment_id']);

@@ -12,4 +12,7 @@ class PackageCategory extends Model
         'user_id',
         'package_category_name',
     ];
+    public function getPackageCategory(){
+        return $this->hasMany(Package::class, 'package_category_name','package_category_name');
+    }
 }

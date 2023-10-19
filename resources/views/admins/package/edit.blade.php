@@ -111,7 +111,7 @@
                                             <label class="col-sm control-label">Package Image</label>
                                             <div class="mb-3">
                                                 <img src="{{url('storage/package/img/'.$package->package_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
-                                                <input class="form-control" name="package_image" type="file" id="formFile"   class="img-fluid" value="{{$package->package_image ?? ''}}" accept=".png, .jpg, .jpeg"> 
+                                                <input class="form-control" name="package_image" type="file" id="formFile"   class="img-fluid" value="{{$package->package_image ?? ''}}" > 
                                                 @if ($errors->has('package_image'))
                                                     <span class="text-danger">{{ $errors->first('package_image') }}</span>
                                                 @endif
@@ -176,10 +176,11 @@
          console.log("packages",packages);
         });
         $("#package_discount_price").keyup(function(){
-             var disPercentage = $(this).val();
-             var price = $('#package_price').val();
-             var totalPrice = (disPercentage*100)/price;
-             $("#package_discount_percentage").val(totalPrice.toFixed(2));
+            var disPercentage = parseFloat($(this).val());  
+            var price = parseFloat($('#package_price').val()); 
+            var totalPrice = ((price - disPercentage) / price) * 100;
+            $("#package_discount_percentage").val(totalPrice.toFixed(2));
+
          });
         // validate -------------------------
         $("#create").validate({

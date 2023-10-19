@@ -5,12 +5,9 @@ namespace App\Http\Controllers\franted;
 use Stevebauman\Location\Facades\Location;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Distinct;
 use App\Models\Product;
 use App\Models\Package;
-use App\Models\State;
-use App\Models\Billing;
-use App\Models\Shipping;
+use App\Models\PackageCategory;
 use App\Models\ClientDevice;
 use App\Models\User;
 use App\Mail\BookInfo;
@@ -21,8 +18,8 @@ use Session;
 class UserPackageController extends Controller
 {
     public function index(Request $request){
-        $product=  Package::with('getProduct')->get();
-        return view('franted.packages.index',compact('product'));
+        $package=  PackageCategory::with('getPackageCategory')->get();
+        return view('franted.packages.index',compact('package'));
     }
     public function packageBook($slug){
         $package = Package::where('package_slug_name',$slug)->latest()->first();
