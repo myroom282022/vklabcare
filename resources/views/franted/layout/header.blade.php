@@ -9,7 +9,7 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="text-lg-right top-right-bar mt-2 mt-lg-0">
-					<a href="tel:+23-345-67890">
+					<a href="tel:+91 958 230 6210">
 						<span>Call Now : </span>
 						<span class="h6">+91 958 230 6210</span>
 					</a>

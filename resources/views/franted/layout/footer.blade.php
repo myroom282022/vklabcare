@@ -71,7 +71,7 @@
 							<i class="icofont-support mr-3"></i>
 							<span class="h6 mb-0">Open 24 hours</span>
 						</div>
-						<h4 class="mt-2"><a href="tel:+23-345-67890">+91 958 230 6210</a></h4>
+						<h4 class="mt-2"><a href="tel:+91 958 230 6210">+91 958 230 6210</a></h4>
 					</div>
 				</div>
 			</div>
