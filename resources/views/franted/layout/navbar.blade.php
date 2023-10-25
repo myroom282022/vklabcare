@@ -20,17 +20,17 @@
 
 		<div class="collapse navbar-collapse " id="navbarmain">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active"><a class="nav-link" href="{{url('/')}}">Home</a></li>
-				<li class="nav-item"><a class="nav-link" href="{{route('about')}}">About</a></li>
-				<li class="nav-item"><a class="nav-link" href="{{route('packages.index')}}">Packages</a></li>
-				<li class="nav-item"><a class="nav-link" href="{{route('services.index')}}">Services</a></li>
+				<li class="nav-item {{ request()->routeIs('home') ? 'active':'' }}"><a class="nav-link" href="{{url('/')}}">Home</a></li>
+				<li class="nav-item {{ request()->routeIs('about') ? 'active':'' }}"><a class="nav-link" href="{{route('about')}}">About</a></li>
+				<li class="nav-item {{ request()->routeIs('packages.index') || request()->routeIs('packages.list') || request()->routeIs('billing-address') || request()->routeIs('payment.index') || request()->routeIs('payment.success') ? 'active':'' }}"><a class="nav-link" href="{{route('packages.index')}}">Packages</a></li>
+				<li class="nav-item {{ request()->routeIs('services.index') ? 'active':'' }}"><a class="nav-link" href="{{route('services.index')}}">Services</a></li>
 
-				<li class="nav-item dropdown">
+				<li class="nav-item dropdown {{ request()->routeIs('departments')|| request()->routeIs('department-single') ? 'active':'' }}">
 					<a class="nav-link dropdown-toggle" href="{{route('departments')}}" id="dropdown02" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">Department <i class="icofont-thin-down"></i></a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown02">
-						<li><a class="dropdown-item" href="{{route('departments')}}">Departments</a></li>
-						<li><a class="dropdown-item" href="{{route('department-single')}}">Department Single</a></li>
+						<li><a class="dropdown-item {{ request()->routeIs('departments') ? 'active':'' }}" href="{{route('departments')}}">Departments</a></li>
+						<li><a class="dropdown-item {{ request()->routeIs('department-single') ? 'active':'' }}" href="{{route('department-single')}}">Department Single</a></li>
 				
 						<!-- <li class="dropdown dropdown-submenu dropright">
 							<a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0301" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>
@@ -43,12 +43,12 @@
 					</ul>
 				</li>
 
-				<li class="nav-item dropdown">
+				<li class="nav-item dropdown {{ request()->routeIs('appoinment') || request()->routeIs('doctor') || request()->routeIs('doctor-single') ? 'active':'' }}">
 					<a class="nav-link dropdown-toggle" href="{{route('doctor')}}" id="dropdown03" data-toggle="dropdown"	aria-haspopup="true" aria-expanded="false">Doctors <i class="icofont-thin-down"></i></a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown03">
-						<li><a class="dropdown-item" href="{{route('doctor')}}">Doctors</a></li>
-						<li><a class="dropdown-item" href="{{route('doctor-single')}}">Doctor Single</a></li>
-						<li><a class="dropdown-item" href="{{route('appoinment')}}">Appoinment</a></li>
+						<li><a class="dropdown-item  {{ request()->routeIs('doctor') ? 'active':'' }}" href="{{route('doctor')}}">Doctors</a></li>
+						<li><a class="dropdown-item {{ request()->routeIs('doctor-single') ? 'active':'' }}" href="{{route('doctor-single')}}">Doctor Single</a></li>
+						<li><a class="dropdown-item{{ request()->routeIs('appoinment') ? 'active':'' }}" href="{{route('appoinment')}}">Appoinment</a></li>
 
 						<!-- <li class="dropdown dropdown-submenu dropleft">
 							<a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0501" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu</a>
@@ -61,22 +61,22 @@
 					</ul>
 				</li>
 
-				<li class="nav-item dropdown">
+				<li class="nav-item dropdown {{ request()->routeIs('blog-sidebar') || request()->routeIs('blog-single') || request()->routeIs('doctor-single') ? 'active':'' }}">
 					<a class="nav-link dropdown-toggle" href="{{route('blog-sidebar')}}" id="dropdown05" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">Blog <i class="icofont-thin-down"></i></a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown05">
-						<li><a class="dropdown-item" href="{{route('blog-sidebar')}}">Blog with Sidebar</a></li>
-						<li><a class="dropdown-item" href="{{route('blog-single')}}">Blog Single</a></li>
+						<li><a class="dropdown-item {{ request()->routeIs('blog-sidebar')  ? 'active':'' }}" href="{{route('blog-sidebar')}}">Blog with Sidebar</a></li>
+						<li><a class="dropdown-item {{  request()->routeIs('blog-single')  ? 'active':'' }}" href="{{route('blog-single')}}">Blog Single</a></li>
 					</ul>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
+				<li class="nav-item {{  request()->routeIs('contact')  ? 'active':'' }}"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
 				@if(auth()->user() && auth()->user()->is_phone_verified == 1)
-				<li class="nav-item dropdown">
+				<li class="nav-item dropdown {{ request()->routeIs('user-logout') || request()->routeIs('user-dashboard')  ? 'active':'' }}">
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">Dashboard <i class="icofont-thin-down"></i></a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown02">
-						<li><a class="dropdown-item" href="{{route('user-dashboard')}}">Dashboard</a></li>
-						<li><a class="dropdown-item" href="{{route('user-logout')}}">Logout</a></li>
+						<li><a class="dropdown-item {{  request()->routeIs('user-dashboard')  ? 'active':'' }}" href="{{route('user-dashboard')}}">Dashboard</a></li>
+						<li><a class="dropdown-item {{  request()->routeIs('user-logout')  ? 'active':'' }}" href="{{route('user-logout')}}">Logout</a></li>
 					</ul>
 				</li>
 				@else
