@@ -5,8 +5,8 @@
 <section class="my-3 doctors">
   <div class="container-fluit mx-3">
 	<div class="row">
-		<div class="col-sm-2">
-			<div class="col-12 text-center  mb-5">
+		<div class="col-sm-2 mt-3">
+			{{-- <div class="col-12 text-center  mb-5"> --}}
 				<div class="btn-group btn-group-toggle " data-toggle="buttons" style="display:inline-grid;">
 				  <label class="btn active ">
 					<input type="radio" name="shuffle-filter" value="all" checked="checked" />All Department
@@ -17,7 +17,7 @@
 				  </label>
 				  @endforeach
 				</div>
-		  </div>
+		  {{-- </div> --}}
 		</div>
 		<div class="col-sm-10">
 			<div class="row shuffle-wrapper portfolio-gallery">

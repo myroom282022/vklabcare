@@ -3,7 +3,7 @@
 	if ($user){
 		$cart = App\Models\PackageBook::where('user_id', $user->id)->with('getPackage')->get();
 	}else {
-		$cart = '';
+		$cart = [];
 	}
 @endphp
 <div class="1fixed-top ">
@@ -85,10 +85,10 @@
 					
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="{{route('packages.list')}}" id="dropdown05" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"><i class="icofont-shopping-cart" style="font-size:20px"><sup><b class="cart-items">{{ count((array) session('cart')) }}</b></sup></i></a>
+						aria-haspopup="true" aria-expanded="false"><i class="icofont-shopping-cart" style="font-size:20px"><sup><b class="cart-items">{{ count($cart ?? 0) }}</b></sup></i></a>
 						
 					<ul class="dropdown-menu  cart-list" aria-labelledby="dropdown05">
-						@if ($cart)
+						@if (count($cart ?? 0) > 0)
 						<li>
 							<div class="container-fluit my-3">
 								@foreach($cart as $key => $packageData)
@@ -127,10 +127,9 @@
 							
 						</li>
 						@else
-						<li class="nav-item">
+						<li class="nav-item my-3 text-center">
 							<h6 class="text-danger">Empty cart</h6>
 						</li>
-							
 						@endif
 
 					</ul>

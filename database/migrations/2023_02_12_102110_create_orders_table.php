@@ -24,7 +24,8 @@ return new class extends Migration
             $table->decimal('product_price')->nullable();
             $table->string('product_image')->nullable();
             $table->string('delivery_charge')->nullable();
-            $table->string('total_price')->nullable();
+            $table->string('product_category_name')->nullable();
+            $table->string('product_discount_percentage')->nullable();
             $table->timestamps();
         });
     }

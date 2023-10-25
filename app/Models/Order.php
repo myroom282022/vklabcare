@@ -18,7 +18,9 @@ class Order extends Model
         'product_image',
         'discount_price',
         'delivery_charge',
-        'total_price',
+        'product_discount_percentage',
+        'product_category_name',
+        'order_number',
     ];
 protected $appends =[
     'image'

@@ -46,11 +46,11 @@
                                 <input type="hidden" name="payment_type" class="payment-type" value="online">
                                 @php
                                 $Subtotal = 0 ;
-                                $shipping=20 ;
+                                $shipping=0 ;
                                 @endphp
                                 @foreach($cart as $key => $packageData)
                                 @foreach($packageData->getPackage as $key => $details)
-                                    @php $Subtotal += $details['package_discount_price'] * $details->quantity ?? 1 @endphp
+                                    @php $Subtotal += $details['package_discount_price'] * 1 @endphp
                                 @endforeach
                                 @endforeach
                                 @php
@@ -61,6 +61,7 @@
                                         'currency' =>"INR"
                                     )); 
                                 @endphp
+
                                 <script src="https://checkout.razorpay.com/v1/checkout.js"
                                         data-key="{{ env('RAZORPAY_KEY') }}"
                                         data-amount=" {{$totalPrice}}"
@@ -113,7 +114,7 @@
                         </div>
                         @php
                             $Subtotal = 0 ;
-                            $shipping=20 ;
+                            $shipping= 0.00 ;
                             @endphp
                                 @foreach($cart as $key => $packageData)
                                     @foreach($packageData->getPackage as $key => $details)

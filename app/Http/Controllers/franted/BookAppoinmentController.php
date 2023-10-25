@@ -13,9 +13,9 @@ class BookAppoinmentController extends Controller
         return view('franted.Appoinment.bookApp');
     }
     public function store(Request $request){
-         $available_date= $request->available_date;
-          $yesterday = Carbon::yesterday()->format('Y-m-d');
-       
+        $available_date= $request->available_date;
+        $yesterday = Carbon::yesterday()->format('Y-m-d');
+        
         $validatedData= request()->validate([
             'speciality'            =>  'required|not_in:0',
             'doctor_name'           =>  'required|not_in:0',

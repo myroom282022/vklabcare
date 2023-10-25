@@ -222,7 +222,7 @@
                         </div>
                         @php
                             $Subtotal = 0 ;
-                            $shipping=20 ;
+                            $shipping= 0.00 ;
                             @endphp
                                 @foreach($cart as $key => $packageData)
                                 @foreach($packageData->getPackage as $key => $details)

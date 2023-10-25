@@ -17,13 +17,17 @@ use Carbon\Carbon;
 use Exception;
 use Session;
 use Mail;
+use Auth;
 
 class CheckoutController extends Controller
 {
     public function index(){
         // $cart = session()->get('cart', []);
         $cart = PackageBook::where('user_id', auth()->user()->id)->with('getPackage')->get();
-        return view('franted.services.checkout',compact('cart'));
+        if(count($cart ?? 0) > 0){
+            return view('franted.services.checkout',compact('cart'));
+        }
+        return redirect()->route()->with('error','Please book any package');
     }
     public function Billing(){
         return view('franted.services.checkout',compact('cart'));
@@ -123,79 +127,134 @@ class CheckoutController extends Controller
     }
     //payment getway 
     public function store(Request $request){
-      return   $input = $request->all();
-        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
-         $payment = $api->payment->fetch($input['razorpay_payment_id']);
-        if($payment) {
-            // try {
-                if($payment->method == 'card'){
-                    $cardData=[
-                        'card_name'        =>   $payment->card['network'] ?? '',
-                        'card_number'      =>   $payment->card['last4'] ?? '',
-                        'bank_name'        =>   $payment->card['issuer'] ?? '',
-                        'card_id'          =>   $payment->card['id'] ?? '',
-                  ];
-                }
-                $paymentData['user_id']         =   auth()->user()->id;
-                $paymentData['transaction_id']  =   $payment->id ?? '';
-                $paymentData['order_id']        =   $payment->order_id ?? '';
-                $paymentData['total_price']     =   $payment->amount/100 ?? '';
-                $paymentData['payment_type']    =   $payment->method ?? '';
-                $paymentData['currency']    =   $payment->currency ?? '';
-                $paymentData['description']    =   $payment->description ?? '';
-                $paymentData['vpa']    =   $payment->vpa ?? '';
-                $paymentData['upi_transaction_id']    =   $payment->acquirer_data['upi_transaction_id'] ?? '';
-                $paymentData['card_details']    =   $cardData ?? '';
-                $paymentData['status']          =   'Success';
-                $paymentDetails= Payment::create($paymentData);
+        $cart = PackageBook::where('user_id', auth()->user()->id)->with('getPackage')->get();
+        if($request->payment_type == 'cash'){
+            $this->cashPayment($cart);
+        }else{
+            $orderNumber =  $this->generateNumber(10);
+            $orderNumber =  "online_order_$orderNumber";
+            $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+            $payment = $api->payment->fetch($request->razorpay_payment_id);
+            if($payment) {
+                // try {
+                    if($payment->method == 'card'){
+                        $cardData=[
+                            'card_name'        =>   $payment->card['network'] ?? '',
+                            'card_number'      =>   $payment->card['last4'] ?? '',
+                            'bank_name'        =>   $payment->card['issuer'] ?? '',
+                            'card_id'          =>   $payment->card['id'] ?? '',
+                        ];
+                    }
+                    $paymentData['user_id']         =   auth()->user()->id;
+                    $paymentData['transaction_id']  =   $payment->id ?? '';
+                    $paymentData['order_id']        =   $payment->order_id ?? '';
+                    $paymentData['total_price']     =   $payment->amount/100 ?? '';
+                    $paymentData['payment_type']    =   $payment->method ?? '';
+                    $paymentData['currency']    =   $payment->currency ?? '';
+                    $paymentData['description']    =   $payment->description ?? '';
+                    $paymentData['vpa']    =   $payment->vpa ?? '';
+                    $paymentData['upi_transaction_id']    =   $payment->acquirer_data['upi_transaction_id'] ?? '';
+                    $paymentData['card_details']    =   $cardData ?? '';
+                    $paymentData['status']          =   'Success';
+                    $paymentData['order_number']    =  $orderNumber ?? '';
+                    $paymentDetails= Payment::create($paymentData);
 
-                // payment order --------------------------------------
-                $order['user_id']             =   auth()->user()->id;
-                $order['payment_id']          =   $paymentDetails->id;
-                $order['product_name']        =   $request->product_name;
-                $order['product_description'] =   $request->product_description;
-                $order['total_price']       =   $payment->amount/100;
-                $order['order_number']        =   $paymentDetails->order_number;
-                $order['quantity']            =   $request->quantity;
-                $order['product_image']       =   $request->product_image;
-                $paymentData['product_price']   =   $request->product_price;
-                $paymentData['discount_price']  =   $request->discount_price;
-                $paymentData['delivery_charge'] =   $request->delivery_charge;
-                $order= Order::create($order);
-               $date = Carbon::now()->format("Y-M-D H:m");
-               $billing     =   Billing::where('user_id',auth()->user()->id)->latest()->first();
-               $shipping    =   Shipping::where('user_id',auth()->user()->id)->latest()->first();
-                $mailData = [
-                    'date' => $date,
-                    'order' =>$order,
-                    'paymentDetails'=>$paymentDetails,
-                    'billing'=>$billing,
-                    'shipping'=>$shipping,
-                ];
-                $sendEmail = ['vka3healthcare@gmail.com', auth()->user()->email];
-                Mail::to($sendEmail)->send(new sendMailOrder($mailData));
-               
-            // } catch (Exception $e) {
-            //     return redirect()->back()->withErros($e->getMessage());
-            // }
+                    // payment order --------------------------------------
+                    foreach ($cart as $key => $dataTotal) {
+                        foreach ($dataTotal->getPackage as $key => $itam) {
+                            $order['user_id']             =   auth()->user()->id ?? '';
+                            $order['payment_id']          =   $paymentDetails->id ?? '';
+                            $order['product_name']        =   $itam->package_name ?? '';
+                            $order['product_description'] =   $itam->package_description ?? '';
+                            $order['product_category_name'] =   $itam->package_category_name ?? '';
+                            $order['order_number']        =   $paymentDetails->order_number ?? '';
+                            $order['quantity']            =   1;
+                            $order['product_image']       =   $itam->package_image;
+                            $order['product_price']   =   $itam->package_price;
+                            $order['product_discount_percentage']  =   $itam->package_discount_percentage ?? 0;
+                            $order['delivery_charge'] =   $itam->delivery_charge ?? 0;
+                             Order::create($order);
+                        }
+                    }
+
+                $date = Carbon::now()->format("Y-M-D H:m");
+                $billing     =   Billing::where('user_id',auth()->user()->id)->latest()->first();
+                $shipping    =   Shipping::where('user_id',auth()->user()->id)->latest()->first();
+                    $mailData = [
+                        'date' => $date,
+                        'order' =>$order,
+                        'paymentDetails'=>$paymentDetails,
+                        'billing'=>$billing,
+                        'shipping'=>$shipping,
+                    ];
+                    $sendEmail = ['vka3healthcare@gmail.com', auth()->user()->email];
+                    Mail::to($sendEmail)->send(new sendMailOrder($mailData));
+                
+                // } catch (Exception $e) {
+                //     return redirect()->back()->withErros($e->getMessage());
+                // }
+            }
         }
-        Session::forget('cart', []);
+        $cart = PackageBook::where('user_id', auth()->user()->id)->delete();
+        // Session::forget('cart', []);
         return redirect()->route('payment.success')->withSuccess('Payment successfully');
     }
+    public function cashPayment($cart){
+        $orderNumber =  $this->generateNumber(10);
+        $orderNumber =  "cash_order_$orderNumber";
+        $Subtotal = 0 ;
+        foreach ($cart as $key => $itam) {
+            foreach ($itam->getPackage as $key => $packageData) {
+                $Subtotal += $packageData['package_discount_price'] * 1;
+            }
+        }
+            $paymentData['user_id']         =   auth()->user()->id;
+            $paymentData['total_price']     =   $Subtotal ?? 0;
+            $paymentData['payment_type']    = 'cash';
+            $paymentData['description']    =    'cash payment';
+            $paymentData['status']          =   'pending';
+            $paymentData['order_number']    =  $orderNumber ?? '';
+            $paymentDetails= Payment::create($paymentData);
 
-    // function incrementalHash($len){
-    //     $charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    //     $base = strlen($charset);
-    //     $result = '';
-      
-    //     $now = explode(' ', microtime())[1];
-    //     while ($now >= $base){
-    //       $i = $now % $base;
-    //       $result = $charset[$i] . $result;
-    //       $now /= $base;
-    //     }
-    //     return substr($result, -5);
-    // }
+        foreach ($cart as $key => $dataTotal) {
+            foreach ($dataTotal->getPackage as $key => $itam) {
+                $order['user_id']             =   auth()->user()->id ?? '';
+                $order['payment_id']          =   $paymentDetails->id ?? '';
+                $order['product_name']        =   $itam->package_name ?? '';
+                $order['product_description'] =   $itam->package_description ?? '';
+                $order['product_category_name'] =   $itam->package_category_name ?? '';
+                $order['order_number']        =   $paymentDetails->order_number ?? '';
+                $order['quantity']            =   1;
+                $order['product_image']       =   $itam->package_image;
+                $order['product_price']   =   $itam->package_price;
+                $order['product_discount_percentage']  =   $itam->package_discount_percentage ?? 0;
+                $order['delivery_charge'] =   $itam->delivery_charge ?? 0;
+                 Order::create($order);
+            }
+        }
+        $date = Carbon::now()->format("Y-M-D H:m");
+        $billing     =   Billing::where('user_id',auth()->user()->id)->latest()->first();
+        $shipping    =   Shipping::where('user_id',auth()->user()->id)->latest()->first();
+            $mailData = [
+                'date' => $date,
+                'order' =>$order,
+                'paymentDetails'=>$paymentDetails,
+                'billing'=>$billing,
+                'shipping'=>$shipping,
+            ];
+            $sendEmail = ['vka3healthcare@gmail.com', auth()->user()->email];
+            Mail::to($sendEmail)->send(new sendMailOrder($mailData));
+            return true;
+    }
+    function generateNumber($length){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $randomString;
+    }
     // public function payments(){
     //     $name=$request->name;
     //     $amount=$request->amount;

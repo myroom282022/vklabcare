@@ -4,16 +4,17 @@ namespace App\Http\Controllers\franted;
 
 use Stevebauman\Location\Facades\Location;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\Package;
 use App\Models\PackageCategory;
 use App\Models\ClientDevice;
-use App\Models\User;
-use App\Mail\BookInfo;
+use Illuminate\Http\Request;
 use App\Models\PackageBook;
-use Mail;
+use App\Jobs\SendEmailJob;
+use App\Models\Product;
+use App\Models\Package;
+use App\Mail\BookInfo;
+use App\Models\User;
 use Session;
+use Mail;
 
 class UserPackageController extends Controller
 {
@@ -33,11 +34,11 @@ class UserPackageController extends Controller
         $deviceData= ClientDevice::where('user_id',$user->id)->latest()->first();
         $bookData = [
           'userData' => $user,
-          'product' =>  $package,
+          'package' =>  $package,
           'deviceData'=>$deviceData,
       ];
         PackageBook::create(['user_id'=>$user->id,'package_id'=>$package->id]);
-        Mail::to('vka3healthcare@gmail.com')->send(new BookInfo($bookData));
+        dispatch(new SendEmailJob($bookData));
         return redirect()->route('packages.list')->with('success', 'Package Book in cart successfully!');
     }
     

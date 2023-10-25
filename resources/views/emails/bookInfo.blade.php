@@ -25,22 +25,25 @@
         <tr>
             <td bgcolor="#ffffff" style="padding: 20px;">
                 <h1 style="color:#0bb2f0">Product Details</h1>
-                <p><strong>Name:</strong> {{ $bookData['product']['product_name'] ?? ''}}</p>
-                <p><strong>Description:</strong> {{  $bookData['product']['product_description'] ?? ''}}</p>
-                <p><strong>Price: ₹</strong>{{  $bookData['product']['product_price'] ?? '' }}</p>
-                <img src="{{url('storage/Product/img/'.$bookData['product']['product_image'])}}"
+                <p><strong>Package Category:</strong> {{ $bookData['package']['package_category_name'] ?? ''}}</p>
+                <p><strong>Name:</strong> {{ $bookData['package']['package_name'] ?? ''}}</p>
+                <p><strong>Description:</strong> {{  $bookData['package']['package_description'] ?? ''}}</p>
+                <p><strong>Price: ₹</strong>{{  $bookData['package']['package_price'] ?? 0 }}</p>
+                <p><strong>Discount Percentage: </strong>{{  $bookData['package']['package_discount_percentage'] ?? 0 }}%</p>
+                <p><strong>Total Price: ₹</strong>{{  $bookData['package']['package_discount_price'] ?? 0 }}</p>
+                <img src="{{asset('storage/package/img/'.$bookData['package']['package_image'])}}"
                     class="img-fluid rounded-3">
             </td>
             <td bgcolor="#ffffff" style="padding: 20px;">
                 <h1 style="color:#0bb2f0">Address Details</h1>
                 <p><strong>City Name:</strong> {{ $bookData['deviceData']['cityName'] ?? ''}}</p>
                 <p><strong>Zip <code></code>:</strong> {{  $bookData['deviceData']['zipCode'] ?? ''}}</p>
-                <p><strong>Country name:</strong> ${{  $bookData['deviceData']['countryName'] ?? '' }}</p>
+                <p><strong>Country name:</strong>{{  $bookData['deviceData']['countryName'] ?? '' }}</p>
             </td>
         </tr>
         <tr>
             <td bgcolor="#0bb2f0" align="center" style="padding: 20px;" style="color:white">
-                <p>&copy; 2023 vka3healthcare Portal. All rights reserved.</p>
+                <p>&copy;vka3healthcare Portal. All rights reserved.</p>
             </td>
         </tr>
     </table>
