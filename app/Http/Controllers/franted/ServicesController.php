@@ -97,7 +97,7 @@ class ServicesController extends Controller
     }
 
     public function billingAddress(Request $request){
-         $product= Session::get('product_id');
+        $product= Session::get('product_id');
         $billing='';
         $shipping='';
         $userData='';
@@ -109,7 +109,7 @@ class ServicesController extends Controller
         $billing=Billing::where('user_id',$userData->id)->latest()->first();
         $shipping=Shipping::where('user_id',$userData->id)->latest()->first();
         $ip = $request->ip();
-        if($ip =='127.0.0.1'){
+        if($ip == '127.0.0.1' || $ip == '::1'){
             $ip = '110.224.79.223'; 
         }else{
             $ip = $request->ip();

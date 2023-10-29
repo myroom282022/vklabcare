@@ -38,7 +38,11 @@ class UserPackageController extends Controller
           'deviceData'=>$deviceData,
       ];
         PackageBook::create(['user_id'=>$user->id,'package_id'=>$package->id]);
-        dispatch(new SendEmailJob($bookData));
+        // dispatch(new SendEmailJob($bookData));
+        $users = User::where('role', 'caller')->orWhere('role', 'admin')->get();
+        foreach ($users as $user) {
+            Mail::to($user->email)->send(new BookInfo($bookData));
+        } 
         return redirect()->route('packages.list')->with('success', 'Package Book in cart successfully!');
     }
     

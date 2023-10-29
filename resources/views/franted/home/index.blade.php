@@ -34,7 +34,7 @@
 							<i class="icofont-support"></i>
 						</div>
 						<span>Emegency Cases</span>
-						<h4 class="mb-3">+91 958 230 6210</h4>
+						<h4 class="mb-3">+91 768 303 6386</h4>
 						<p>Get ALl time support for emergency.We have introduced the principle of family medicine.Get Conneted with us for any urgency .</p>
 					</div>
 				</div>

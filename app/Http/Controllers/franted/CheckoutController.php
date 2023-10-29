@@ -24,7 +24,7 @@ class CheckoutController extends Controller
     public function index(){
         // $cart = session()->get('cart', []);
         $cart = PackageBook::where('user_id', auth()->user()->id)->with('getPackage')->get();
-        if(count($cart ?? 0) > 0){
+        if(count($cart) > 0){
             return view('franted.services.checkout',compact('cart'));
         }
         return redirect()->route()->with('error','Please book any package');
@@ -129,7 +129,7 @@ class CheckoutController extends Controller
     public function store(Request $request){
         $cart = PackageBook::where('user_id', auth()->user()->id)->with('getPackage')->get();
         if($request->payment_type == 'cash'){
-            $this->cashPayment($cart);
+             $this->cashPayment($cart);
         }else{
             $orderNumber =  $this->generateNumber(10);
             $orderNumber =  "online_order_$orderNumber";
@@ -158,10 +158,11 @@ class CheckoutController extends Controller
                     $paymentData['status']          =   'Success';
                     $paymentData['order_number']    =  $orderNumber ?? '';
                     $paymentDetails= Payment::create($paymentData);
-
+                    $orderData = [];
                     // payment order --------------------------------------
                     foreach ($cart as $key => $dataTotal) {
                         foreach ($dataTotal->getPackage as $key => $itam) {
+                            $order = [];
                             $order['user_id']             =   auth()->user()->id ?? '';
                             $order['payment_id']          =   $paymentDetails->id ?? '';
                             $order['product_name']        =   $itam->package_name ?? '';
@@ -173,16 +174,15 @@ class CheckoutController extends Controller
                             $order['product_price']   =   $itam->package_price;
                             $order['product_discount_percentage']  =   $itam->package_discount_percentage ?? 0;
                             $order['delivery_charge'] =   $itam->delivery_charge ?? 0;
-                             Order::create($order);
+                            $orderData[]  =  Order::create($order);
                         }
                     }
-
                 $date = Carbon::now()->format("Y-M-D H:m");
                 $billing     =   Billing::where('user_id',auth()->user()->id)->latest()->first();
                 $shipping    =   Shipping::where('user_id',auth()->user()->id)->latest()->first();
-                    $mailData = [
+                     $mailData = [
                         'date' => $date,
-                        'order' =>$order,
+                        'order' =>$orderData,
                         'paymentDetails'=>$paymentDetails,
                         'billing'=>$billing,
                         'shipping'=>$shipping,
@@ -215,9 +215,10 @@ class CheckoutController extends Controller
             $paymentData['status']          =   'pending';
             $paymentData['order_number']    =  $orderNumber ?? '';
             $paymentDetails= Payment::create($paymentData);
-
+            $orderData = [];
         foreach ($cart as $key => $dataTotal) {
             foreach ($dataTotal->getPackage as $key => $itam) {
+                $order = [];
                 $order['user_id']             =   auth()->user()->id ?? '';
                 $order['payment_id']          =   $paymentDetails->id ?? '';
                 $order['product_name']        =   $itam->package_name ?? '';
@@ -229,15 +230,15 @@ class CheckoutController extends Controller
                 $order['product_price']   =   $itam->package_price;
                 $order['product_discount_percentage']  =   $itam->package_discount_percentage ?? 0;
                 $order['delivery_charge'] =   $itam->delivery_charge ?? 0;
-                 Order::create($order);
+               $orderData[] = Order::create($order);
             }
         }
         $date = Carbon::now()->format("Y-M-D H:m");
         $billing     =   Billing::where('user_id',auth()->user()->id)->latest()->first();
         $shipping    =   Shipping::where('user_id',auth()->user()->id)->latest()->first();
-            $mailData = [
+             $mailData = [
                 'date' => $date,
-                'order' =>$order,
+                'order' =>$orderData,
                 'paymentDetails'=>$paymentDetails,
                 'billing'=>$billing,
                 'shipping'=>$shipping,
