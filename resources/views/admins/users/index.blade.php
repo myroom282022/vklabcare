@@ -33,8 +33,12 @@
                         <tr>
                             <td>{{$useId}}</td>
                             <td>
-                            <img src="{{url('storage/users/img/'.$userdata->user_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
-
+                                @if ($userdata->user_image)
+                                    <img src="{{asset('storage/users/img/'.$userdata->user_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                                @else
+                                    <img src="{{asset('public/img_defautl/users.png')}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                                @endif
+                            
                             </td>
                             <td>{{$userdata->name}}</td>
                             <td>{{$userdata->email}}</td>

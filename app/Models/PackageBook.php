@@ -15,4 +15,10 @@ class PackageBook extends Model
     public function getPackage(){
         return $this->hasMany(Package::class , 'id'  ,'package_id');
     }
+    public function getBookOrders(){
+        return $this->hasOne(User::class , 'id'  ,'user_id');
+    }
+    public function getDeviceDatils(){
+        return $this->hasOne(ClientDevice::class , 'user_id'  ,'user_id');
+    }
 }

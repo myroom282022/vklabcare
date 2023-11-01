@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Package;
 use App\Models\ClientDevice;
+use App\Models\User;
+use App\Models\PackageBook;
 
 
 class HomeController extends Controller
@@ -27,7 +29,9 @@ class HomeController extends Controller
             $this->deviceDetails($locationInfo);
         }
       }
-      return view('franted.home.index',compact('slider','package'));
+      $totalUser = User::all()->count();
+      $Totalbooking = Package::all()->count();
+      return view('franted.home.index',compact('slider','package','totalUser','Totalbooking'));
     }
 
     public function deviceDetails($locationInfo){

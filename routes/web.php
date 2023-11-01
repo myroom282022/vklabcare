@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Auth\AdminLoginContrroller;
 use App\Http\Controllers\Admin\TransitionController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\BookOrderController;
 use App\Http\Controllers\SendMails\MailController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProductController;
@@ -208,7 +209,10 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
         Route::get('order/{id}', 'order')->name('transition.order');
         Route::get('delete/{id}','destroy')->name('transition.delete');
     });
-
+    Route::controller(BookOrderController::class)->prefix('book-info')->group(function () {
+        Route::get('index', 'index')->name('bookorder.index');
+        Route::get('book-order/{id}', 'bookinOrder')->name('bookorder.order');
+    });
     Route::controller(AdminProfileController::class)->prefix('profile')->group(function () {
         Route::get('index', 'index')->name('profile.index');
         Route::post('update','update')->name('profile.update');

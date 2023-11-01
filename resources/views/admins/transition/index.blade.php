@@ -13,8 +13,9 @@
                 <tr>
                     <th>Sr.No</th>
                     <th>Transaction Id</th>
-                    <th>Product Price</th>
-                    <th>Quantity </th>
+                    <th>Total Price</th>
+                    <th>Order Number </th>
+                    <th>Description</th>
                     <th>Payment Type</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -25,9 +26,10 @@
                     @foreach($transition as $userdata)
                         <tr>
                             <td>{{$useId}}</td>
-                            <td>{{$userdata->transaction_id}}</td>
-                            <td>{{$userdata->product_price}}</td>
-                            <td>{{$userdata->quantity}}</td>
+                            <td>{{$userdata->transaction_id ?? ''}}</td>
+                            <td>₹{{$userdata->total_price ?? ''}}</td>
+                            <td>{{$userdata->order_number ?? ''}}</td>
+                            <td>{{$userdata->description ?? ''}}</td>
                             <td>{{$userdata->payment_type}}</td>
                             <td><span class="text-success">{{$userdata->status}}</span></td>
                             <td><a href="{{'order/'.$userdata->id}}"><i class="fa fa-eye" style="font-size:30px;color:green"></i></a></td>

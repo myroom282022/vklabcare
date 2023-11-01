@@ -14,13 +14,12 @@
                 <tr>
                     <th>Sr.No</th>
                     <th>Image</th>
-                    <th>Order Number</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Quantity </th>
+                    <th>Discount Price</th>
                     <th>Delivery charge </th>
-                    <th>Package category name</th>
                     <th>Discount percentage</th>
+                    <th>Package category name</th>
                     <th>Description</th>
                 </tr>
                 </thead>
@@ -30,17 +29,15 @@
                         <tr>
                             <td>{{$useId}}</td>
                             <td>
-                            <img src="{{url('storage/package/img/'.$userdata->product_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                            <img src="{{url('storage/package/img/'.$userdata->package_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                             </td>
                             <td>{{$userdata->order_number ?? ''}}</td>
-                            <td>{{$userdata->product_name ?? ''}}</td>
-                            <td>{{$userdata->product_price ?? ''}}</td>
-                            <td>{{$userdata->quantity ?? 1}}</td>
-                            <td>{{$userdata->delivery_charge ?? ''}}</td>
-                            <td>{{$userdata->product_category_name ?? ''}}</td>
-                            <td>{{$userdata->product_category_name ?? ''}}</td>
-                            <td>{{$userdata->product_discount_percentage ?? ''}}</td>
-                            <td>{{$userdata->product_description ?? ''}}</td>
+                            <td>{{$userdata->package_name ?? ''}}</td>
+                            <td>{{$userdata->package_price ?? ''}}</td>
+                            <td>{{$userdata->package_discount_price ?? ''}}</td>
+                            <td>{{$userdata->package_discount_percentage ?? ''}}</td>
+                            <td>{{$userdata->package_category_name ?? ''}}</td>
+                            <td>{{$userdata->package_description ?? ''}}</td>
                         </tr>
                         @php $useId++; @endphp
                     @endforeach

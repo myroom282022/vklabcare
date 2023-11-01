@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row">
       <div class="col-sm-md-8 col-lg-7 col-xl-6 d-none d-lg-block">
-        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image"> 
+        <img src="{{asset('/public/front_assets/images/logRegImage/login.png')}}" class="img-fluid" alt="Phone image"> 
       </div>
       <div class="col-sm-md-7 col-lg-5 col-xl-5 offset-xl-1">
        <h5 class="heading-color">Sign Up</h5>

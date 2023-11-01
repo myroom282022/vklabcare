@@ -33,4 +33,7 @@ class ClientDevice extends Model
         'areaCode',
         'timezone'
     ];
+    public function bookingOrder(){
+        return $this->belongsTo(PackageBook::class , 'user_id' ,'user_id');
+    }
 }

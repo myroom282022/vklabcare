@@ -23,9 +23,9 @@
 						<span>Timing schedule</span>
 						<h4 class="mb-3">Working Hours</h4>
 						<ul class="w-hours list-unstyled">
-							<li class="d-flex justify-content-between">Sun - Wed : <span>8:00 - 17:00</span></li>
-							<li class="d-flex justify-content-between">Thu - Fri : <span>9:00 - 17:00</span></li>
-							<li class="d-flex justify-content-between">Sat - sun : <span>10:00 - 17:00</span></li>
+							<li class="d-flex justify-content-between">Sun - Wed : <span>8:00 AM - 8:00 PM</span></li>
+							<li class="d-flex justify-content-between">Thu - Fri : <span>8:00 AM - 8:00 PM</span></li>
+							<li class="d-flex justify-content-between">Sat - sun : <span>8:00 AM - 8:00 PM</span></li>
 						</ul>
 					</div>
 				
@@ -67,22 +67,22 @@
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="counter-stat">
 						<i class="icofont-doctor"></i>
-						<span class="h3 counter" data-count="58">0</span>k
+						<span class="h3 counter" data-count="{{9561+$totalUser ?? 1000}}">0</span>
 						<p>Happy People</p>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="counter-stat">
 						<i class="icofont-flag"></i>
-						<span class="h3 counter" data-count="70">0</span>+
-						<p>Surgery Comepleted</p>
+						<span class="h3 counter" data-count="{{63201+$Totalbooking ?? 5236}}">0</span>
+						<p>Comeplet Test</p>
 					</div>
 				</div>
 				
 				<div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="counter-stat">
 						<i class="icofont-badge"></i>
-						<span class="h3 counter" data-count="40">0</span>+
+						<span class="h3 counter" data-count="40">0</span>
 						<p>Expert Doctors</p>
 					</div>
 				</div>
@@ -116,13 +116,11 @@
 						<i class="icofont-laboratory text-lg"></i>
 						<h4 class="mt-3 mb-3">Laboratory services</h4>
 					</div>
-
 					<div class="content">
 						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
 					</div>
 				</div>
 			</div>
-
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="service-item mb-4">
 					<div class="icon d-flex align-items-center">
@@ -193,7 +191,7 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-7">
 				<div class="section-title text-center">
-					<h2>We served over 5000+ Patients</h2>
+					<h2>We served over {{9561+$totalUser ?? 5000}}+ Patients</h2>
 					<div class="divider mx-auto my-4"></div>
 					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
 				</div>
