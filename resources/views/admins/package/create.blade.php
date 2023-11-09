@@ -101,15 +101,6 @@
                                         </div>
                                     </div>
                                </div>
-                               
-                               
-                
-                                
-                               
-
-                               
-                                
-                               
                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -134,18 +125,19 @@
                                         </div>
                                     </div>
                                </div>
-                               
-                               <div class="form-group not-add-description">
-                                    <label for="name" class="col-sm control-label">Package Description Not Add</label>
-                                    <div class="col-sm-12">
-                                        <textarea  class="form-control" rows="5" id="description_not_add" name="description_not_add" placeholder="Enter description">{{ old('description_not_add') }}</textarea>
-                                        @if ($errors->has('description_not_add'))
-                                            <span class="text-danger">{{ $errors->first('description_not_add') }}</span>
-                                        @endif
+                               <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-sm control-label">Total Test Parameter</label>
+                                            <div class="mb-3">
+                                                <input class="form-control" name="total_test" type="number" value="{{old('total_test')}}" >
+                                                @if ($errors->has('total_test'))
+                                                    <span class="text-danger">{{ $errors->first('total_test') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                
                                 <div class="text-center my-2">
                                     <a href="{{route('package.index')}}"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> </a>
                                     <button type="submit" class=" btn btn-primary btn-submit">Save changes</button>

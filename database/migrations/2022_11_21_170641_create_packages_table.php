@@ -26,6 +26,7 @@ return new class extends Migration
             $table->decimal('package_discount_percentage')->default('0');
             $table->string('package_category_name')->nullable();
             $table->string('package_slug_name')->nullable();
+            $table->string('total_test')->nullable();
             $table->timestamps();
         });
     }

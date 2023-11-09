@@ -19,12 +19,28 @@
                   <div class="row mb-4 d-flex justify-content-between align-items-center">
                     <div class="col-md-2 col-lg-2 col-xl-2">
                       <img
-                        src="{{url('storage/Package/img/'.$item['package_image'])}}"
+                        src="{{url('storage/package/img/'.$item['package_image'])}}"
                         class="img-fluid rounded-3" alt="package">
                     </div>
                     <div class="col-md-5 col-lg-5 col-xl-5">
                       <h6 class="text-muted">{{$item['package_name']}}</h6>
-                      <h6 class="text-black mb-0">{{$item['package_description']}}</h6>
+                        @php
+                            $packageDescription = $item->package_description ?? '';
+                            $packageItems = explode('\n', $packageDescription);
+                            $counter = 0;
+                        @endphp
+                        @foreach ($packageItems as $packageItem)
+                            @if ($packageItem)
+                            <li>{{ trim($packageItem ?? '') }}</li>
+                                @php
+                                $counter++;
+                                @endphp
+                                @if ($counter == 3)
+                                <a href="{{route('packages.single',$item->package_slug_name ?? $item->id)}}"  class="text-info ">......Read More<i class="icofont-simple-right ml-2"></i></a>
+                                    @break
+                                @endif
+                            @endif
+                        @endforeach
                     </div>
 
                     <div class="col-md-1 col-lg-1 col-xl-1">

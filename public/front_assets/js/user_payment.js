@@ -1,12 +1,12 @@
 $(".view-orders").click(function(){
     var orderDate = JSON.parse($(this).attr('order-data'))
-    console.log("data", orderDate);
-    $('.total-price ,.total-subtotal').text("₹"+orderDate.total_price);
+    console.log("data", orderDate.product_price);
+    var description = orderDate.product_description;
+    var modifiedString = description.replace(/\n/g, ',');
+    $('.total-price ,.total-subtotal').text("₹"+orderDate.product_price);
     $('.total-shipping').text("+₹0"+orderDate.delivery_charge === '+₹0null' || "+₹0"+orderDate.delivery_charge === '' ?  '+₹0' : "+₹0"+orderDate.delivery_charge);
-    $('.product-description').text(orderDate.product_description);
+    $('.product-description').text(modifiedString);
     $('.product-name').text(orderDate.product_name);
-    $('.product-name').text(orderDate.product_name);
-    console.log("image",orderDate.image);
     $('.product-image').attr('src',orderDate.image)
     $('#startet-modal').modal('show');
       

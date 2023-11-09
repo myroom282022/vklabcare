@@ -32,7 +32,8 @@
                             <td>{{$userdata->getDeviceDatils->countryName ?? ''}}</td>
                             <td>{{$userdata->getDeviceDatils->zipCode ?? ''}}</td>
                             <td>{{$userdata->getDeviceDatils->regionCode ?? ''}}</td>
-                            <td><a href="{{'book-order/'.$userdata->package_id ?? ''}}">view<i class="fa fa-eye" style="font-size:30px;color:green"></i></a></td>
+                            <td><a href="{{'book-order/'.$userdata->package_id ?? ''}}"><i class="fa fa-eye" style="font-size:20px;color:#cb0c9f"></i></a>
+                            </td>
                         </tr>
                         @php $useId++; @endphp
                     @endforeach
@@ -44,7 +45,7 @@
         </div>
     </div>
 </div>
-
 @endsection
+
    
   

@@ -203,13 +203,16 @@
                         <div class="d-flex jusitfy-content-between align-items-center pt-3 pb-2 border-bottom">
 
                                 <div class="item">
-                                    <img src="{{url('storage/Package/img/'.$item['package_image'])}}"
+                                    <img src="{{url('storage/package/img/'.$item['package_image'])}}"
                                         alt="" width="80" height="80">
                                 </div>
-                                <div class="d-flex flex-column">
-                                    <b class="h5">{{$item['package_name']}}</b>
-                                    <a href="#" class=" text-info">{{$item['package_description']}}</a>
+                                <div class="d-flex flex-column mx-1">
+                                    <b class="h5">{{ $item['package_name'] }}</b>
+                                    <a href="#" class="text-info">
+                                        {{ str_replace('\n', ',', trim($item['package_description'] ?? '')) }}
+                                    </a>
                                 </div>
+                                
                                 <div class="ml-auto">
                                     <b class="h5">₹{{$item['package_discount_price'] ?? ''}}</b>
                                 </div>

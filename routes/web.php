@@ -71,6 +71,8 @@ Route::controller(UserPackageController::class)->prefix('packages')->group(funct
     Route::get('book-list', 'getBookList')->name('packages.list');
     Route::patch('update-cart',  'update')->name('update.cart');
     Route::get('remove-cart/{id}',  'remove')->name('packages.remove.cart');
+    Route::get('single-package/{slug}', 'singlePackage')->name('packages.single');
+
 });
 
 Route::controller(ServicesController::class)->prefix('services')->group(function () {

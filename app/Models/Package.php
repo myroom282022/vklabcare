@@ -21,6 +21,7 @@ class Package extends Model
         'package_discount_percentage',
         'package_category_name',
         'package_slug_name',
+        'total_test'
     ];
 
     public function getProduct(){

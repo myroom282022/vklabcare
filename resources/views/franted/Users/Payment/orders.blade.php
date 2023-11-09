@@ -29,10 +29,7 @@
                 <th>Image</th>
                 <th>Product Name</th>
                 <th>Product Description</th>
-                <th>Product Price</th>
-                <th>Delivery Charge</th>
                 <th>Total Price</th>
-                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -45,21 +42,11 @@
                     <img src="{{$item->image ?? ''}}" alt="" class="user-image">
                 </td>
                 <td>{{$item->product_name ?? ''}}</td>
-                <td>{{$item->product_description ?? ''}}</td>
-                <td>{{$item->total_price ?? ''}}</td>
+                <td>{{ str_replace('\n', ',', trim($item->product_description ?? '')) }}</td>
                 <td>{{$item->product_price ?? ''}}</td>
-                <td>{{$item->delivery_charge ?? ''}}</td>
-                <td>
-                    @if ($item->singleUserOrderPayment->status == 'Success')
-                        <span class="badge badge-success rounded-pill d-inline">Succes</span>
-                    @else
-                        <span class="badge badge-danger rounded-pill d-inline">Cancel</span>
-                    @endif
-                  </td>
                 <td>
                     <a><i class="fa fa-trash text-danger" aria-hidden="true"></i></a>
                     <a><i class="fa fa-ban text-warning" aria-hidden="true"></i></a>
-
                 </td>
               </tr>
               @php $id++;@endphp
@@ -67,6 +54,7 @@
               @endforeach
             </tbody>
           </table> 
+          {!! $payData->withQueryString()->links('pagination::bootstrap-5') !!}
         @else
         <div class="text-center my-5">
             <button type="button" class="btn btn-secondary btn-rounded">Not any package purchase yet ! </button>

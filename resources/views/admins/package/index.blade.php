@@ -26,9 +26,10 @@
                     <th> Price </th>
                     <th> Discount Price </th>
                     <th>Percentage</th>
+                    <th>Total Test</th>
                     <th>Package Type</th>
-                    <th> Description </th>
-                    <th> Description Not Add</th>
+                    {{-- <th> Description </th>
+                    <th> Description Not Add</th> --}}
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -50,14 +51,16 @@
                             <td>{{$data->package_price}}</td>
                             <td>{{$data->package_discount_price}}</td>
                             <td>{{$data->package_discount_percentage ?? '0'}}%</td>
-                            <td>{{$data->package_type}}</td>
-                            <td>{{$data->package_description}}</td>
-                            <td>{{$data->description_not_add ?? ''}}</td>
-                           
+                            <td>{{$data->total_test ?? 0}}</td>
+                            <td>{{$data->package_type ?? ''}}</td>
+                            {{-- <td></td>
+                            <td></td> --}}
                             <td>
                                 <a href="{{url('admin/package/edit/'.$data->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>
                                 <a href="#" delete_id="{{$data->id}}" class="button delete_confirm" id="deletebutton"><i class="fas fa-trash text-danger" aria-hidden="true" style="font-size:18px"></i></a>
+                                <a class=" get-description" data-bs-toggle="modal" data-bs-target="#exampleModal" package-desk ="{{ str_replace('\n', ',', trim($data->package_description ?? '')) }}" ><i class="fas fa-eye text-success" aria-hidden="true" style="font-size:18px"></i></a>
                             </td>
+                        </tr>
                         </tr>
                         @php $useId++; @endphp
                     @endforeach
@@ -71,11 +74,36 @@
     </div>
 </div>
 
-
+<!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Package Description</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h4>Package Description</h4>
+          <p class="package-description"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
+
+$(".get-description").on('click',function(e){
+    e.preventDefault();
+    var packageDesk  = $(this).attr('package-desk');
+    $('.package-description').text(packageDesk);
+  });
+
+
      $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

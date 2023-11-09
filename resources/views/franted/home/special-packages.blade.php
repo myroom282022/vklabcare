@@ -12,7 +12,7 @@
                 @foreach ($package as $item)
                 @if($item->package_type == 'Special')
                 <div class="pricing-block col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
-                    <div class="inner-box">
+                    <div class="inner-box h-100">
                         <div class="icon-box">
                             <div class="icon-outer">
                                 @if ($item->package_image ?? '')
@@ -28,28 +28,29 @@
                             <h4 class="price">₹{{$item->package_discount_price ?? ''}}</h4>
                         </div>
                         <ul class="features">
-                            @php
-                                $packageDescription = $item->package_description ?? '';
-                                $packageDescriptionNotAdd = $item->description_not_add ?? '';
-                                $packageItems = explode(',', $packageDescription);
-                                $packageItemsNotAdd = explode(',', $packageDescriptionNotAdd);
-                            @endphp
-                            <h6>{{ count($packageItems) }} Packages</h6>
+                           
+                            <h6>Test Parameter ({{$item->total_test ?? 0}})</h6>
                                 <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                 <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                 <i class="fa fa-star text-warning" aria-hidden="true"></i>
                                 <i class="fa fa-star-half-o text-warning" aria-hidden="true"></i>
                                 <i class="fa fa-star " aria-hidden="true"></i>
                                 <span class="rating-number">(4.8)</span>
-                                
-                            @foreach($packageItems as $packageItem)
-                                @if($packageItem)
-                                    <li class="true">{{ trim($packageItem ?? '') }}</li>
-                                @endif
-                            @endforeach
-                            @foreach($packageItemsNotAdd as $packageItem)
-                                @if($packageItem)
-                                    <li class="false">{{ trim($packageItem ?? '') }}</li>
+                            @php
+                                $packageDescription = $item->package_description ?? '';
+                                $packageItems = explode('\n', $packageDescription);
+                                $counter = 0;
+                            @endphp
+                            @foreach ($packageItems as $packageItem)
+                                @if ($packageItem)
+                                        <li class="true">{{ trim($packageItem ?? '') }}</li>
+                                    @php
+                                    $counter++;
+                                    @endphp
+                                    @if ($counter == 5)
+                                    <a href="{{route('packages.single',$item->package_slug_name ?? $item->id)}}"  class="text-info ">......Read More<i class="icofont-simple-right ml-2"></i></a>
+                                        @break
+                                    @endif
                                 @endif
                             @endforeach
                         </ul>

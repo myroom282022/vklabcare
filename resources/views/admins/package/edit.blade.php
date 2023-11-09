@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="name" class="col-sm control-label">Package Description</label>
+                                            <label for="name" class="col-sm control-label">Package Description(Change line to add  <span class="text-primary">\n</span> )</label>
                                             <div class="col-sm-12">
                                                 <textarea  class="form-control" id="package_description" rows="5" name="package_description" placeholder="Enter description">{{$package->package_description ?? ''}} </textarea>
                                                 @if ($errors->has('package_description'))
@@ -131,13 +131,13 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group not-add-description">
-                                            <label for="name" class="col-sm control-label">Package Description Not Add</label>
-                                            <div class="col-sm-12">
-                                                <textarea  class="form-control" id="description_not_add" rows="5" name="description_not_add" placeholder="Enter description">{{$package->description_not_add ?? ''}}</textarea>
-                                                @if ($errors->has('description_not_add'))
-                                                    <span class="text-danger">{{ $errors->first('description_not_add') }}</span>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-sm control-label">Total Test Parameter</label>
+                                            <div class="mb-3">
+                                                <input class="form-control" name="total_test" type="number" value="{{$package->total_test ?? ''}}" >
+                                                @if ($errors->has('total_test'))
+                                                    <span class="text-danger">{{ $errors->first('total_test') }}</span>
                                                 @endif
                                             </div>
                                         </div>

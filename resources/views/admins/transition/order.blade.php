@@ -17,11 +17,10 @@
                     <th>Order Number</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Quantity </th>
                     <th>Delivery charge </th>
-                    <th>Package category name</th>
-                    <th>Discount percentage</th>
-                    <th>Description</th>
+                    <th>Category name</th>
+                    <th>Discount(%)</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,12 +34,10 @@
                             <td>{{$userdata->order_number ?? ''}}</td>
                             <td>{{$userdata->product_name ?? ''}}</td>
                             <td>{{$userdata->product_price ?? ''}}</td>
-                            <td>{{$userdata->quantity ?? 1}}</td>
                             <td>{{$userdata->delivery_charge ?? ''}}</td>
                             <td>{{$userdata->product_category_name ?? ''}}</td>
-                            <td>{{$userdata->product_category_name ?? ''}}</td>
                             <td>{{$userdata->product_discount_percentage ?? ''}}</td>
-                            <td>{{$userdata->product_description ?? ''}}</td>
+                            <td><a class="get-description" data-bs-toggle="modal" data-bs-target="#orderDataTrn" package-desk ="{{ str_replace('\n', ',', trim($userdata->product_description ?? '')) }}" ><i class="fas fa-eye text-success" aria-hidden="true" style="font-size:18px"></i></a></td>
                         </tr>
                         @php $useId++; @endphp
                     @endforeach
@@ -52,7 +49,32 @@
         </div>
     </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="orderDataTrn" tabindex="-1" aria-labelledby="orderDataTrn" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderDataTrn">Package Description</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h4>Package Description</h4>
+          <p class="package-description"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    
+    $(".get-description").on('click',function(e){
+      e.preventDefault();
+      var packageDesk  = $(this).attr('package-desk');
+      $('.package-description').text(packageDesk);
+    });
+  </script>
 @endsection
    
   

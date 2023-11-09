@@ -27,7 +27,7 @@
                 <h1 style="color:#0bb2f0">Product Details</h1>
                 <p><strong>Package Category:</strong> {{ $bookData['package']['package_category_name'] ?? ''}}</p>
                 <p><strong>Name:</strong> {{ $bookData['package']['package_name'] ?? ''}}</p>
-                <p><strong>Description:</strong> {{  $bookData['package']['package_description'] ?? ''}}</p>
+                <p><strong>Description:</strong>{{ str_replace('\n', ',', trim($bookData['package']['package_description'] ?? '')) }}</p>
                 <p><strong>Price: ₹</strong>{{  $bookData['package']['package_price'] ?? 0 }}</p>
                 <p><strong>Discount Percentage: </strong>{{  $bookData['package']['package_discount_percentage'] ?? 0 }}%</p>
                 <p><strong>Total Price: ₹</strong>{{  $bookData['package']['package_discount_price'] ?? 0 }}</p>

@@ -27,7 +27,7 @@
                 @foreach ($mailData['order'] as $key => $dataTotal) 
                     <p><strong>Package Category:</strong> {{ $dataTotal['product_category_name'] ?? ''}}</p>
                     <p><strong>Name:</strong> {{ $dataTotal['product_name'] ?? ''}}</p>
-                    <p><strong>Description:</strong> {{  $dataTotal['product_description'] ?? ''}}</p>
+                    <p><strong>Description:</strong>{{ str_replace('\n', ',', trim($dataTotal['product_description'] ?? '')) }}</p>
                     <p><strong>Price: ₹</strong>{{  $dataTotal['product_price'] ?? 0 }}</p>
                     <p><strong>Discount Percentage: </strong>{{  $dataTotal['package_discount_percentage'] ?? 0 }}%</p>
                     <p><strong>Total Price: ₹</strong>{{  $dataTotal['product_price'] ?? 0 }}</p>

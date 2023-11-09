@@ -54,8 +54,8 @@
 <section class="my-5">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3 m-auto ">
-				<a href="{{route('packages.index')}}"><button class="btn btn-info"> MORE PACKAGES</button></a>
+			<div class="col-sm-3 m-auto mt-5">
+				<a href="{{route('packages.index')}}"><button class="btn btn-color btn-lg btn-block my-3"> MORE PACKAGES</button></a>
 			</div>
 		</div>
 	</div>

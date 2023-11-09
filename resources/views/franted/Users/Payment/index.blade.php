@@ -55,6 +55,7 @@
               @endforeach
             </tbody>
           </table> 
+          {!! $payData->withQueryString()->links('pagination::bootstrap-5') !!}
         @else
         <div class="text-center my-5">
             <button type="button" class="btn btn-secondary btn-rounded">Not any package purchase yet ! </button>

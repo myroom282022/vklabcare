@@ -46,7 +46,7 @@ class PackageController extends Controller
         $details=$request->all();
         if ($files = $request->file('package_image')) {
             $fileName = rand(0000,9999).time().'.'.$files->extension();  
-            $path = 'storage/Package/img';
+            $path = 'storage/package/img';
             $request->package_image->move($path, $fileName);
             $details['package_image'] = "$fileName";
         } 
@@ -78,6 +78,7 @@ class PackageController extends Controller
             'package_type'          =>  'required',
             'package_category_name' =>  'required',
             'package_discount_percentage' =>  'required',
+            'total_test' =>  'required',
 
        ],[
             'package_category_name.required'=>  'Please selectpackage category name',

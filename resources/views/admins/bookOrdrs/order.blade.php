@@ -20,7 +20,7 @@
                     <th>Delivery charge </th>
                     <th>Discount percentage</th>
                     <th>Package category name</th>
-                    <th>Description</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@
                             <td>{{$userdata->package_discount_price ?? ''}}</td>
                             <td>{{$userdata->package_discount_percentage ?? ''}}</td>
                             <td>{{$userdata->package_category_name ?? ''}}</td>
-                            <td>{{$userdata->package_description ?? ''}}</td>
+                            <td><a class=" get-description" data-bs-toggle="modal" data-bs-target="#orderData" package-desk ="{{ str_replace('\n', ',', trim($userdata->package_description ?? '')) }}" ><i class="fas fa-eye text-success" aria-hidden="true" style="font-size:18px"></i></a></td>
                         </tr>
                         @php $useId++; @endphp
                     @endforeach
@@ -49,7 +49,31 @@
         </div>
     </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="orderData" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderData">Package Description</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h4>Package Description</h4>
+          <p class="package-description"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(".get-description").on('click',function(e){
+      e.preventDefault();
+      var packageDesk  = $(this).attr('package-desk');
+      $('.package-description').text(packageDesk);
+    });
+  </script>
 @endsection
-   
+
   

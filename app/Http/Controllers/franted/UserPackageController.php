@@ -60,4 +60,13 @@ class UserPackageController extends Controller
          $cart->delete();
       return redirect()->back()->with('success', 'Packages removed to cart successfully!');
     }
+
+    public function singlePackage($slug){
+        $package = Package::where('package_slug_name',$slug)->latest()->first();
+        if(empty($package)){
+            $package = Package::where('id',$slug)->latest()->first();
+        }
+         $packageData=  Package::where('package_category_name',$package->package_category_name ?? '')->get();
+        return view('franted.packages.single-packages',compact('package','packageData'));
+    }
 }
