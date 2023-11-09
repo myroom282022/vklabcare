@@ -1,7 +1,6 @@
 @extends('franted.layout.app')
 @section('content')
 @include('franted.Users.common.sidebar')
-
 <section>
     <div class="mx-2">
         <nav class="navbar navbar-light bg-light">
