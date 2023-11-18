@@ -23,11 +23,11 @@ class CheckoutController extends Controller
 {
     public function index(){
         // $cart = session()->get('cart', []);
-        $cart = PackageBook::where('user_id', auth()->user()->id)->with('getPackage')->get();
+         $cart = PackageBook::where('user_id', auth()->user()->id)->with('getPackage')->get();
         if(count($cart) > 0){
             return view('franted.services.checkout',compact('cart'));
         }
-        return redirect()->route()->with('error','Please book any package');
+        return redirect()->route('home')->with('error','Please book any package');
     }
     public function Billing(){
         return view('franted.services.checkout',compact('cart'));

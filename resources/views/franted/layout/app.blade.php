@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+  @php
+	$contactData = App\Models\ContactInfo::latest()->first();
+@endphp
   <!-- Basic Page Needs
   ================================================== -->
   <meta charset="utf-8">
-  <title>VKA3 - Health Care &amp; Medical D 13/187, Sector 7, Rohini Near Sai Baba mandir New Delhi 110085</title>
+  <title>VKA3 - Health Care &amp; Medical  {{$contactData->address ?? 'B-108 Graund floor,Punjabi basti Baljeet nagar new delhi Near Ram chok Ambedkar park'}}</title>
 
   <!-- Mobile Specific Metas
   ================================================== -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Health Care Medical HTML5 Template">
-  <meta name="keywords" content="Healthcare, Lab, Blood Checkup, Health, Medical, New Delhi, D 13/187, Sector 7, Rohini, Sai Baba Mandir, 110085, Full Body Checkup, Comprehensive Health Checkup, Complete Body Health Assessment, Annual Full Body Examination, Total Wellness Checkup, Preventive Health Checkup, Medical Checkup Packages, Whole Body Health Screening, Health Checkup for Men/Women, Diagnostic Health Tests, Blood Tests for Health Checkup, Healthcare Screening Services, Best Full Body Checkup, Body Checkup Cost, Full Body Checkup Packages, Pathology Tests for Full Body Checkup, Medical Test for Complete Health Checkup, Full Body Checkup in [D 13/187, Sector 7, Rohini Near Sai Baba mandir New Delhi 110085], Wellness Blood Tests, Corporate Health Checkup, Family Health Checkup, Health Checkup Center, Affordable Full Body Checkup, Senior Citizen Health Checkup, Complete Medical Examination, Full Body Checkup Near Me, Full Body Scan, Health Checkup for All Ages, Body Health Assessment, Preventive Health Screening">
+  <meta name="keywords" content="Healthcare, Lab, Blood Checkup, Health, Medical, New Delhi, D 13/187, Sector 7, Rohini, Sai Baba Mandir, 110085, Full Body Checkup, Comprehensive Health Checkup, Complete Body Health Assessment, Annual Full Body Examination, Total Wellness Checkup, Preventive Health Checkup, Medical Checkup Packages, Whole Body Health Screening, Health Checkup for Men/Women, Diagnostic Health Tests, Blood Tests for Health Checkup, Healthcare Screening Services, Best Full Body Checkup, Body Checkup Cost, Full Body Checkup Packages, Pathology Tests for Full Body Checkup, Medical Test for Complete Health Checkup, Full Body Checkup in [D 13/187, Sector 7, Rohini Near Sai Baba mandir New Delhi 110085], Wellness Blood Tests, Corporate Health Checkup, Family Health Checkup, Health Checkup Center, Affordable Full Body Checkup, Senior Citizen Health Checkup, Complete Medical Examination, Full Body Checkup Near Me, Full Body Scan, Health Checkup for All Ages, Body Health Assessment, Preventive Health Screening , {{$contactData->address ?? 'B-108 Graund floor,Punjabi basti Baljeet nagar new delhi Near Ram chok Ambedkar park'}}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="author" content="Themefisher">
-  <meta name="generator" content="Themefisher Novena HTML Template v1.0">
+  <meta name="author" content="vka3 healthcare">
+  <meta name="generator" content="Healthcare, Lab, Blood Checkup, Health, Medical, New Delhi , {{$contactData->address ?? 'B-108 Graund floor,Punjabi basti Baljeet nagar new delhi Near Ram chok Ambedkar park'}}">
   
 
   <!-- Favicon -->

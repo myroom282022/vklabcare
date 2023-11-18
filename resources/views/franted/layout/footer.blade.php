@@ -1,3 +1,6 @@
+@php
+	$contactData = App\Models\ContactInfo::latest()->first();
+@endphp
 <!-- footer Start -->
 <footer class="footer section gray-bg">
 	<div class="container">
@@ -7,7 +10,7 @@
 					<div class="logo mb-4">
 						<img src="{{url('public/front_assets/images/vka3logo.png')}}" alt="" class="img-fluid">
 					</div>
-					<p>Tempora dolorem voluptatum nam vero assumenda voluptate, facilis ad eos obcaecati tenetur veritatis eveniet distinctio possimus.</p>
+					<p>Welcome to VKA3, where precision and care unite in delivering exceptional diagnostic services. With cutting-edge technology and personalized attention, we redefine healthcare standards for all, making your well-being our priority.</p>
 
 					<ul class="list-inline footer-socials mt-4">
 						<li class="list-inline-item">
@@ -29,9 +32,10 @@
 					<div class="divider mb-4"></div>
 
 					<ul class="list-unstyled footer-menu lh-35">
-						<li><a href="#!">Surgery </a></li>
-						<li><a href="#!">Wome's Health</a></li>
-						<li><a href="#!">Radiology</a></li>
+						<li><a href="{{route('packages.index')}}">Body Test Package </a></li>
+						<li><a href="{{route('book-appoinment-create')}}">Appoinment</a></li>
+						<li><a href="{{route('blog-sidebar')}}">Blogs</a></li>
+						<li><a href="{{route('contact')}}">Contact Us </a></li>
 						<li><a href="#!">Cardioc</a></li>
 						<li><a href="#!">Medicine</a></li>
 					</ul>
@@ -63,7 +67,7 @@
 							<i class="icofont-email mr-3"></i>
 							<span class="h6 mb-0">Support Available for 24/7</span>
 						</div>
-						<h4 class="mt-2"><a href="mailto:info@vka3healthcare.com">info@vka3healthcare.com</a></h4>
+						<h4 class="mt-2"><a href="mailto: {{$contactData->email ?? 'info@vka3healthcare.com'}}">{{$contactData->email ?? 'info@vka3healthcare.com'}}</a></h4>
 					</div>
 
 					<div class="footer-contact-block">
@@ -72,8 +76,7 @@
 							<span class="h6 mb-0">Open 24 hours</span>
 						</div>
 						<h4 class="mt-2">
-							<a href="tel:+91 958 230 6210">+91 958 230 6210</a>
-							<a href="tel:+91 768 303 6386">+91 768 303 6386</a>
+							<a href="tel:+91">{{$contactData->phone ?? '958 230 6210'}}</a>
 						</h4>
 					</div>
 				</div>

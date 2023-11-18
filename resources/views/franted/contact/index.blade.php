@@ -1,62 +1,21 @@
 @extends('franted.layout.app')
 @section('content')
-<section class="page-title bg-1">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="block text-center">
-          <span class="text-white">Contact Us</span>
-          <h1 class="text-capitalize mb-5 text-lg">Get in Touch</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- contact form start -->
 
-<section class="section contact-info pb-0">
+<section class="contact-form-wrap my-3">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-md-6">
-        <div class="contact-block mb-4 mb-lg-0">
-          <i class="icofont-live-support"></i>
-          <h5>Call Us</h5>
-          +823-4565-13456
-        </div>
+    <div class="col-12 text-center  mb-5 bg-info">
+      <div class="btn-group btn-group-toggle " data-toggle="buttons">
+        <label class="btn active ">
+          <input type="radio" name="shuffle-filter" value="all" checked="checked" />All Department
+        </label>
+        <label class="btn ">
+          <input type="radio" name="shuffle-filter" value="cat1" />Cardiology
+        </label>
       </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="contact-block mb-4 mb-lg-0">
-          <i class="icofont-support-faq"></i>
-          <h5>Email Us</h5>
-          contact@mail.com
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-12">
-        <div class="contact-block mb-4 mb-lg-0">
-          <i class="icofont-location-pin"></i>
-          <h5>Location</h5>
-          North Main Street,Brooklyn Australia
-        </div>
-      </div>
-    </div>
   </div>
-</section>
-
-<section class="contact-form-wrap section">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-6">
-        <div class="section-title text-center">
-          <h2 class="text-md mb-2">Contact us</h2>
-          <div class="divider mx-auto my-4"></div>
-          <p class="mb-5">Laboriosam exercitationem molestias beatae eos pariatur, similique, excepturi mollitia sit
-            perferendis maiores ratione aliquam?</p>
-        </div>
-      </div>
-    </div>
     <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
+      
+      <div class="col-lg-6 col-md-12 col-sm-12">
         <form id="contact-form" class="contact__form " method="post" action="mail.php">
           <!-- form message -->
           <div class="row">
@@ -100,12 +59,28 @@
           </div>
         </form>
       </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-lg-12 col-md-6">
+            <div class=" mb-4 mb-lg-0">
+              <i class="icofont-live-support text-info"></i>
+              +91 {{$contactData->phone ?? '958 230 6210'}}<br/>
+              <i class="icofont-support-faq text-info "></i>
+              {{$contactData->email ?? 'info@vka3healthcare.com'}}<br/>
+              <i class="icofont-location-pin text-info"></i>
+              {{$contactData->address ?? 'B-108 Graund floor,Punjabi basti Baljeet nagar new delhi Near Ram chok Ambedkar park'}}
+            </div>
+            <div class="google-map my-4">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.9604027271093!2d77.16068557550183!3d28.660904275649315!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d031e0369b695%3A0x845e668e223a20cc!2sAkash%20Verma!5e0!3m2!1sen!2sin!4v1699985959581!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              {{-- <div id="map" data-latitude="40.712776" data-longitude="-74.005974" data-marker="{{url('public/front_assets/images/marker.png')}}"></div> --}}
+            </div>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 
-<div class="google-map ">
-	<div id="map" data-latitude="40.712776" data-longitude="-74.005974" data-marker="{{url('public/front_assets/images/marker.png')}}"></div>
-</div>
+
 @endsection

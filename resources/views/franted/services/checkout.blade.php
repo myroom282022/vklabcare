@@ -21,7 +21,7 @@
             <div class="container py-5">
             <div class="row ">
                 <div class="col-lg-6 col-md-8 col-sm-10 offset-lg-0 offset-md-2 offset-sm-1">
-                    <div id="details" class="bg-white rounded pb-5">
+                    <div  class="bg-white rounded pb-5">
                         <h3 class="text-center mt-3 heading-color m-auto">Payment Method</h3>
                         <div class="pb-3 mx-5 mt-3">
                             <div class="d-flex flex-row  my-3 cash-on-booking">

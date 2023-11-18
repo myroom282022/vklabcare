@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\BookOrderController;
 use App\Http\Controllers\SendMails\MailController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\AuthController;
@@ -226,4 +227,16 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
     Route::controller(AllAppontmentController::class)->group(function(){
         Route::get('list-appoinment','index')->name('list-appoinment');
     });
+
+    Route::controller(SettingController::class)->prefix('contact-info')->group(function () {
+        Route::get('index', 'index')->name('contact-info.index');
+        Route::get('create', 'create')->name('contact-info.create');
+        Route::post('store', 'store')->name('contact-info.store');
+        Route::get('edit/{id}',  'edit')->name('contact-info.edit');
+        Route::post('update',  'update')->name('contact-info.update');
+        Route::get('delete/{id}','destroy')->name('contact-info.delete');
+
+    });
+
+   
 });

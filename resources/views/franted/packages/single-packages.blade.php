@@ -50,7 +50,7 @@
                                 $packageDescription = $package->package_description ?? '';
                                 $packageItems = explode('\n', $packageDescription);
                             @endphp
-                            <ul class="list-unstyled department-service">
+                            <ul class="list-unstyled">
                                 @foreach ($packageItems as $packageItem)
                                     @if ($packageItem)
                                     <li><i class="icofont-check mr-2"></i>{{ trim($packageItem ?? '') }}</li>
@@ -95,7 +95,7 @@
 										$packageDescription = $packageValue->package_description ?? '';
 										$packageItems = explode('\n', $packageDescription);
 									@endphp
-									<ul class="list-unstyled department-service mx-2">
+									<ul class="list-unstyled">
 										@php
 											$counter = 0;
 											@endphp
@@ -112,7 +112,7 @@
 												@endif
 											@endforeach
 									</ul>
-								<div class="d-flex justify-content-between align-items-center pt-1 my-3">
+								<div class="d-flex justify-content-between align-items-center">
 									<div>
 										<i class="fa fa-star text-warning" aria-hidden="true"></i>
 										<i class="fa fa-star text-warning" aria-hidden="true"></i>

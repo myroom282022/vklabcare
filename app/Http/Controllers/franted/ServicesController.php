@@ -21,7 +21,7 @@ use Session;
 class ServicesController extends Controller
 {
     public function index(Request $request){
-        $product=  Package::with('getProduct')->get();
+        $product =  Package::with('getProduct')->get();
         return view('franted.services.index',compact('product'));
     }
     public function product($id){

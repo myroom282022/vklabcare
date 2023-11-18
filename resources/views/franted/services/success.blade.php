@@ -185,7 +185,7 @@ header .active .fa-check {
                            <div class="checkmark draw"></div>
                         </div>
                         <h5 class="my-3 heading-color">Your payment successfully ! </h5>
-                           <a href="{{route('home')}}"><button type="submit" class="btn btn-color mb-5">My Orders</button></a>
+                           <a href="{{route('user-orders')}}"><button type="submit" class="btn btn-color mb-5">My Orders</button></a>
                         </div>
                 </div>
             </div>

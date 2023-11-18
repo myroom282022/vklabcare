@@ -179,8 +179,8 @@
                             <div id="" class=" rounded mt-3">
                                 <div class="row pt-lg-3 pt-2 buttons mb-sm-0 mb-2">
                                         <div class="col-md-6">
-                                        <a href="{{route('cart-item')}}">
-                                            <button class="btn btn-color text-uppercase">back to shopping</button>
+                                        <a href="{{route('home')}}">
+                                            <span class="btn btn-color text-uppercase">back to Booking</span>
                                         </a>
                                         </div>
                                     <div class="col-md-6 pt-md-0 pt-3" >
