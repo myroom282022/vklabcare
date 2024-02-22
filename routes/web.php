@@ -235,8 +235,5 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
         Route::get('edit/{id}',  'edit')->name('contact-info.edit');
         Route::post('update',  'update')->name('contact-info.update');
         Route::get('delete/{id}','destroy')->name('contact-info.delete');
-
     });
-
-   
 });
