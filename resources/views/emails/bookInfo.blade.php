@@ -31,7 +31,7 @@
                 <p><strong>Price: ₹</strong>{{  $bookData['package']['package_price'] ?? 0 }}</p>
                 <p><strong>Discount Percentage: </strong>{{  $bookData['package']['package_discount_percentage'] ?? 0 }}%</p>
                 <p><strong>Total Price: ₹</strong>{{  $bookData['package']['package_discount_price'] ?? 0 }}</p>
-                <img src="{{asset('storage/package/img/'.$bookData['package']['package_image'])}}"
+                <img src="{{asset('public/storage/package/img/'.$bookData['package']['package_image'])}}"
                     class="img-fluid rounded-3">
             </td>
             <td bgcolor="#ffffff" style="padding: 20px;">

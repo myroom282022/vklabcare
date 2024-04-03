@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{url('public/front_assets/css/packages.css')}}">
+<link rel="stylesheet" href="{{asset('front_assets/css/packages.css')}}">
 <section class="pricing-section">
     <div class="container">
         <div class="sec-title text-center">
@@ -16,7 +16,7 @@
                         <div class="icon-box">
                             <div class="icon-outer">
                                 @if ($item->package_image ?? '')
-                                    <i><img src="{{url('storage/package/img/'.$item->package_image)}}" class="avatar avatar-sm package-image me-3 m-auto" alt="user1"></i>
+                                    <i><img src="{{asset('public/storage/package/img/'.$item->package_image)}}" class="avatar avatar-sm package-image me-3 m-auto" alt="user1"></i>
                                 @else
                                     <i class="fas fa-paper-plane"></i>
                                 @endif

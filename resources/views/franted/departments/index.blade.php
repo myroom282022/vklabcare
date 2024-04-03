@@ -36,7 +36,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-6 ">
 				<div class="department-block mb-5">
-					<img src="{{url('public/front_assets/images/service/service-1.jpg')}}" alt="" class="img-fluid w-100">
+					<img src="{{asset('public/front_assets/images/service/service-1.jpg')}}" alt="" class="img-fluid w-100">
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">Opthomology</h4>
 						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
@@ -47,7 +47,7 @@
 
 			<div class="col-lg-4 col-md-6">
 				<div class="department-block mb-5">
-					<img src="{{url('public/front_assets/images/service/service-2.jpg')}}" alt="" class="img-fluid w-100">
+					<img src="{{asset('public/front_assets/images/service/service-2.jpg')}}" alt="" class="img-fluid w-100">
 					<div class="content">
 						<h4 class="mt-4 mb-2  title-color">Cardiology</h4>
 						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
@@ -58,7 +58,7 @@
 			
 			<div class="col-lg-4 col-md-6">
 				<div class="department-block mb-5">
-					<img src="{{url('public/front_assets/images/service/service-3.jpg')}}" alt="" class="img-fluid w-100">
+					<img src="{{asset('public/front_assets/images/service/service-3.jpg')}}" alt="" class="img-fluid w-100">
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">Dental Care</h4>
 						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
@@ -70,7 +70,7 @@
 
 			<div class="col-lg-4 col-md-6 ">
 				<div class="department-block  mb-5 mb-lg-0">
-					<img src="{{url('public/front_assets/images/service/service-4.jpg')}}" alt="" class="img-fluid w-100">
+					<img src="{{asset('public/front_assets/images/service/service-4.jpg')}}" alt="" class="img-fluid w-100">
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">Child Care</h4>
 						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
@@ -81,7 +81,7 @@
 
 			<div class="col-lg-4 col-md-6">
 				<div class="department-block mb-5 mb-lg-0">
-					<img src="{{url('public/front_assets/images/service/service-6.jpg')}}" alt="" class="img-fluid w-100">
+					<img src="{{asset('public/front_assets/images/service/service-6.jpg')}}" alt="" class="img-fluid w-100">
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">Pulmology</h4>
 						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
@@ -92,7 +92,7 @@
 			
 			<div class="col-lg-4 col-md-6">
 				<div class="department-block mb-5 mb-lg-0">
-					<img src="{{url('public/front_assets/images/service/service-8.jpg')}}" alt="" class="img-fluid w-100">
+					<img src="{{asset('public/front_assets/images/service/service-8.jpg')}}" alt="" class="img-fluid w-100">
 					<div class="content">
 						<h4 class="mt-4 mb-2 title-color">Gynecology</h4>
 						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>

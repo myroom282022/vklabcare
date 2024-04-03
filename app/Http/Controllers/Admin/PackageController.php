@@ -46,7 +46,7 @@ class PackageController extends Controller
         $details=$request->all();
         if ($files = $request->file('package_image')) {
             $fileName = rand(0000,9999).time().'.'.$files->extension();  
-            $path = 'storage/package/img';
+            $path = 'public/storage/package/img';
             $request->package_image->move($path, $fileName);
             $details['package_image'] = "$fileName";
         } 
@@ -96,13 +96,13 @@ class PackageController extends Controller
         $data = Package::findOrFail($id);
          if ($files = $request->file('package_image')) {
             //delete old file
-                 $destinationPath = 'storage/package/img/'.$data->package_image;
+                 $destinationPath = 'public/storage/package/img/'.$data->package_image;
                  if(File::exists($destinationPath)){
                      File::delete($destinationPath);
                  }
              //insert new file
              $fileName = rand(0000,9999).time().'.'.$files->extension();  
-             $path = 'storage/package/img';
+             $path = 'public/storage/package/img';
              $request->package_image->move($path, $fileName);
              $details['package_image'] = $fileName;
          }  
@@ -117,7 +117,7 @@ class PackageController extends Controller
     // delete funconality --------------------------
     public function destroy($id) {
         $data = Package::findOrFail($id);
-        $destinationPath = 'storage/users/img/'.$data->user_image;
+        $destinationPath = 'public/storage/users/img/'.$data->user_image;
         if(File::exists($destinationPath)){
             File::delete($destinationPath);
         }

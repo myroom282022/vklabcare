@@ -19,7 +19,7 @@
                   <div class="row mb-4 d-flex justify-content-between align-items-center">
                     <div class="col-md-2 col-lg-2 col-xl-2">
                       <img
-                        src="{{url('storage/package/img/'.$item['package_image'])}}"
+                        src="{{asset('public/storage/package/img/'.$item['package_image'])}}"
                         class="img-fluid rounded-3" alt="package">
                     </div>
                     <div class="col-md-5 col-lg-5 col-xl-5">

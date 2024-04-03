@@ -78,7 +78,7 @@
                                 <div class="form-group">
                                     <label class="col-sm control-label">Product Image</label>
                                     <div class="mb-3">
-                                        <img src="{{url('storage/product/img/'.$product->product_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                                        <img src="{{asset('public/storage/product/img/'.$product->product_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                                         <input class="form-control" name="product_image" type="file" id="formFile"  class="img-fluid" value="{{$product->product_image}}" accept=".png, .jpg, .jpeg"> 
                                         @if ($errors->has('product_image'))
                                             <span class="text-danger">{{ $errors->first('product_image') }}</span>

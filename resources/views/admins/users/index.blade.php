@@ -34,7 +34,7 @@
                             <td>{{$useId}}</td>
                             <td>
                                 @if ($userdata->user_image)
-                                    <img src="{{asset('storage/users/img/'.$userdata->user_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                                    <img src="{{asset('public/storage/users/img/'.$userdata->user_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                                 @else
                                     <img src="{{asset('public/img_defautl/users.png')}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                                 @endif
@@ -45,7 +45,7 @@
                             <td>{{$userdata->phone_number}}</td>
                             <td>
 
-                                <a href="{{url('admin/users/edit/'.$userdata->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>
+                                <a href="{{asset('admin/users/edit/'.$userdata->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>
                                 <a href="#" delete_id="{{$userdata->id}}" class="button delete_confirm" id="deletebutton"><i class="fas fa-trash text-danger" aria-hidden="true" style="font-size:18px"></i></a>
                             </td>
                         </tr>

@@ -19,7 +19,7 @@
           <div class="card mb-4">
             <div class="card-body text-center">
               @if (auth()->user()->user_image ?? '')
-              <img src="{{url('storage/users/img/'.auth()->user()->user_image)}}" alt="" class="user-image object-fit-sm-contain">
+              <img src="{{asset('public/storage/users/img/'.auth()->user()->user_image)}}" alt="" class="user-image object-fit-sm-contain">
               @else
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
               class="rounded-circle img-fluid object-fit-sm-contain" style="width: 150px;">

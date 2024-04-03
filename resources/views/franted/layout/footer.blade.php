@@ -48,8 +48,8 @@
 					<div class="divider mb-4"></div>
 
 					<ul class="list-unstyled footer-menu lh-35">
-						<li><a href="#!">Terms & Conditions</a></li>
-						<li><a href="#!">Privacy Policy</a></li>
+						<li><a href="{{route('front.terms-and-conditions')}}">Terms & Conditions</a></li>
+						<li><a href="{{route('front.privacy-policy')}}">Privacy Policy</a></li>
 						<li><a href="#!">Company Support </a></li>
 						<li><a href="#!">FAQuestions</a></li>
 						<li><a href="#!">Company Licence</a></li>

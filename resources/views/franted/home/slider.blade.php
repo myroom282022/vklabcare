@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{asset('public/front_assets/css/slider.css')}}" >
+<link rel="stylesheet" href="{{asset('front_assets/css/slider.css')}}" >
 <section class="">
 	<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
@@ -9,7 +9,7 @@
 		<div class="carousel-inner">
 			@foreach($slider as $sliderValue)
 				<div class="carousel-item @if($loop->first) active @endif">
-					<img src="{{url('storage/slider/img/'.$sliderValue->slider_image)}}" class="d-block w-100 slider-image" alt="...">
+					<img src="{{asset('public/storage/slider/img/'.$sliderValue->slider_image)}}" class="d-block w-100 slider-image" alt="...">
 					<div class="carousel-caption d-none d-md-block">
 						<h5>{{$sliderValue->title}}</h5>
 						<p>{{$sliderValue->description}}</p>

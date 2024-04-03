@@ -201,7 +201,7 @@
                         @foreach($cart as $key => $item)
                         
                             <div class="item pr-2">
-                                    <img src="{{url('storage/product/img/'.$item['product_image'])}}"
+                                    <img src="{{asset('public/storage/product/img/'.$item['product_image'])}}"
                                         alt="" width="80" height="80">
                                     <!-- <div class="number">1</div> -->
                                 </div>

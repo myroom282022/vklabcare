@@ -10,7 +10,7 @@
 <nav class="navbar navbar-expand-lg navigation " id="navbar">
 	<div class="container ">
 		<a class="navbar-brand" href="{{url('/')}}">
-			<img src="{{url('public/front_assets/images/vka3logo.png')}}" alt="" class="img-fluid">
+			<img src="{{asset('front_assets/images/vka3logo.png')}}" alt="" class="img-fluid">
 		</a>
 
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"

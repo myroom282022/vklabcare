@@ -49,7 +49,7 @@
 										</div>
 									</div>
 									<a href="{{ route('add.to.cart', $productValue->id) }}">
-										<img src="{{url('storage/Product/img/'.$productValue->product_image)}}" class="img-fluid rounded thumbnail-image">
+										<img src="{{asset('public/storage/Product/img/'.$productValue->product_image)}}" class="img-fluid rounded thumbnail-image">
 									</a>
 								</div>
 								<div class="product-detail-container p-2">

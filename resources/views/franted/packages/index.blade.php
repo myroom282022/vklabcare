@@ -33,8 +33,8 @@
 										<span class="wishlist"><i class="fa fa-heart text-danger"></i></span>
 										</div>
 									</div>
-									<a href="{{url('services/product/'.$packageValue->package_name)}}">
-										<img src="{{url('storage/package/img/'.$packageValue->package_image)}}" class="img-fluid rounded thumbnail-image">
+									<a href="{{asset('services/product/'.$packageValue->package_name)}}">
+										<img src="{{asset('public/storage/package/img/'.$packageValue->package_image)}}" class="img-fluid rounded thumbnail-image">
 									</a>
 								</div>
 								<div class="product-detail-container p-2 ">

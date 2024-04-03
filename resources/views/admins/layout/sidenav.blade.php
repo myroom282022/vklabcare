@@ -3,9 +3,9 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="#" >
         @if(auth()->user()->user_image)
-        <img src="{{asset('storage/users/img/'.auth()->user()->user_image)}}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{asset('public/storage/users/img/'.auth()->user()->user_image)}}" class="navbar-brand-img h-100" alt="main_logo">
         @else
-        <img src="{{url('public/front_assets\images\logoes\userimage.jpg')}}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{asset('front_assets/images/logoes/userimage.jpg')}}" class="navbar-brand-img h-100" alt="main_logo">
         @endif
         <span class="ms-1 font-weight-bold">{{auth()->user()->email}}</span>
       </a>
@@ -217,7 +217,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('contact-info.index')}}">
+          <a class="nav-link" href="{{route('contact-info.index')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>spaceship</title>

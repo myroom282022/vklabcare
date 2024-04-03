@@ -32,7 +32,7 @@
                     <p><strong>Discount Percentage: </strong>{{  $dataTotal['package_discount_percentage'] ?? 0 }}%</p>
                     <p><strong>Total Price: ₹</strong>{{  $dataTotal['product_price'] ?? 0 }}</p>
                     {{-- <img src="{{$dataTotal['image'] ?? ''}}" class="img-fluid rounded-3"> --}}
-                    <img src="{{asset('storage/package/img/'.$dataTotal['product_image'])}}" class="img-fluid rounded-3">
+                    <img src="{{asset('public/storage/package/img/'.$dataTotal['product_image'])}}" class="img-fluid rounded-3">
                 @endforeach
             </td>
         </tr>

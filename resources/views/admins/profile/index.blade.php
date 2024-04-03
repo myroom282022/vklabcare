@@ -60,7 +60,7 @@
                                     <div class="mb-3">
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            <img src="{{url('storage/users/img/'.$users->user_image)}}" class="avatar avatar-sm me-3" alt="user1">
+                                            <img src="{{asset('public/storage/users/img/'.$users->user_image)}}" class="avatar avatar-sm me-3" alt="user1">
                                         </div>
                                     </div>
 

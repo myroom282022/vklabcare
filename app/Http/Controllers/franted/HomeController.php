@@ -10,6 +10,8 @@ use App\Models\Package;
 use App\Models\ClientDevice;
 use App\Models\User;
 use App\Models\PackageBook;
+use App\Models\Partner;
+use App\Models\PrivacyAndTerm;
 
 
 class HomeController extends Controller
@@ -17,6 +19,7 @@ class HomeController extends Controller
     public function index(Request $request){
       $slider = Slider::latest()->paginate(3);
       $package = Package::latest()->get();
+      $partner = Partner::latest()->get();
       $device_id = md5($_SERVER['HTTP_USER_AGENT']);
       $data = ClientDevice::where('device_id',$device_id)->first();
       if(isset($data)){
@@ -31,7 +34,7 @@ class HomeController extends Controller
       }
       $totalUser = User::all()->count();
       $Totalbooking = Package::all()->count();
-      return view('franted.home.index',compact('slider','package','totalUser','Totalbooking'));
+      return view('franted.home.index',compact('slider','package','totalUser','Totalbooking','partner'));
     }
 
     public function deviceDetails($locationInfo){
@@ -194,5 +197,17 @@ class HomeController extends Controller
           fpassthru($f); 
         } 
       exit; 
+    }
+
+
+    public function privacyPolicy(Request $request){
+      $date  = PrivacyAndTerm::where('type','privacy')->first();
+      $privacy = $date ?? '';
+       return view('franted.PrivacyAndTerm.Privacy_policy',compact('privacy'));
+    }
+    public function TermsAndConditions(Request $request){
+       $date  = PrivacyAndTerm::where('type','terms')->first();
+       $privacy = $date ?? '';
+        return view('franted.PrivacyAndTerm.terms_and_condisation',compact('privacy'));
     }
 }

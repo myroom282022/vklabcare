@@ -6,7 +6,7 @@
 		<div class="row align-items-center">
 			<div class="col-lg-6 ">
 				<div class="appoinment-content">
-					<img src="{{url('public/front_assets/images/about/img-3.jpg')}}" alt="" class="img-fluid">
+					<img src="{{asset('public/front_assets/images/about/img-3.jpg')}}" alt="" class="img-fluid">
 					<div class="emergency">
 						<h2 class="text-lg"><i class="icofont-phone-circle text-lg"></i>+91 958 230 6210</h2>
 					</div>

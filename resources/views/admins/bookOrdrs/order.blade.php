@@ -29,7 +29,7 @@
                         <tr>
                             <td>{{$useId}}</td>
                             <td>
-                            <img src="{{url('storage/package/img/'.$userdata->package_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                            <img src="{{url('public/storage/package/img/'.$userdata->package_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                             </td>
                             <td>{{$userdata->order_number ?? ''}}</td>
                             <td>{{$userdata->package_name ?? ''}}</td>

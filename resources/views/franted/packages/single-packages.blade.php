@@ -6,7 +6,7 @@
 			<div class="col-lg-3 col-md-6">
 				<div class="doctor-img-block">
 					@if ($package->package_image ?? '')
-						<img src="{{url('storage/package/img/'.$package->package_image)}}" alt="" class="img-fluid w-100">
+						<img src="{{asset('public/storage/package/img/'.$package->package_image)}}" alt="" class="img-fluid w-100">
 					@else
 						<img src="" alt="" class="img-fluid w-100">
 					@endif
@@ -78,8 +78,8 @@
 								<span class="wishlist"><i class="fa fa-heart text-danger"></i></span>
 								</div>
 							</div>
-							<a href="{{url('services/product/'.$packageValue->package_name)}}">
-								<img src="{{url('storage/package/img/'.$packageValue->package_image)}}" class="img-fluid rounded thumbnail-image">
+							<a href="{{asset('services/product/'.$packageValue->package_name)}}">
+								<img src="{{asset('public/storage/package/img/'.$packageValue->package_image)}}" class="img-fluid rounded thumbnail-image">
 							</a>
 						</div>
 						<div class="product-detail-container p-2">

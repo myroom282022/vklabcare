@@ -52,7 +52,7 @@ class ProductController extends Controller
         $details=$request->all();
         if ($files = $request->file('product_image')) {
             $fileName = rand(0000,9999).time().'.'.$files->extension();  
-            $path = 'storage/Product/img';
+            $path = 'public/storage/Product/img';
             $request->product_image->move($path, $fileName);
             $details['product_image'] = "$fileName";
         } 
@@ -105,14 +105,14 @@ class ProductController extends Controller
             //delete old file
              if($request->id){
                  $data = Product::findOrFail($request->id);
-                 $destinationPath = 'storage/Product/img/'.$data->product_image;
+                 $destinationPath = 'public/storage/Product/img/'.$data->product_image;
                  if(File::exists($destinationPath)){
                      File::delete($destinationPath);
                  }
              }
              //insert new file
              $fileName = rand(0000,9999).time().'.'.$files->extension();  
-             $path = 'storage/Product/img';
+             $path = 'public/storage/Product/img';
              $request->product_image->move($path, $fileName);
              $details['product_image'] = "$fileName";
          } 
@@ -124,7 +124,7 @@ class ProductController extends Controller
     {
         // return $id;
         $data = Product::findOrFail($id);
-        $destinationPath = 'storage/Product/img/'.$data->user_image;
+        $destinationPath = 'public/storage/Product/img/'.$data->user_image;
         if(File::exists($destinationPath)){
             File::delete($destinationPath);
         }

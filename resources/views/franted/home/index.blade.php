@@ -206,7 +206,7 @@
 					<i class="icofont-quote-right"></i>
 
 					<div class="testimonial-thumb">
-						<img src="{{url('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
+						<img src="{{asset('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info ">
@@ -220,7 +220,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('public/front_assets/images/team/test-thumb2.jpg')}}" alt="" class="img-fluid">
+						<img src="{{asset('public/front_assets/images/team/test-thumb2.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -236,7 +236,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('public/front_assets/images/team/test-thumb3.jpg')}}" alt="" class="img-fluid">
+						<img src="{{asset('public/front_assets/images/team/test-thumb3.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -252,7 +252,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('public/front_assets/images/team/test-thumb4.jpg')}}" alt="" class="img-fluid">
+						<img src="{{asset('public/front_assets/images/team/test-thumb4.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -267,7 +267,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="{{url('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
+						<img src="{{asset('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -283,72 +283,5 @@
 		</div>
 	</div>
 </section>
-<section class="section clients">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-7">
-				<div class="section-title text-center">
-					<h2>Partners who support us</h2>
-					<div class="divider mx-auto my-4"></div>
-					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="container">
-		<div class="row clients-logo">
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/1.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/2.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/3.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/4.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/5.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/6.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/3.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/4.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/5.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="client-thumb">
-					<img src="{{url('public/front_assets/images/about/6.png')}}" alt="" class="img-fluid">
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+@include('franted.home.partners_supportus')
 @endsection

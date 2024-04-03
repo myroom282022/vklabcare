@@ -50,7 +50,7 @@
                                 <div class="form-group">
                                     <label class="col-sm control-label">Image</label>
                                     <div class="mb-3">
-                                    <img src="{{url('storage/users/img/'.$users->user_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                                    <img src="{{asset('public/storage/users/img/'.$users->user_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
 
                                         <input class="form-control" name="user_image" type="file" id="formFile"  class="img-fluid" value="{{$users->user_image}}" accept=".png, .jpg, .jpeg"> 
                                         @if ($errors->has('user_image'))

@@ -53,7 +53,7 @@ class UsersController extends Controller
         if ($files = $request->file('user_image')) {
             //insert new file
              $fileName = rand(0000,9999).time().'.'.$files->extension();  
-            $path = 'storage/users/img/';
+            $path = 'public/storage/users/img/';
             $request->user_image->move($path, $fileName);
             $details['user_image'] = $fileName;
         } 
@@ -101,14 +101,14 @@ class UsersController extends Controller
             //delete old file
              if($request->id){
                  $data = User::findOrFail($request->id);
-                 $destinationPath = 'storage/users/img/'.$data->user_image;
+                 $destinationPath = 'public/storage/users/img/'.$data->user_image;
                  if(File::exists($destinationPath)){
                      File::delete($destinationPath);
                  }
              }
              //insert new file
              $fileName = rand(0000,9999).time().'.'.$files->extension();  
-             $path = 'storage/users/img/';
+             $path = 'public/storage/users/img/';
              $request->user_image->move($path, $fileName);
              $details['user_image'] = $fileName;
          } 
@@ -119,7 +119,7 @@ class UsersController extends Controller
     public function destroy($id) 
     {
         $data = User::findOrFail($id);
-        $destinationPath = 'storage/users/img/'.$data->user_image;
+        $destinationPath = 'public/storage/users/img/'.$data->user_image;
         if(File::exists($destinationPath)){
             File::delete($destinationPath);
         }

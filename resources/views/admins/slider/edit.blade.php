@@ -3,13 +3,22 @@
   <div class="row">
     <div class="col-12">
         <div class="card mb-4">
-        <div class="card-header pb-0">
-            <h5>Update Slider</h5>
-        </div>
+            @include('admins.setting.layout')
+            <div class="card-header pb-0">
+                <h4>Slider Update</h4>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end userbuttton">
+                    <a href="{{route('slider.index')}}">
+                        <button class="btn btn-primary me-md-2 btn-sm" >
+                            <i class="fa fa-arrow-left"></i> &nbsp;&nbsp;
+                        Back 
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="content-wrapper">
+<div class="content-wrapper card">
          <div class="container-fluid py-4">
              <div class="row justify-content-center">
                  <div class="col-12 col-xl-8">
@@ -42,7 +51,7 @@
                                 <div class="form-group">
                                     <label class="col-sm control-label">Slider Image</label>
                                     <div class="mb-3">
-                                    <img src="{{url('storage/slider/img/'.$slider->slider_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                                    <img src="{{url('public/storage/slider/img/'.$slider->slider_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                                         <input class="form-control" name="slider_image" type="file" id="formFile"  class="img-fluid" value="{{$slider->slider_image}}"  accept=".png, .jpg, .jpeg"> 
                                         @if ($errors->has('slider_image'))
                                             <span class="text-danger">{{ $errors->first('slider_image') }}</span>

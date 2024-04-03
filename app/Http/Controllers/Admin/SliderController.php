@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use File;
+
 class SliderController extends Controller
 {
     // show all data -------------------
@@ -27,7 +28,6 @@ class SliderController extends Controller
             ],[
                 'slider_image.required'    =>  'Please upload images ',
                 'slider_image.mimes'    =>  'Please upload images only  jpg png jpeg',
-
             ]);
         }else{
             $validatedData= request()->validate([
@@ -40,27 +40,27 @@ class SliderController extends Controller
              'title' => $request->title,
              'description' => $request->description, 
         ];
- 
+        
         if ($files = $request->file('slider_image')) {
             //delete old file
             if($request->id){
                 $data = Slider::findOrFail($request->id);
-                $destinationPath = 'storage/slider/img/'.$data->slider_image;
+                $destinationPath = 'public/storage/slider/img/'.$data->slider_image;
                 if(File::exists($destinationPath)){
                     File::delete($destinationPath);
                 }
             }
             $fileName = rand(0000,9999).time().'.'.$files->extension();  
-            $path = 'storage/slider/img';
+            $path = 'public/storage/slider/img';
             $request->slider_image->move($path, $fileName);
             $details['slider_image'] = "$fileName";
         } 
         if($request->id){
             $data= Slider::where('id',$request->id)->update($details);      
-            return redirect()->route('slider.index')->withSuccess('Slider updated successfully');
+            return redirect()->route('slider.index')->withSuccess('slider updated successfully');
         }else{
             $data= Slider::create($details);      
-            return redirect()->route('slider.index')->withSuccess('Slider Add successfully');
+            return redirect()->route('slider.index')->withSuccess('slider Add successfully');
         }
     } 
 
@@ -104,14 +104,14 @@ class SliderController extends Controller
     //         //delete old file
     //          if($request->id){
     //              $data = User::findOrFail($request->id);
-    //              $destinationPath = 'storage/users/img/'.$data->user_image;
+    //              $destinationPath = 'public/storage/users/img/'.$data->user_image;
     //              if(File::exists($destinationPath)){
     //                  File::delete($destinationPath);
     //              }
     //          }
     //          //insert new file
     //          $fileName = rand(0000,9999).time().'.'.$files->extension();  
-    //          $path = 'storage/users/img';
+    //          $path = 'public/storage/users/img';
     //          $request->user_image->move($path, $fileName);
     //          $details['user_image'] = "$fileName";
     //      } 
@@ -122,7 +122,7 @@ class SliderController extends Controller
     public function destroy($id) 
     {
         $data = Slider::findOrFail($id);
-        $destinationPath = 'storage/slider/img/'.$data->slider_image;
+        $destinationPath = 'public/storage/slider/img/'.$data->slider_image;
         if(File::exists($destinationPath)){
             File::delete($destinationPath);
         }

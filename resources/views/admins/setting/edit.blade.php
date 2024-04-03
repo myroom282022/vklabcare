@@ -2,9 +2,18 @@
   @section('content')  
   <div class="row">
     <div class="col-12">
+        @include('admins.setting.layout')
         <div class="card mb-4">
         <div class="card-header pb-0">
-            <h5>Update Contact Info</h5>
+            <h4>Update Contact Info</h4>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end userbuttton">
+                <a href="{{route('contact-info.index')}}">
+                    <button class="btn btn-primary me-md-2 btn-sm">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;&nbsp;
+                    Back
+                    </button>
+                </a>
+            </div>
         </div>
         </div>
     </div>
@@ -13,7 +22,6 @@
          <div class="container-fluid py-4">
              <div class="row justify-content-center">
                  <div class="col-12 col-xl-8">
-                    
                     <div class="card mb-4">
                         <div class="card-body p-4">
                             <form  action="{{route('contact-info.update')}}" method="POST" class=" btn-submit user_add form-horizontal" enctype="multipart/form-data">

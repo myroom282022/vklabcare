@@ -95,7 +95,7 @@
                                     <div class="d-flex jusitfy-content-between align-items-center pt-3 pb-2 border-bottom">
 
                                         <div class="item">
-                                            <img src="{{url('storage/package/img/'.$item['package_image'])}}"
+                                            <img src="{{asset('public/storage/package/img/'.$item['package_image'])}}"
                                                 alt="" width="80" height="80">
                                         </div>
                                         <div class="d-flex flex-column mx-1">

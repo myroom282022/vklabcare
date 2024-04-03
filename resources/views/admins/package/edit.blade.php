@@ -110,7 +110,7 @@
                                         <div class="form-group">
                                             <label class="col-sm control-label">Package Image</label>
                                             <div class="mb-3">
-                                                <img src="{{url('storage/package/img/'.$package->package_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
+                                                <img src="{{asset('public/storage/package/img/'.$package->package_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                                                 <input class="form-control" name="package_image" type="file" id="formFile"   class="img-fluid" value="{{$package->package_image ?? ''}}" > 
                                                 @if ($errors->has('package_image'))
                                                     <span class="text-danger">{{ $errors->first('package_image') }}</span>

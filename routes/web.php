@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // ***************All Admin Panel******************
+use App\Http\Controllers\Admin\PrivacyPolicyTermsAndConditionsController;
 use App\Http\Controllers\Admin\PackageCategoryController;
 use App\Http\Controllers\Admin\AllAppontmentController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookOrderController;
 use App\Http\Controllers\SendMails\MailController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\ParnterController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
@@ -62,10 +64,17 @@ Route::get('/clear', function() {
     Artisan::call('optimize');
     return "Cleared!";
  });
- 
-Route::get('/',[HomeController::class,'index'])->name('home');
-Route::get('about',[AboutController::class,'index'])->name('about');
+ Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 
+Route::controller(HomeController::class)->prefix('/')->group(function () {
+    Route::get('', 'index')->name('home');
+    Route::get('privacy-policy', 'privacyPolicy')->name('front.privacy-policy');
+    Route::get('terms-and-conditions', 'TermsAndConditions')->name('front.terms-and-conditions');
+});
+
+Route::get('about',[AboutController::class,'index'])->name('about');
 Route::controller(UserPackageController::class)->prefix('packages')->group(function () {
     Route::get('index', 'index')->name('packages.index');
     Route::get('book/{slug}', 'packageBook')->name('packages.book');
@@ -73,7 +82,6 @@ Route::controller(UserPackageController::class)->prefix('packages')->group(funct
     Route::patch('update-cart',  'update')->name('update.cart');
     Route::get('remove-cart/{id}',  'remove')->name('packages.remove.cart');
     Route::get('single-package/{slug}', 'singlePackage')->name('packages.single');
-
 });
 
 Route::controller(ServicesController::class)->prefix('services')->group(function () {
@@ -236,4 +244,21 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
         Route::post('update',  'update')->name('contact-info.update');
         Route::get('delete/{id}','destroy')->name('contact-info.delete');
     });
+
+    Route::controller(ParnterController::class)->prefix('partner')->group(function () {
+        Route::get('index', 'index')->name('partner.index');
+        Route::get('create', 'create')->name('partner.create');
+        Route::post('store', 'store')->name('partner.store');
+        Route::get('edit/{id}',  'edit')->name('partner.edit');
+        Route::post('update',  'update')->name('partner.update');
+        Route::get('delete/{id}','destroy')->name('partner.delete');
+    });
+    Route::controller(PrivacyPolicyTermsAndConditionsController::class)->prefix('privacy-policy-terms-condition')->group(function () {
+        Route::get('privacy-policy', 'privacyPolicy')->name('privacy-policy');
+        Route::post('privacy-policy', 'privacyPolicyStore')->name('privacy-policy-store');
+        Route::get('terms-and-conditions', 'TermsAndConditions')->name('terms-and-conditions');
+        Route::post('ckeditor/upload', 'upload')->name('ckeditor.upload');
+
+    });
+    
 });

@@ -42,7 +42,7 @@
                             <td>
                                 <div class="d-flex px-2 py-1">
                                     <div>
-                                        <img src="{{url('storage/package/img/'.$data->package_image)}}" class="avatar avatar-sm me-3" alt="user1">
+                                        <img src="{{asset('public/storage/package/img/'.$data->package_image)}}" class="avatar avatar-sm me-3" alt="user1">
                                     </div>
                                 </div>
                             </td>
@@ -56,7 +56,7 @@
                             {{-- <td></td>
                             <td></td> --}}
                             <td>
-                                <a href="{{url('admin/package/edit/'.$data->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>
+                                <a href="{{asset('admin/package/edit/'.$data->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>
                                 <a href="#" delete_id="{{$data->id}}" class="button delete_confirm" id="deletebutton"><i class="fas fa-trash text-danger" aria-hidden="true" style="font-size:18px"></i></a>
                                 <a class=" get-description" data-bs-toggle="modal" data-bs-target="#exampleModal" package-desk ="{{ str_replace('\n', ',', trim($data->package_description ?? '')) }}" ><i class="fas fa-eye text-success" aria-hidden="true" style="font-size:18px"></i></a>
                             </td>
