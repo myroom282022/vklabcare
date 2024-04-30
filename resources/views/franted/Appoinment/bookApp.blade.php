@@ -21,10 +21,12 @@
                     <div class="row">
                          <div class="col-lg-6">
                             <div class="form-group">
+                               
+
                                 <select class="form-control" id="Speciality" name="speciality" value="{{old('Speciality')}}">
-                                  <option value="0">Select Speciality</option>
-                                  <option value="heart specialist">heart specialist</option>
-                                  <option value="back specialist">back specialist</option>
+                                    @foreach(getMedicalSpecializations() as $specialization)
+                                    <option value="{{ $specialization }}">{{ $specialization }}</option>
+                                @endforeach
                                 </select>
                             </div>
                             @if ($errors->has('speciality'))

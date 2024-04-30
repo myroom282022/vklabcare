@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->nullable();
+            $table->string('medical_specialization')->nullable();
+            $table->string('medical_license_no')->nullable();
+            $table->string('total_experience')->nullable();
+            $table->string('clinic_name')->nullable();
+            $table->string('education_degree')->nullable();
             $table->timestamps();
         });
     }

@@ -12,10 +12,19 @@
             <a class="nav-link active" aria-current="page" href="{{route('slider.index')}}">Slider</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('service.index')}}">Service</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('feedback.index')}}">FeedBack </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{route('privacy-policy')}}">Privacy Policy</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{route('terms-and-conditions')}}">Terms and Conditions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{route('blog.index')}}">Blog</a>
           </li>
         </ul>
       </div>

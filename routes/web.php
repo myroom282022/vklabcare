@@ -19,8 +19,10 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\AuthController;
-
-
+use App\Http\Controllers\Admin\AdminServiceController;
+use App\Http\Controllers\Admin\AdminFeedbackController;
+use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\AdminBlogController;
 // ***************All Fronted Panel******************
 
 use App\Http\Controllers\franted\BlogController;
@@ -109,8 +111,8 @@ Route::controller(DepartmentController::class)->group(function(){
 
 Route::controller(DoctorsController::class)->group(function(){
     Route::get('doctor','index')->name('doctor');
+    Route::get('doctor-single/{id}','singlePage')->name('doctor-single');
     Route::get('doctor-single','singlePage')->name('doctor-single');
-    Route::get('appoinment','appoinment')->name('appoinment');
 });
 Route::controller(BlogController::class)->group(function(){
 
@@ -261,4 +263,36 @@ Route::group(['prefix' => 'admin','middleware'=> ['auth', 'admin_login']],functi
 
     });
     
+    Route::controller(AdminServiceController::class)->prefix('service')->group(function () {
+        Route::get('index', 'index')->name('service.index');
+        Route::get('create', 'create')->name('service.create');
+        Route::post('store', 'store')->name('service.store');
+        Route::get('edit/{id}',  'edit')->name('service.edit');
+        Route::post('update',  'update')->name('service.update');
+        Route::get('delete/{id}','destroy')->name('service.delete');
+    });
+    Route::controller(AdminFeedbackController::class)->prefix('feedback')->group(function () {
+        Route::get('', 'index')->name('feedback.index');
+        Route::get('create', 'create')->name('feedback.create');
+        Route::post('store', 'store')->name('feedback.store');
+        Route::get('edit/{id}',  'edit')->name('feedback.edit');
+        Route::post('update',  'update')->name('feedback.update');
+        Route::get('delete/{id}','destroy')->name('feedback.delete');
+    });
+    Route::controller(DoctorController::class)->prefix('doctor')->group(function () {
+        Route::get('', 'index')->name('doctor.index');
+        Route::get('create', 'create')->name('doctor.create');
+        Route::post('store', 'store')->name('doctor.store');
+        Route::get('edit/{id}',  'edit')->name('doctor.edit');
+        Route::post('update',  'update')->name('doctor.update');
+        Route::get('delete/{id}','destroy')->name('doctor.delete');
+    });
+    Route::controller(AdminBlogController::class)->prefix('blog')->group(function () {
+        Route::get('', 'index')->name('blog.index');
+        Route::get('create', 'create')->name('blog.create');
+        Route::post('store', 'store')->name('blog.store');
+        Route::get('edit/{id}',  'edit')->name('blog.edit');
+        Route::post('update',  'update')->name('blog.update');
+        Route::get('delete/{id}','destroy')->name('blog.delete');
+    });
 });

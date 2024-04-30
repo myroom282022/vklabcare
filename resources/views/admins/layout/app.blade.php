@@ -21,7 +21,9 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/css/soft-ui-dashboard.css?v=1.0.3')}}" rel="stylesheet" />
   <link  href="{{asset('assets/css/style.css')}}" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   @include('toster')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </head>
 <body class="g-sidenav-show  bg-gray-100">
       @include('admins.layout.sidenav')
@@ -86,11 +88,12 @@
     </div>
   </div>
   <!--   Core JS Files   -->
+  <script src="{{asset('assets/js/my/custom.js')}}"></script>
   <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
   <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
   <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
- 
+  <script src="{{asset('assets/js/my/sweetalert.js')}}"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

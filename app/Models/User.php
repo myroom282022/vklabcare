@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Doctor;
+use App\Models\UserDetails;
 
 class User extends Authenticatable
 {
@@ -51,5 +53,11 @@ class User extends Authenticatable
 
     public function bookingOrder(){
         return $this->belongsTo(PackageBook::class , 'user_id' ,'id');
+    }
+    public function getUserDetails(){
+        return $this->hasOne(UserDetails::class,'user_id','id');
+    }
+    public function getDoctor(){
+        return $this->hasOne(Doctor::class,'user_id','id');
     }
 }

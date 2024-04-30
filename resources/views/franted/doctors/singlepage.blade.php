@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="block text-center">
           <span class="text-white">Doctor Details</span>
-          <h1 class="text-capitalize mb-5 text-lg">Alexandar james</h1>
+          <h1 class="text-capitalize mb-5 text-lg">{{$doctor->name ?? ''}}</h1>
         </div>
       </div>
     </div>
@@ -20,11 +20,28 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-6">
 				<div class="doctor-img-block">
-					<img src="{{url('public/front_assets/images/team/1.jpg')}}" alt="" class="img-fluid w-100">
-
+					@if ($doctor->user_image ?? '')
+						<img src="{{asset('public/storage/users/img/'.$doctor->user_image)}}" alt="doctor-image" class="img-fluid w-100" style="height: 320px">
+					@else
+						<img src="{{asset('public/front_assets/images/team/4.jpg')}}" alt="doctor-image" class="img-fluid w-100" style="height: 320px">
+					@endif
 					<div class="info-block mt-4">
-						<h4 class="mb-0">Alexandar james</h4>
-						<p>Orthopedic Surgary</p>
+						<h4 class="mb-0 text-capitalize">{{$doctor->name ?? ''}}</h4>
+						@if(isset($doctor->getDoctor->medical_specialization))
+							@php
+								$degrees = json_decode($doctor->getDoctor->medical_specialization);
+							@endphp
+							<p>
+								@foreach($degrees as $index => $degree)
+									{{ $degree }}
+									@if($index < count($degrees) - 1)
+							</br>
+									@endif
+								@endforeach
+							</p>
+						@else
+							<p>No specialization available</p>
+						@endif
 
 						<ul class="list-inline mt-4 doctor-social-links">
 							<li class="list-inline-item"><a href="#!"><i class="icofont-facebook"></i></a></li>
@@ -41,121 +58,41 @@
 				<div class="doctor-details mt-4 mt-lg-0">
 					<h2 class="text-md">Introducing to myself</h2>
 					<div class="divider my-4"></div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam tempore cumque voluptate beatae quis
-						inventore sapiente nemo, a eligendi nostrum expedita veritatis neque incidunt ipsa doloribus provident ex,
-						at ullam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, perferendis officiis esse quae,
-						nobis eius explicabo quidem? Officia accusamus repudiandae ea esse non reiciendis accusantium voluptates,
-						facilis enim, corrupti eligendi?</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo recusandae veritatis minus optio quod
-						obcaecati laborum temporibus, deleniti vero perferendis molestias, ducimus facilis, sunt minima. Tempora,
-						amet quasi asperiores voluptas?</p>
+							@if($doctor)
+								<h5>Doctor Details</h5>
+								<ul>
+									<li>Name: {{ $doctor->name }}</li>
+									<li>Email: {{ $doctor->email }}</li>
+									<li>Phone Number: {{ $doctor->phone_number }}</li>
+								</ul>
 
-					<a href="{{route('appoinment')}}" class="btn btn-main-2 btn-round-full mt-3">Make an Appoinment<i
+								@if($doctor->getDoctor)
+									<h5>Doctor Education</h5>
+									<p>
+										@php
+											$education = json_decode($doctor->getDoctor->education_degree);
+											echo implode(', ', $education);
+										@endphp
+									</p>
+
+									<h5>Doctor Address</h5>
+									<ul>
+										<li>Address: {{ $doctor->getUserDetails->address }}</li>
+										<li>City: {{ $doctor->getUserDetails->city }}</li>
+										<li>State: {{ $doctor->getUserDetails->state }}</li>
+										<li>Zip Code: {{ $doctor->getUserDetails->zip_code }}</li>
+										<li>Country: {{ $doctor->getUserDetails->country }}</li>
+									</ul>
+								@else
+									<p>No education or address information available for this doctor.</p>
+								@endif
+							@else
+								<p>Doctor not found.</p>
+							@endif
+						</div>
+
+					<a href="{{route('book-appoinment-create')}}" class="btn btn-main-2 btn-round-full mt-3">Make an Appoinment<i
 							class="icofont-simple-right ml-2  "></i></a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="section doctor-qualification gray-bg">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<div class="section-title">
-					<h3>My Educational Qualifications</h3>
-					<div class="divider my-4"></div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-6 mb-4 mb-lg-0">
-				<div class="edu-block mb-5">
-					<span class="h6 text-muted">Year(2005-2007) </span>
-					<h4 class="mb-3 title-color">MBBS, M.D at University of Wyoming</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime
-						porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod,
-						dolor aliquam!</p>
-				</div>
-
-				<div class="edu-block">
-					<span class="h6 text-muted">Year(2007-2009) </span>
-					<h4 class="mb-3 title-color">M.D. of Netherland Medical College</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime
-						porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod,
-						dolor aliquam!</p>
-				</div>
-			</div>
-
-			<div class="col-lg-6">
-				<div class="edu-block mb-5">
-					<span class="h6 text-muted">Year(2009-2010) </span>
-					<h4 class="mb-3 title-color">MBBS, M.D at University of Japan</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime
-						porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod,
-						dolor aliquam!</p>
-				</div>
-
-				<div class="edu-block">
-					<span class="h6 text-muted">Year(2010-2011) </span>
-					<h4 class="mb-3 title-color">M.D. of Canada Medical College</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi doloremque harum, mollitia, soluta maxime
-						porro veritatis fuga autem impedit corrupti aperiam sint, architecto, error nesciunt temporibus! Vel quod,
-						dolor aliquam!</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-
-<section class="section doctor-skills">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-4">
-				<h3>My skills</h3>
-				<div class="divider my-4"></div>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In architecto voluptatem alias, aspernatur
-					voluptatibus corporis quisquam? Consequuntur, ad, doloribus, doloremque voluptatem at consectetur natus eum
-					ipsam dolorum iste laudantium tenetur.</p>
-			</div>
-			<div class="col-lg-4">
-				<div class="skill-list">
-					<h5 class="mb-4">Expertise area</h5>
-					<ul class="list-unstyled department-service">
-						<li><i class="icofont-check mr-2"></i>International Drug Database</li>
-						<li><i class="icofont-check mr-2"></i>Stretchers and Stretcher Accessories</li>
-						<li><i class="icofont-check mr-2"></i>Cushions and Mattresses</li>
-						<li><i class="icofont-check mr-2"></i>Cholesterol and lipid tests</li>
-						<li><i class="icofont-check mr-2"></i>Critical Care Medicine Specialists</li>
-						<li><i class="icofont-check mr-2"></i>Emergency Assistance</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="sidebar-widget  gray-bg p-4">
-					<h5 class="mb-4">Make Appoinment</h5>
-
-					<ul class="list-unstyled lh-35">
-						<li class="d-flex justify-content-between align-items-center">
-							<span>Monday - Friday</span>
-							<span>9:00 - 17:00</span>
-						</li>
-						<li class="d-flex justify-content-between align-items-center">
-							<span>Saturday</span>
-							<span>9:00 - 16:00</span>
-						</li>
-						<li class="d-flex justify-content-between align-items-center">
-							<span>Sunday</span>
-							<span>Closed</span>
-						</li>
-					</ul>
-
-					<div class="sidebar-contatct-info mt-4">
-						<p class="mb-0">Need Urgent Help?</p>
-						<h3 class="text-color-2">+23-4565-65768</h3>
-					</div>
 				</div>
 			</div>
 		</div>

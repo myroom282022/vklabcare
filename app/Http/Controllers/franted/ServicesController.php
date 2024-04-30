@@ -17,12 +17,13 @@ use App\Mail\BookInfo;
 use App\Models\PackageBook;
 use Mail;
 use Session;
+use App\Models\Service;
 
 class ServicesController extends Controller
 {
     public function index(Request $request){
-        $product =  Package::with('getProduct')->get();
-        return view('franted.services.index',compact('product'));
+        $serviceSlider= Service::latest()->paginate(10);
+        return view('franted.services.index',compact('serviceSlider'));
     }
     public function product($id){
         if($id){

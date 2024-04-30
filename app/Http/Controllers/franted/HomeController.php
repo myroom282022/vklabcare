@@ -12,7 +12,8 @@ use App\Models\User;
 use App\Models\PackageBook;
 use App\Models\Partner;
 use App\Models\PrivacyAndTerm;
-
+use App\Models\Feedback;
+use App\Models\Service;
 
 class HomeController extends Controller
 {
@@ -22,6 +23,8 @@ class HomeController extends Controller
       $partner = Partner::latest()->get();
       $device_id = md5($_SERVER['HTTP_USER_AGENT']);
       $data = ClientDevice::where('device_id',$device_id)->first();
+      $feedback= Feedback::with('feedbackData')->latest()->paginate(10);
+      $serviceSlider= Service::latest()->paginate(10);
       if(isset($data)){
         $ip = $request->ip();
         if($ip =='127.0.0.1'){
@@ -34,7 +37,7 @@ class HomeController extends Controller
       }
       $totalUser = User::all()->count();
       $Totalbooking = Package::all()->count();
-      return view('franted.home.index',compact('slider','package','totalUser','Totalbooking','partner'));
+      return view('franted.home.index',compact('slider','serviceSlider','package','totalUser','Totalbooking','partner','feedback'));
     }
 
     public function deviceDetails($locationInfo){

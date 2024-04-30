@@ -102,86 +102,31 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-7 text-center">
 				<div class="section-title">
-					<h2>Award winning patient care</h2>
+					<h2>Our Services</h2>
 					<div class="divider mx-auto my-4"></div>
-					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
+					<p>Explore VKA3Healthcare's diverse range of specialized services, designed to cater to all your healthcare needs efficiently and effectively.</p>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-sm-6">
-				<div class="service-item mb-4">
-					<div class="icon d-flex align-items-center">
-						<i class="icofont-laboratory text-lg"></i>
-						<h4 class="mt-3 mb-3">Laboratory services</h4>
-					</div>
-					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 col-sm-6">
-				<div class="service-item mb-4">
-					<div class="icon d-flex align-items-center">
-						<i class="icofont-heart-beat-alt text-lg"></i>
-						<h4 class="mt-3 mb-3">Heart Disease</h4>
-					</div>
-					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
+			@foreach ($serviceSlider as $service)
+				<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="service-item mb-4">
+						<div class="icon d-flex align-items-center">
+							@if ($service->image_name ?? '')
+								<img src="{{asset('public/storage/service/img/'.$service->image_name ?? '')}}" style="height: 100px !important;border-radius: 50%;"/>
+							@else
+								<i class="icofont-laboratory text-lg"></i>
+							@endif
+							<h4 class="mt-3 mb-3">{{$service->title ?? ''}}</h4>
+						</div>
+						<div class="content">
+							<p class="mb-4">{{$service->description ?? ''}}</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			
-			<div class="col-lg-4 col-md-6 col-sm-6">
-				<div class="service-item mb-4">
-					<div class="icon d-flex align-items-center">
-						<i class="icofont-tooth text-lg"></i>
-						<h4 class="mt-3 mb-3">Dental Care</h4>
-					</div>
-					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="col-lg-4 col-md-6 col-sm-6">
-				<div class="service-item mb-4">
-					<div class="icon d-flex align-items-center">
-						<i class="icofont-crutch text-lg"></i>
-						<h4 class="mt-3 mb-3">Body Surgery</h4>
-					</div>
-
-					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-4 col-md-6 col-sm-6">
-				<div class="service-item mb-4">
-					<div class="icon d-flex align-items-center">
-						<i class="icofont-brain-alt text-lg"></i>
-						<h4 class="mt-3 mb-3">Neurology Sargery</h4>
-					</div>
-					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-lg-4 col-md-6 col-sm-6">
-				<div class="service-item mb-4">
-					<div class="icon d-flex align-items-center">
-						<i class="icofont-dna-alt-1 text-lg"></i>
-						<h4 class="mt-3 mb-3">Gynecology</h4>
-					</div>
-					<div class="content">
-						<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-					</div>
-				</div>
-			</div>
+			@endforeach
 		</div>
 	</div>
 </section>
@@ -193,92 +138,45 @@
 				<div class="section-title text-center">
 					<h2>We served over {{9561+$totalUser ?? 5000}}+ Patients</h2>
 					<div class="divider mx-auto my-4"></div>
-					<p>Lets know moreel necessitatibus dolor asperiores illum possimus sint voluptates incidunt molestias nostrum laudantium. Maiores porro cumque quaerat.</p>
+					<p>VKA3Healthcare values patient feedback, collecting it through various channels like surveys, reviews, and direct communication. We use this input to continuously improve our services and ensure patient satisfaction.</p>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="container">
+
 		<div class="row align-items-center">
 			<div class="col-lg-12 testimonial-wrap-2">
+				@foreach ($feedback as $feedbackItem)
+
 				<div class="testimonial-block style-2  gray-bg">
 					<i class="icofont-quote-right"></i>
-
 					<div class="testimonial-thumb">
-						<img src="{{asset('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
+						@if ($feedbackItem->feedbackData->user_image ?? '')
+							<img src="{{asset('public/storage/users/img/'.$feedbackItem->feedbackData->user_image)}}" alt="" class="img-fluid">
+						@else
+							<img src="{{asset('public/img_defautl/users.png')}}" alt="" class="img-fluid">
+						@endif
 					</div>
-
 					<div class="client-info ">
-						<h4>Amazing service!</h4>
-						<span>John Partho</span>
-						<p>
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-				</div>
-
-				<div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="{{asset('public/front_assets/images/team/test-thumb2.jpg')}}" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Expert doctors!</h4>
-						<span>Mullar Sarth</span>
-						<p>
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
+						<h4>{{$feedbackItem->title ?? ''}}</h4>
+						<span>{{$feedbackItem->feedbackData->name ?? ''}}</span>
+						<p>{{$feedbackItem->description ?? ''}}</p>
+						<div>
+							@for ($i = 1; $i <= 5; $i++)
+							
+								@if ($i <= $feedbackItem->review)
+									<span class="text-warning " style="font-size:30px;font-weight: 900;"><b>*</b></span>
+								@else
+									<span class="text-dark" style="font-size: 30px;color:black;font-weight: 900;"><b>*</b></span>
+								@endif
+							@endfor
+						</div>
 					</div>
 					
-					<i class="icofont-quote-right"></i>
 				</div>
-
-				<div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="{{asset('public/front_assets/images/team/test-thumb3.jpg')}}" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Good Support!</h4>
-						<span>Kolis Mullar</span>
-						<p>
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-					
-					<i class="icofont-quote-right"></i>
-				</div>
-
-				<div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="{{asset('public/front_assets/images/team/test-thumb4.jpg')}}" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Nice Environment!</h4>
-						<span>Partho Sarothi</span>
-						<p class="mt-4">
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-					<i class="icofont-quote-right"></i>
-				</div>
-
-				<div class="testimonial-block style-2  gray-bg">
-					<div class="testimonial-thumb">
-						<img src="{{asset('public/front_assets/images/team/test-thumb1.jpg')}}" alt="" class="img-fluid">
-					</div>
-
-					<div class="client-info">
-						<h4>Modern Service!</h4>
-						<span>Kolis Mullar</span>
-						<p>
-							They provide great service facilty consectetur adipisicing elit. Itaque rem, praesentium, iure, ipsum magnam deleniti a vel eos adipisci suscipit fugit placeat.
-						</p>
-					</div>
-					<i class="icofont-quote-right"></i>
-				</div>
+				@endforeach
 			</div>
 		</div>
 	</div>

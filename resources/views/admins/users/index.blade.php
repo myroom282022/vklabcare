@@ -23,6 +23,7 @@
                     <th>Image</th>
                     <th>Name</th>
                     <th>Email </th>
+                    <th>Role</th>
                     <th>Phone Number</th>
                     <th>Action</th>
                 </tr>
@@ -33,16 +34,17 @@
                         <tr>
                             <td>{{$useId}}</td>
                             <td>
-                                @if ($userdata->user_image)
+                                @if ($userdata->user_image ?? '')
                                     <img src="{{asset('public/storage/users/img/'.$userdata->user_image)}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                                 @else
                                     <img src="{{asset('public/img_defautl/users.png')}}" class="img-fluid" alt="user" style="height: 40px; width:40px;  border-radius: 50%;">
                                 @endif
                             
                             </td>
-                            <td>{{$userdata->name}}</td>
-                            <td>{{$userdata->email}}</td>
-                            <td>{{$userdata->phone_number}}</td>
+                            <td>{{$userdata->name ?? ''}}</td>
+                            <td>{{$userdata->email ?? ''}}</td>
+                            <td class="text-capitalize">{{$userdata->role ?? ''}}</td>
+                            <td>{{$userdata->phone_number ?? ''}}</td>
                             <td>
 
                                 <a href="{{asset('admin/users/edit/'.$userdata->id)}}"   id="editbutton"><i class="fas fa-edit text-warning" aria-hidden="true" style="font-size:18px" data-bs-toggle="modal" data-bs-target="#edituser"></i></a>

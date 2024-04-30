@@ -62,12 +62,12 @@ class AuthController extends Controller
         }else{
             $user=  User::create([
                 'name' => $data['name'],
-                'role' => 'user',
+                'role' => 'User',
                 'email' => $data['email'],
                 'phone_number' => $data['phone_number'],
                 'password' => Hash::make($data['password']),
                 'referral_code'=> $this->generateReferralCode(),
-                ]);
+            ]);
         }
        
             $referralData   =   User::where('referral_code',$request->referral_code)->latest()->first();

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('gender')->nullable();
+            $table->string('dob')->nullable();
             $table->integer('is_email_verified')->default('0');
             $table->integer('is_phone_verified')->default('0');
             $table->text('address')->nullable();
